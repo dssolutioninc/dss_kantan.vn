@@ -1,0 +1,29 @@
+﻿JapaneseTrainingOnline Tool
+	- Quyết + Dương:		
+		+ Đang làm Test Module (90%)
+		+ Bắt đầu làm module Acticle 
+	- Tuyền + Tuấn:
+		+ Đã lam xong User, Profile
+		+ Đã làm vocabulary module
+		+ Xử lý layout Admin
+	- Đông + Nam: 
+		+ Đã làm Grammar module
+		+ Đang lam Home sau khi Đăng nhập
+		+ Correct link project.
+		+ Đã lam home trước, Login User, Recommend Full
+		+ Đã làm Recommend module
+
+JapaneseTrainingOnline Tool
+	- Quyết + Dương:				
+		+ Test Module (Acticle ) (90%)
+		+ Correct model and All function by New design:
+			BookMaster, BookDetail, BookReview, UserLearnHistory...		
+	- Tuyền + Tuấn:
+		+ Correct model and All function by New design:
+		    Kanji, vocal, admin module
+	- Đông + Nam: 
+		+ Review and suport all module in project
+		+ Correct model and All function by New design:
+		+ Correct Recommend, suvey user, selfLearning
+	
+	
