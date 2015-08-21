@@ -1,0 +1,14 @@
+{
+	"dbhost" : "localhost",
+	"database" : "japtool",
+	"article_csv_file" : "work/article.csv",
+	"book_csv_file" : "work/book.csv",
+    "vocabulary_csv_file" : "work/vocabulary.csv",
+    "kanji_csv_file" : "work/kanji.csv",
+    "kanji_image_folder" : "work/kanji_image/",
+    "survey_csv_file" : "work/survey.csv",
+    "grammar_csv_file" : "work/grammar.csv",
+    "chars_split_between_examples" : "<br>",
+    "chars_split_insite_examples" : ":",
+    "speed_csv_file" : "work/speed.csv"
+}

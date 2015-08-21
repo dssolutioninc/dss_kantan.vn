@@ -1,0 +1,4 @@
+sort,type,oneTime,tag,question,option1,option2,option3,option4
+"1","1","TRUE","","Khả năng học ngoại ngữ của bạn?","Tốt","Bình thường","Kém","Rất kém"
+"2","1","FALSE","","Khả năng nhớ từ mới?","Nhanh","Chậm","",""
+"3","1","TRUE","","Bạn đã từng học ở level này hoặc tương đương?","Đã từng","Chưa bao giờ.","",""
