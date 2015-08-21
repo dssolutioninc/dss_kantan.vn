@@ -1,0 +1,81 @@
+<div class="col-sm-12">
+    <h2>Search List Friends</h2>
+
+    <div class="table-responsive">
+
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Add Friends</th>
+            </tr>
+            </thead>
+            <tbody>
+            <input type="hidden" name="users" id="id_origin_hidden" value="<%= id_origin %>">
+            <% _.each(ob, function(obitem){ %>
+
+            <tr data-id="<%= obitem.id %>" data-model="user">
+                <td>
+                    <input type="hidden" name="user_id" value="<%= obitem.id %>"><%= obitem.id %>
+                    <input type="hidden" name="statusBuddy" id="statusBuddy" value="<%= obitem.statusBuddy %>">
+                </td>
+                <td><input type="hidden" name="name" value="<%= obitem.username %>"><%= obitem.username %></td>
+                <td><%= obitem.email %></td>
+                <td>
+                    <% _.each(buddy, function(buddyitem){ %>
+                    <% if(buddyitem.user_id == obitem.id && buddyitem.statusBuddy == 1){ %>
+                    <button type="submit" class="btn btn-warning btn-add-buddy" userid="<%= obitem.id %>">Cancel
+                        request
+                    </button>
+
+                    <% } else if(buddyitem.user_id == obitem.id && buddyitem.statusBuddy == 2){ %>
+                    <button type="submit" class="btn btn-primary btn-add-buddy" userid="<%= obitem.id %>">Cancel Buddy
+                    </button>
+
+                    <% } else { %>
+                    <button type="submit" class="btn btn-danger btn-add-buddy" userid="<%= obitem.id %>">Add Buddy
+                    </button>
+                    <% } %>
+                    <% }) %>
+
+                </td>
+            </tr>
+            <% }) %>
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+</div>
+
+<script>
+    $(".btn-add-buddy").on('click', function () {
+        var userid = $(this).attr('userid');
+        var id_origin_hidden = $('#id_origin_hidden').val();
+        var statusBuddy = $('#statusBuddy').val();
+        $.ajax({
+            url: '/user/addBuddy',
+            type: 'POST',
+            data: {
+                userid: userid,
+                id_origin_hidden: id_origin_hidden,
+                statusBuddy: statusBuddy
+            },
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                if (data.isFlag == 1) {
+
+                }
+            },
+            error: function () {
+                alert('loi roi nhe');
+            }
+        });
+    });
+</script>

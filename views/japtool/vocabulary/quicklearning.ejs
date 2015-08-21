@@ -1,0 +1,131 @@
+
+<script src="/js/dependencies/jquery-1.9.1.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <!-- item -->
+  <div class="col-md-4 text-center">
+      <div class="panel panel-success panel-card">
+          <div class="panel-heading">
+              <h2 id="word"></h2>
+          </div>
+          <div class="panel-body text-left">
+            <div id="children">
+              <p>1.読み方</p>
+              <p class="left-space" id="reading"></p>
+              <p>2.意味</p>
+              <p class="left-space" id="meaning"></p>
+              <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4"></div>
+                <div class="col-xs-4 col-sm-4 col-md-4">
+                  <a class="btn btn-md btn-block btn-default" id="next-button">次</a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4"></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <a class="btn btn-md btn-block btn-danger" id="unknow-button">知らない</a>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <a class="btn btn-md btn-block btn-success" id="know-button" >知っている</a>
+            </div>
+          </div>
+      </div>
+  </div>
+  <!-- /item -->
+  <div class="col-md-4"></div>
+</div>
+
+
+<script>
+  $(function(){
+    //Get value from VocabularyController.quicklearning
+    var vocabularies = <%- JSON.stringify(vocabularies) %>;
+    var unknowVocabularies = [];
+    var i = 0;
+
+    // reload vocabulary
+    var reload = function(array1,array2){
+      if(array2.length > 0){
+        i = 0;
+        // remove all elements of array1
+        array1.length = 0;
+        // push all elements of array2 to array1
+        $.each(array2,function(index,value){
+          array1.push(value);
+        });
+        // remove all elements of array2
+        array2.length = 0;
+      }
+    };
+
+    // set values of vocabulary
+    var setVocabulary = function(vocabulary){
+      //Pass value to view(id="word")
+      $("#word").text(vocabulary.item);
+      //Pass value to view(id="reading")
+      $("#reading").text(vocabulary.reading);
+      //Pass value to view(id="meaning")
+      $("#meaning").text(vocabulary.description); 
+    };
+
+    //view first vocabulary
+    $(document).ready(function(){
+      //init array vocabularies
+      reload(vocabularies,unknowVocabularies);
+
+      setVocabulary(vocabularies[0]); 
+      //hide reaading, meaning of vocabulary
+      $("#children").hide();
+    });
+         
+    //When [知らない] button click
+    $("#unknow-button").click(function(){
+      //show reaading, meaning of vocabulary
+      $("#children").show();
+      //disable [知っている] button
+      $("#know-button").attr("disabled", true);
+      //add value to [unknowVocabularies] array
+      unknowVocabularies.splice(i,1,vocabularies[i]);
+    });
+
+    //When [知っている] button click
+    $("#know-button").click(function(){
+      i = i +1;
+      if(i < vocabularies.length) {
+        setVocabulary(vocabularies[i]); 
+      }else {
+        if(unknowVocabularies.length > 0) {
+          reload(vocabularies,unknowVocabularies);
+          setVocabulary(vocabularies[i]);
+        }else {
+          $("#word").text("Finish!!!");
+          $("#unknow-button").hide();
+          $("#know-button").hide();
+        }
+      }
+    });
+
+    // When [次] button click
+    $("#next-button").click(function(){
+      i = i +1;
+      if(i < vocabularies.length) {
+        setVocabulary(vocabularies[i]); 
+        $("#children").hide();
+        $("#know-button").attr("disabled", false);
+      }else {
+        if(unknowVocabularies.length > 0) {
+          $("#children").hide();
+          $("#know-button").attr("disabled", false);
+          reload(vocabularies,unknowVocabularies);
+          setVocabulary(vocabularies[i]);
+        }else {
+          alert("Finish");
+        }
+      }
+    });
+  });
+</script>

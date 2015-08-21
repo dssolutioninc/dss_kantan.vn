@@ -1,0 +1,312 @@
+<script>
+    var isNext;
+    var lang = $("#lang").val();
+    $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        fade: false,
+        asNavFor: '.slider-nav',
+        draggable: false,
+        touchMove: false,
+        accessibility: false,
+        infinite: false,
+        prevArrow: '<button type="button" data-role="none" class="btn btn-show-list btn-arrow-left" aria-label="Previous" tabindex="0" role="button"><i class="fa fa-chevron-left"></i></button>',
+        nextArrow: '<button type="button" data-role="none" class="btn btn-show-list btn-arrow-right" aria-label="Next" tabindex="0" role="button"><i class="fa fa-chevron-right"></i></button>'
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        asNavFor: '.slider-for',
+        dots: false,
+        centerMode: true,
+        focusOnSelect: true,
+        accessibility: false,
+        infinite: false
+    });
+    var audioconfig = true;
+    // when slide is last slide
+    $('.slider-for').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+        // enable slide
+        enableActiveSlide(currentSlide);
+        var slideCount = $("#countPage").text();
+        console.log(currentSlide);
+        if(slideCount==(currentSlide)){
+            audioconfig=false;
+            $(".exe-voca .btn-arrow-right").hide();
+            $(".exe-voca .btn-arrow-left").hide();
+            $(".exe-voca .slider-nav").hide();
+        }
+    });
+    $(".exe-voca .btn-arrow-left").on("click",function(){
+        $(".exe-voca .btn-arrow-right").show();
+        $(".exe-voca .slider-nav").show();
+        audioconfig=true;
+    });
+    $(".exe-voca .slick-prev").on("click",function(){
+        $(".exe-voca .btn-arrow-right").show();
+        $(".exe-voca .slider-nav").show();
+        audioconfig=true;
+    });
+    function learnAgain(){
+        window.location.replace(window.location.href);
+    }
+    //disable all slide-nav
+    function disbleAllSlideNav(){
+        // diable slide-nav
+        var sl_nav = $(".slider-nav .slick-slide");
+        $(sl_nav).addClass("disable-slide-element");
+    }
+    // enable slide-nav
+    function enableActiveSlide(index){
+        var sl_nav = $(".slider-nav .slick-slide")[index];
+        $(sl_nav).removeClass("disable-slide-element");
+    }
+    $(document).ready(function(){
+        disbleAllSlideNav();
+        enableActiveSlide(0);
+        //    on or off sound
+        $('.mic-off').hide();
+        $('.mic-on').on('click', function () {
+            $('.mic-off').show();
+            $('.mic-on').hide();
+            audioconfig = false;
+        });
+        $('.mic-off').on('click', function () {
+            $('.mic-on').show();
+            $('.mic-off').hide();
+            audioconfig = true;
+        });
+        //set isNext when next slide
+        $('.slider-for').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+            isNext = false;
+        });
+        $('.ans-box').on('click', function () {
+            isNext = true;
+        });
+    });
+    var truee = 0;
+    var total = 0;
+    var sum = $('#sum').val();
+    var AnsweredArr = new Array();
+    function checkAnswer(description, description2, optionID) {
+        var optionIDArr = optionID.split('-');
+        var numOfQuestion = optionIDArr[1];
+        var isAnswered = false;
+        for (var i = 0; i < AnsweredArr.length; i++) {
+            if (numOfQuestion == AnsweredArr[i]) {
+                isAnswered = true;
+                break;
+            }
+        }
+        if (!isAnswered) {
+            total++;
+            AnsweredArr.push(numOfQuestion);
+            if (description == description2) {
+                truee++;
+                if (audioconfig) {
+                    $("#audioTrue").trigger('play');
+                }
+                // set color
+                var $el = $('#' + optionID),
+                        x = 100,
+                        originalColor = $el.css("background"),
+                        i = 3; //counter
+                (function loop() { //recurisve IIFE
+                    $el.css("background", "#13B192");
+                    setTimeout(function () {
+                        $el.css("background", originalColor);
+                    }, x);
+                }());
+                //Trễ 2s và next sang câu tiếp theo.
+                setTimeout(
+                        function () {
+                            if (isNext) {
+                                $('.slider-for').slick('slickNext');
+                            }
+                        }, 1000);
+            } else {
+                if (audioconfig) {
+                    $("#audioFalse").trigger('play');
+                }
+                // set color
+                var $el = $('#' + optionID),
+                        x = 100,
+                        originalColor = $el.css("background"),
+                        i = 3; //counter
+                (function loop() { //recurisve IIFE
+                    $el.css("background", "#EA5552");
+                    setTimeout(function () {
+                        $el.css("background", originalColor);
+                    }, x);
+                });
+            }
+            if (sum == total) {
+                var mark = (truee / total) * 100;
+
+                $("#mark-view").text(Math.round(mark));
+
+                //pie chart
+                $(".excercise-kanji .last-right .progress-pie-chart").attr("data-percent",mark);
+                $('.ppc-percents span').html(Math.round(mark)+'%');
+                var $ppc = $('.progress-pie-chart'),
+                        percent = parseInt($ppc.data('percent')),
+                        deg = 360*percent/100;
+                if (percent > 50) {
+                    $ppc.addClass('gt-50');
+                }
+                $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
+                // log mark for run time
+                logMark();
+            }
+        }
+        else {
+            if (description == description2) {
+                if (audioconfig) {
+                    $("#audioTrue").trigger('play');
+                }
+                // set color
+                var $el = $('#' + optionID),
+                        x = 100,
+                        originalColor = $el.css("background"),
+                        i = 3; //counter
+                (function loop() { //recurisve IIFE
+                    $el.css("background", "#13B192");
+                    setTimeout(function () {
+                        $el.css("background", originalColor);
+                    }, x);
+                }());
+                //Trễ 2s và next sang câu tiếp theo.
+                setTimeout(
+                        function () {
+                            if (isNext) {
+                                $('.slider-for').slick('slickNext');
+                            }
+                        }, 1000);
+            } else {
+                if (audioconfig) {
+                    $("#audioFalse").trigger('play');
+                }
+                // set color
+                var $el = $('#' + optionID),
+                        x = 100,
+                        originalColor = $el.css("background"),
+                        i = 3; //counter
+                (function loop() { //recurisve IIFE
+                    $el.css("background", "#EA5552");
+                    setTimeout(function () {
+                        $el.css("background", originalColor);
+                    }, x);
+                }());
+            }
+        }
+    }
+    // count page
+    var $status = $('.pagingCnt');
+    var $slickElement = $('.slider-for');
+    $slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+        //currentSlide is undefined on init -- set it to 0 in this case (currentSlide is 0 based)
+        var i = (currentSlide ? currentSlide : 0) + 1;
+        $status.text(i + '/' + (slick.slideCount-1));
+    });
+    function logMark(){
+        var mark = $("#mark-view").text();
+        logFinish(mark);
+    }
+</script>
+<input type="hidden" id="sum" value="<%= vocabularies.length %>">
+<input type="hidden" id="lessonn" value="<%= lessonn %>">
+<input type="hidden" id="passMark" value="<%= Constants.passMark %>">
+<div class="exe-voca">
+    <!--div audio-->
+    <audio id="audioTrue">
+        <source src="/sound/true.wav" type="audio/wav">
+    </audio>
+    <audio id="audioFalse">
+        <source src="/sound/false.wav" type="audio/wav">
+    </audio>
+    <!--finish div audio-->
+    <% if(vocabularies == null || vocabularies.length == 0){ %>
+    <h5 class="text-center text-danger"><%= __("didn't find any data") %></h5>
+    <% }else{ %>
+    <div class="slider slider-for">
+        <%
+            var sumPage = vocabularies.length;
+                vocabularies.forEach( function(vocabulary, index){ %>
+        <div class="pratice-voca">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="panel panel-default panel-paper-slide">
+                    <div class="panel-body panel-bd-all">
+                        <div class="mics-audio-practice-voca">
+                            <i class="fa fa-volume-up mic-on" data-toggle="tooltip" title='<%= __("off audio") %>'></i>
+                            <i class="fa fa-volume-off mic-off" data-toggle="tooltip" title="<%= __("on audio") %>"></i>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="voca-prac-txt-cntr text-center">
+                                <div class="card">
+                                    <div class="front">
+                                        <h3 class="text-center text-danger text-center-exe"><%= vocabulary.item %>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% vocabulary.randomVocabularies.forEach( function(description, indexOption){ %>
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <div class="panel panel-default text-center panel-choose-exe">
+                                <div id="<%= indexOption %>-<%= index %>" class="panel-body ans-box"
+                                     onclick="checkAnswer('<%= description %>','<%= vocabulary.description %>','<%= indexOption %>-<%= index %>')">
+                                    <%= description %>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                        <div class="col-sm-offset-10 col-sm-1">
+                            <span class="pagingCnt">1/<%= sumPage %></span>
+                            <span id="countPage" style="display:none;"><%= sumPage %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+        <div class="pratice-voca">
+            <div class="col-sm-offset-2 col-sm-8 lastSlide description">
+                <div class="col-sm-6 last-left">
+                    <div class="col-sm-12 ">
+                        <i class="fa fa-child fa-2x icon"></i><strong><%=__("You finish exercise")%> !</strong>
+                        <br><br>
+                        <p class="text-left text-danger"><%=__("Your Mark")%> : <label id="mark-view"></label></p>
+                        <p class="text-left"><%=__("Learn Again")%> : <%=__("Learn this sublesson again")%></p>
+                        <p class="text-left"><%=__("Next Lesson")%> : <%=__("Learn missed lesson or new lesson")%></p>
+                    </div>
+                </div>
+                <div class="col-sm-6 last-right">
+                    <!--Pie Chart -->
+                    <div class="progress-pie-chart" data-percent="">
+                        <div class="ppc-progress">
+                            <div class="ppc-progress-fill"></div>
+                        </div>
+                        <div class="ppc-percents">
+                            <div class="pcc-percents-wrapper">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Chart -->
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button onclick="learnAgain();" class="btn btn-primary"><%=__("Learn Again")%></button>
+                    <button onclick="nextLesson();"class="btn btn-primary"><%=__("Next Lesson")%></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-offset-2 col-sm-8">
+        <div class="slider slider-nav">
+            <% vocabularies.forEach( function(vocabulary){ %>
+            <div><h3><%= vocabulary.item %></h3></div>
+            <% }) %>
+        </div>
+    </div>
+    <% } %>
+</div>

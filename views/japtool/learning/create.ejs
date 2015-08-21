@@ -1,0 +1,116 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h2><%= __("Create new learning big") %></h2>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+
+            <div class="clearfix">
+                <div class="col-sm-10 learning-group-item">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label><%= __("From") %></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" name="startDate" id="startDate"><br>
+
+                            <div>
+                                <i class="message-date-validate" id="messDateInvalid"><p><%=__("Start date is Invalid")%>!!</p></i>
+                                <i class="message-date-validate" id="messDateGreater"><p><%=__("Start date must be greater than today")%>!!!</p></i>
+                                <i class="message-date-validate" id="messFinishDateIsInvalid"><p><%=__("Finish date is Invalid")%></p></i>
+                                <i class="message-date-validate" id="messFinishDateGreater"><p><%=__("Finish date must be greater than today")%>!!!</p></i>
+                                <i class="message-date-validate" id="messFinishDateGreaterStart"><p><%=__("Finish date must be greater than start date")%>!!!</p></i>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label><%= __("To") %></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" name="finishDate" id="finishDate"><br>
+
+                            <div id="mesagefinishDate">
+                                <i class="message-date-validate" id="messFinishDateGreaterToday"><p><%=__("Finish date must be greater than today")%>!</p></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-2 hidden-md hidden-xs">
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="col-sm-10 learning-group-item">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label><%= __("Notes") %></label>
+                        </div>
+                        <div class="col-sm-10">
+                                    <textarea class="form-control"
+                                              rows="4"
+                                              id="notes"
+                                              name="notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="library-content-desc" style="margin-bottom: 150px">
+                    <div class="col-sm-offset-2 col-sm-12">
+                        <div class="desc-library" id="placebook">
+                            <% if(book != null){ %>
+                            <div class="col-sm-2 hidden-xs">
+                                <input type="hidden" name="lbr" value="lbr">
+                                <img
+                                        <% if (book.image) { %>
+                                        src="/media/image/<%= book.image %>"
+                                        <% } else { %>
+                                        src="/images/bookicon.jpg"
+                                        <% } %>
+                                        width="100" height="100">
+                                <input id="idbook" type="hidden" name="bookMaster" value="<%= book.id %>">
+                            </div>
+                            <div class="col-sm-2" style="padding-top: 40px">
+                                <b><%= book.name %></b><br>
+                                <b>Level : <%= book.level %></b>
+                            </div>
+                            <% } %>
+                            <div class="col-sm-4" style="padding-top: 15px">
+                                <% if(create != "" && create != null){ %>
+                                <h4><%= __("notice coincidence") %><a
+                                            href="/japtool/Learning/practice/?id=<%= book.id %>&learnID=<%= learning.id %>"><%= __("here") %></a>
+                                </h4>
+                                <% } %>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Trigger the modal with a button -->
+
+            <div id="mesageBook">
+                <i id="choose-book-validator"><p><%=__("You must choose a book")%></p></i>
+            </div>
+            <div style="padding-left: 150px">
+                <% if(!book){ %>
+                <input type="button"
+                       class="btn btn-danger btn-chooseBook"
+                       onclick="loadbooks()"
+                       value="<%= __('Choose a book') %>"
+                       id="btn-show-books"/>
+                <% } %>
+                <input type="button"
+                       onclick="check()"
+                       class="btn btn-success"
+                       value="<%= __('Create learning') %>"
+                       id="btnCreateLearning"/>
+                <input type="button"
+                       class="btn btn-warning"
+                       role="button"
+                       value="<%= __('Close') %>"
+                       data-dismiss="modal"/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#grammarList").steps({
+      headerTag: "h3",
+      bodyTag: "section",
+      transitionEffect: "slideLeft"
+    });
+  });
+</script>
+<div id="grammarList">
+  <% grammars.forEach( function(grammar, index){ %>
+  <h3><%= grammar.item %></h3>
+  <section>
+    <h4 class="text-center text-danger"><%= grammar.item %></h4>
+    <p>
+      <span class="text-success">User Guide <i class="fa fa-microphone text-danger"></i> : </span><%= grammar.useGuide %>
+    </p>
+
+    <p><span class="text-success">Description: </span><%= grammar.description %></p>
+
+    <% if (typeof grammar.examples !== 'undefined' && grammar.examples.length > 0) { %>
+    <p><span class="text-success">Example: </span></p>
+    <ul class="vocabulary-item-example">
+      <% grammar.examples.forEach( function(item){ %>
+      <% if (item.example == 'undefined' || item.example.length == 0){ %>
+      <% }else { %>
+      <li><span class="text-danger"><%= item.example %> : </span><%= item.meaning %></li>
+      <% } %>
+      <% }) %>
+    </ul>
+    <% } %>
+
+  </section>
+  <% }); %>
+
+</div>

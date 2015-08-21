@@ -1,0 +1,110 @@
+<form class="form-horizontal" action="/japtool/bookmaster/create" method="post" id="" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Book Master Form</legend>
+        <div class="form-group">
+            <label for="inputName" class="col-lg-2 control-label">Name</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputName" placeholder="Name" type="text" name="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDescription" class="col-lg-2 control-label">Description</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputDescription" placeholder="Description" type="text"
+                       name="description">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputType" class="col-lg-2 control-label">Type</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputType" placeholder="Type" type="text" name="type">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLevel" class="col-lg-2 control-label">Level</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputLevel" placeholder="Level" type="text" name="level">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputCategory" class="col-lg-2 control-label">Category</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputCategory" placeholder="Category" type="text" name="category">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">publish</label>
+            <div class="col-lg-10">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="published" id="optionsRadios1" value="true" checked="">
+                        True
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="published" id="optionsRadios2" value="false">
+                        False
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">complex</label>
+            <div class="col-lg-10">
+                <select class="form-control" id="select" name="complex">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLessonNum" class="col-lg-2 control-label">LessonNum</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputLessonNum" placeholder="LessonNum" type="text" name="lessonNum">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputHourForLearn" class="col-lg-2 control-label">HourForLearn</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputHourForLearn" placeholder="HourForLearn" type="text"
+                       name="hourForLearn">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputUsedNum" class="col-lg-2 control-label">UsedNum</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputUsedNum" placeholder="UsedNum" type="text" name="usedNum">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputRecommendNum" class="col-lg-2 control-label">RecommendNum</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputRecommendNum" placeholder="RecommendNum" type="text"
+                       name="RecommendNum">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputImage" class="col-lg-2 control-label">Image</label>
+
+            <div class="col-lg-10">
+                <input class="" id="inputImage" type="file" multiple="multiple" name="image">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <input id="submit-test" class="btn btn-primary" type="submit" value="Ok"/>
+            </div>
+        </div>
+    </fieldset>
+</form>

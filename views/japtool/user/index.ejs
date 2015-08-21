@@ -1,0 +1,118 @@
+<div id="LibraRecommend">
+    <div class="content-group-friends clearfix content bg-white">
+        <div class="container">
+            <div class="row">
+                <h2 class="text-center"><%=__("Infomation about learning groups from friends")%></h2>
+
+                <p class="text-center desc-home"><%=__("Display japanese learning group of your friend , let's join now")%></p>
+
+                <p class="text-center desc-home"><i><a><%=__("view all")%></a></i></p>
+
+                <div class="col-sm-6 group-friends">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <a><img src="/images/group-friends/masonry_02-400x400.jpg"/></a>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="info">
+                                <h3><a>N2 Grammar Learning Group</a></h3>
+                                <span><%=__("Author")%>: </span> Billy Tran
+                                <div class="date-info">
+                                    <span><%=__("Schedule")%>:</span> 2015/05/01 - 2015/08/15
+                                </div>
+                                <div class="using-library-info">
+                                    <span><%=__("Using library")%>:</span> ABC, XYZ
+                                </div>
+                                <div class="person-info">
+                                    <span><%=__("Registered")%>:</span> 10 <%=__("person")%>
+                                </div>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+                            </div>
+                            <a class="btn sd-learn-more"><%=__("Join Group")%></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <a class="btn sd-learn-more view-more"><%=__("View More Groups From Friends")%></a>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="lv" value="<%= lv %>">
+<input type="hidden" id="crt" value="<%= crt %>">
+
+
+<!--recommend popup-->
+<div class="modal fade" id="lib-recommend-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%=__("Recommended Libraries For You")%> - <%=__("Step")%> 1/3</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label><%=__("What level do you want to learn or practices")%>?</label>
+                        <select class="form-control" id="recommend-1">
+                            <option><%=__("Choose one N")%></option>
+                            <option value="N1">N1</option>
+                            <option value="N2">N2</option>
+                            <option value="N3">N3</option>
+                            <option value="N4">N4</option>
+                            <option value="N5">N5</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-success" role="button"
+                   onclick="checkAnswer1btn(1,2)"><%=__("Next")%></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="lib-recommend-2" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%=__("Recommended Libraries For You")%> - <%=__("Step")%> 2/3</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-group" id="rcm2">
+                    <label><%=__("How about your learning plan")%>?</label>
+
+                    <p><input type="radio" name="optradio" value="1" onchange="checkAnswer2(2,3)"><%=__("I have a lot of free time, so I want to learn as fast as posible")%> .</p>
+
+                    <p><input type="radio" name="optradio" value="2" onchange="checkAnswer2(2,3)"><%=__("I have limited time for learning, so I want to learning about 1h")%>.</p>
+
+                    <p><input type="radio" name="optradio" value="3" onchange="checkAnswer2(2,3)"><%=__("I want to set learning plan by my self")%>.</p>
+
+                    <p><input type="radio" name="optradio" value="4" onchange="checkAnswer2(2,3)"><%=__("Just trial")%>.</p>
+
+                    <p><input type="radio" name="optradio" value="5" onchange="checkAnswer2(2,3)"><%=__("I would like system support best course")%>.</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-success" role="button" data-dismiss="modal" data-toggle="modal"
+                   data-target="#lib-recommend-1"><%=__("Back")%></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="lib-recommend-3" data-backdrop="static" data-keyboard="false">
+
+</div>
+<form action="/japtool/learning/add" method="post" onsubmit="return validateCreatLearning()"
+      id="create-learning-japtool">
+
+    <div class="modal fade" id="formedit" data-keyboard="false">
+        <div class="modal-dialog modal-lg" id="editform"></div>
+    </div>
+</form>
+<div class="modal fade" id="show-books" data-backdrop="static" data-keyboard="false">
+
+</div>

@@ -1,0 +1,115 @@
+<div class="container-do-test-article" id="do-test-articles">
+    <%
+            articles.forEach(function(article, index){
+    %>
+
+    <h2></h2>
+    <section>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="unescape"><%= article.subject %></h3>
+                <hr>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="">
+                    <p><%=__("Level")%> : <%= article.level %></p>
+
+                    <p>
+                    <h4><%=__("content")%></h4>
+                    </p>
+                    <p class="unescape">
+                        <%= article.content %>
+                    </p>
+                    <%
+                    if(article.image != null || article.audio != null || article.video != null) {
+                    %>
+                    <p>
+                    <h4><%=__("Media")%></h4>
+                    </p>
+                    <%
+                    }
+                    %>
+                    <% if(article.image != null){
+                    %>
+                    <p>
+                        <img src="/media/image/?fd=<%= article.image %>"/>
+                    </p>
+                    <%
+                    }
+                    %>
+
+                    <% if(article.audio != null){
+                    %>
+                    <p>
+                        <audio class="audio-form" controls>
+                            <source src="/media/audio/?fd=<%= article.audio %>" type="audio/mpeg">
+                        </audio>
+                    </p>
+                    <%
+                    } %>
+
+                    <% if(article.video != null){
+                    %>
+                    <p>
+                        <video class="video-form" controls>
+                            <source src="/media/video/?fd=<%= article.video %>" type="video/mp4">
+                        </video>
+                    </p>
+                    <%
+                    } %>
+                </div>
+            </div>
+            <div class="col-sm-12" id="div-question-list">
+                <%
+                article.question.forEach(function (question) {
+                %>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4 class="unescape"><%= question.question %></h4>
+                        <% if(question.image != null){
+                        %>
+                        <h5>Image :</h5>
+                        <img src="/media/image/?fd=<%= question.image %>"/>
+                        <%
+                        } %>
+                        <div class="question-div-info"  >
+                            <div class="col-sm-6">
+                                <label  ><%= question.option1 %></label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label  ><%= question.option2 %></label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label  ><%= question.option3 %></label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label  ><%= question.option4 %></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%
+                });
+                %>
+            </div>
+        </div>
+    </section>
+    <% }) %>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#do-test-articles").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft"
+        });
+
+        $(".unescape").each(function () {
+            $(this).html($(this).text());
+        })
+
+    });
+</script>

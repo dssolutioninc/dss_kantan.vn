@@ -1,0 +1,151 @@
+<div class="container">
+    <div class="row">
+        <form action="updateQuestion" enctype="multipart/form-data" id="editQueForm" method="post">
+            <div class="edit-question">
+                <div class="col-sm-12">
+                    <label class="lb-create-ar lead">Edit Question</label>
+                    <hr>
+                </div>
+                <input type="text" hidden="hidden"  value="<%=question.id%>" name="id"/>
+                <div class="col-sm-2 text-right">
+                    <label>article Subject</label>
+                </div>
+                <div class="col-sm-10">
+                    <select name="articleID" class="form-control txt-box">
+                        <%
+                        articles.forEach(function(article){
+                        %>
+                        <option value="<%=article.id%>"><%=article.subject%></option>
+                        <%
+                        });
+                        %>
+                    </select>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>question</label>
+                </div>
+                <div class="col-sm-10">
+                    <textarea type="text" class="form-control txt-box" id=""  placeholder="question" name="question" row="3"><%=question.question%></textarea>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>option 1</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control txt-box" id="" value="<%=question.option1%>" placeholder="option 1" name="option1">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>result Option 1</label>
+                </div>
+                <div class="col-sm-10">
+                    <select name="resultOption1" class="form-control txt-box">
+                        <option value="<%= question.resultOption1 %>" selected="selected"><%= question.resultOption1 %></option>
+                        <% if (question.resultOption1 != true) {
+                        %>
+                        <option value="true"> true</option>
+                        <%
+                        } %>
+                        <% if (question.resultOption1 != false) {
+                        %>
+                        <option value="false"> false</option>
+                        <%
+                        } %>
+                    </select>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>option 2</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control txt-box" id="" value="<%=question.option2%>" placeholder="option 2" name="option2">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>result Option 2</label>
+                </div>
+                <div class="col-sm-10">
+                    <select name="resultOption2" class="form-control txt-box">
+                        <option value="<%= question.resultOption2 %>" selected="selected"><%= question.resultOption2 %></option>
+                        <% if (question.resultOption2 != true) {
+                        %>
+                        <option value="true"> true</option>
+                        <%
+                        } %>
+                        <% if (question.resultOption2 != false) {
+                        %>
+                        <option value="false"> false</option>
+                        <%
+                        } %>
+                    </select>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>option 3</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control txt-box" value="<%=question.option3%>" id="" placeholder="option 3" name="option3">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>result Option 3</label>
+                </div>
+                <div class="col-sm-10">
+                    <select name="resultOption3" class="form-control txt-box">
+                        <option value="<%= question.resultOption3 %>" selected="selected"><%= question.resultOption3 %></option>
+                        <% if (question.resultOption3 != true) {
+                        %>
+                        <option value="true"> true</option>
+                        <%
+                        } %>
+                        <% if (question.resultOption3 != false) {
+                        %>
+                        <option value="false"> false</option>
+                        <%
+                        } %>
+                    </select>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>option 4</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control txt-box" id="" value="<%=question.option4%>" placeholder="option 4" name="option4">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>result Option 4</label>
+                </div>
+                <div class="col-sm-10">
+                    <select name="resultOption4" class="form-control txt-box">
+                        <option value="<%= question.resultOption4 %>" selected="selected"><%= question.resultOption4 %></option>
+                        <% if (question.resultOption4 != true) {
+                        %>
+                        <option value="true"> true</option>
+                        <%
+                        } %>
+                        <% if (question.resultOption4 != false) {
+                        %>
+                        <option value="false"> false</option>
+                        <%
+                        } %>
+                    </select>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>image</label>
+                </div>
+                <div class="col-sm-10 col-media-img">
+                    <!--this textbox let we know , user change media ot not-->
+                    <input type="text" hidden="hidden" name="isImgQueChange"  id="hid-imgQue" value="no"/>
+                    <div class="col-sm-12" id="div-show-que-img">
+                        <img src="/showImageQue/<%=question.image%>" class="img-thumbnail">
+                        <button type="button" id="editImgQue" class="glyphicon glyphicon-wrench btn-changeMedia">edit</button>
+                    </div>
+                    <!--div hidden, this div let user change media-->
+                    <div class="col-sm-12" id="div-hide-que-img">
+                        <input type="file" name="img" multiple="multiple" accept="image/*" id="file-edit-que-img" class="txt-box">
+                        <button type="button" id="cancleImgQue" class="glyphicon glyphicon-floppy-remove btn-changeMedia">Cancle</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-success btn-add-ar pull-left">Edit Question</button>
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-success btn-cancle pull-right">Cancle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

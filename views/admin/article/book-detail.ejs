@@ -1,0 +1,56 @@
+<form class="form-horizontal" action="japtool/bookdetail/create" method="post" id="">
+    <fieldset>
+        <legend>Book Detail Form</legend>
+        <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">Book Master</label>
+
+            <div class="col-lg-10">
+                <select class="form-control" id="select-question" name="bookID">
+                    <% data.forEach(function(item) { %>
+                    <option value="<%= item.id %>"><%= item.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLesson" class="col-lg-2 control-label">lesson</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputLesson" placeholder="Lesson" type="text" name="lesson">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSubLesson" class="col-lg-2 control-label">SubLesson</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputSubLesson" placeholder="SubLesson" type="text" name="subLesson">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputUseModule" class="col-lg-2 control-label">UseModule</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputUseModule" placeholder="Type" type="text" name="useModule">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputUseCollection" class="col-lg-2 control-label">UseCollection</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputUseCollection" placeholder="Level" type="text" name="useCollection">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDataExtractCondition" class="col-lg-2 control-label">DataExtractCondition</label>
+
+            <div class="col-lg-10">
+                <input class="form-control" id="inputDataExtractCondition" placeholder="Level" type="text" name="dataExtractCondition">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <input id="submit-test" class="btn btn-primary" type="submit" value="Ok"/>
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,132 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content model-show-boook">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"></button>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h4 class="modal-title"><%= __("Book Library") %></h4>
+                    <%= __("Choose a book") %>
+                </div>
+                <div class="col-sm-offset-6 col-sm-3 col-xs-12">
+                    <div class="form-group form-horizontal">
+                        <select class="form-control" id="sel1">
+                            <option value="0"><%= __("Choose level") %></option>
+                            <option value="N1">N1</option>
+                            <option value="N2">N2</option>
+                            <option value="N3">N3</option>
+                            <option value="N4">N4</option>
+                            <option value="N5">N5</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <ul class="nav nav-tabs">
+                <li><a data-toggle="tab" href="#allbook" chooseBookCat="allbook" class="chosseBookItem active"><%=__("all books")%></a>
+                </li>
+                <% uniqueType.forEach(function(type){ %>
+
+                <li><a data-toggle="tab" href="#<%= type %>" chooseBookCat="<%= type %>"
+                       class="chosseBookItem"><%= type %></a></li>
+                <% }) %>
+            </ul>
+            <div class="tab-content choose-book">
+                <div id="allbook" class="tab-pane fade in active">
+                    <div class="pre-scrollable choose-book-pre" data-mcs-theme="dark">
+                        <!--start three book info-->
+                        <div class="row form-showBook">
+                            <% for(var i = 0;i < books.length;i++){ %>
+                            <div class="col-sm-4">
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <% if (books[i].image) { %>
+                                        <img id="imglink<%= books[i].id %>" src="/media/image/<%= books[i].image %>"
+                                             width="45"
+                                             height="45"/>
+                                        <% } else { %>
+                                        <img id="imglink<%= books[i].id %>" src="/images/bookicon.jpg" width="45"
+                                             height="45"/>
+                                        <% } %>
+
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="hidden" id="bookid<%= books[i].id %>" value="<%= books[i].id %>">
+                                        <a onclick="addbook('<%= books[i].id %>')" id="bookname<%= books[i].id %>"
+                                           title="<%= books[i].name %>"><p
+                                                    class="lbUser"><%= books[i].name %></p></a>
+
+                                        <p title="<%= books[i].level %>" id="booklv<%= books[i].id %>">Level
+                                            : <%= books[i].level %></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+
+                        <hr class="lineBook">
+                        <!--finish three book info-->
+                    </div>
+                </div>
+                <% uniqueType.forEach(function(type){ %>
+                <div id="<%= type %>" class="tab-pane fade"></div>
+                <% }) %>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <input type="button"
+                   onclick="addbook()"
+                   class="btn btn-warning"
+                   role="button"
+                   value="<%= __('Close') %>"/>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var chooseBookCat = '';
+    $(".chosseBookItem").on('click', function () {
+        var level = $('#sel1').val();
+        chooseBookCat = $(this).attr('chooseBookCat');
+        filrBook(level, chooseBookCat);
+    });
+    $("#sel1").each(function () {
+        $(this).on('change', function () {
+            var level = $('#sel1').val();
+            var check = false;
+            if (chooseBookCat == null || chooseBookCat == '') {
+                chooseBookCat = "allbook";
+                check = true;
+            }
+            else {
+                check = true;
+
+            }
+            if (check == true) {
+                filrBook(level, chooseBookCat);
+            }
+        });
+    });
+
+    function filrBook(level, chooseBookCat) {
+        $.ajax({
+            url: '/japtool/learning/getItemsBooks',
+            type: 'POST',
+            data: {
+                chooseBookCat: chooseBookCat,
+                level: level
+
+            },
+            success: function (data) {
+                $('#' + chooseBookCat + '').html('');
+                $('#' + chooseBookCat + '').html(data);
+            },
+            error: function () {
+                alert('Error');
+            }
+        });
+    }
+</script>

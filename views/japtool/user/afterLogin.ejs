@@ -1,0 +1,73 @@
+<div id="LibraRecommend">
+
+</div>
+<div class="content-group-friends clearfix content bg-white">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center"><%= __("Infomation about learning groups from friends") %></h2>
+
+            <p class="text-center desc-home"><%= __("Display japanese learning group of your friend , let's join now") %></p>
+
+            <p class="text-center desc-home"><i><a><%= __("view all") %></a></i></p>
+
+            <div class="col-sm-6 group-friends">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <a><img src="/images/group-friends/masonry_02-400x400.jpg"/></a>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="info">
+                            <h3><a>N2 Grammar Learning Group</a></h3>
+                            <span><%= __("Author") %>: </span> Billy Tran
+                            <div class="date-info">
+                                <span><%= __("Schedule") %>:</span> 2015/05/01 - 2015/08/15
+                            </div>
+                            <div class="using-library-info">
+                                <span><%= __("Using library") %>:</span> ABC, XYZ
+                            </div>
+                            <div class="person-info">
+                                <span><%= __("Registered") %>:</span> 10 <%=__("person")%>
+                            </div>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+                        </div>
+                        <a class="btn sd-learn-more"><%= __("Join Group") %></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <a class="btn sd-learn-more view-more"><%= __("View More Groups From Friends") %></a>
+        </div>
+    </div>
+</div>
+
+<!--recommend popup-->
+
+<div class="modal fade" id="lib-recommend-4" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%= __("Recommended Libraries For You") %></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-group" id="rcmlogin">
+                    <label><%= __("What do you want to learning today ???") %></label>
+
+                    <p><a href="/japtool/recommend/getLibraryLogin"><input type="radio" name="optradio" value="1"
+                                                                           onchange="checkAnswer1Login()"><%= __("Please recommed for me..") %>
+                        </a></p>
+
+                    <p><a href="/japtool/home"><input type="radio" name="optradio" value="2"
+                                                      onchange="checkAnswer1Login()"><%= __("Next lesson from my learning resource") %>
+                            .</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="lib-recommend-3" data-backdrop="static" data-keyboard="false">
+</div>
+

@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+
+		
+
+
+		<form action="/admin/book/update/<%=book.id%>" 
+		   enctype="multipart/form-data"
+		   method="POST">
+		 <a class="btn btn-info btn-xs" href="/admin/book/index">Back to list</a>
+		 <input class="btn btn-warning btn-xs" type="submit" value="Update">
+		 <table class='table'>
+		 	<tr><td>Cover image     <td>
+		 								<% if (book.image) { %>
+								  			<img class="img-rounded" src="/media/image/<%=book.image%>" height="140" width="100">
+								  		<% } %>
+		 								<input type="file" name="image_file">
+			<tr><td>name 			<td><input type="text" name="name"  value="<%=book.name %>">
+			<tr><td>description    	<td><input type="text" name="description"  value="<%=book.description %>">
+			<tr><td>type        	<td><input type="text" name="type"  value="<%=book.type %>">
+			<tr><td>level        	<td><input type="text" name="level"  value="<%=book.level %>"> 
+			<tr><td>published       <td><input type="text" name="published"  value="<%=book.published %>">
+			<tr><td>category        <td><input type="text" name="category"  value="<%=book.category %>">
+			<tr><td>complex         <td><input type="text" name="complex"  value="<%=book.complex %>">
+			<tr><td>lessonNum       <td><input type="text" name="lessonNum"  value="<%=book.lessonNum %>">
+			<tr><td>hourForLearn	<td><input type="text" name="hourForLearn"  value="<%=book.hourForLearn %>">
+			<tr><td>usedNum         <td><input type="text" name="usedNum"  value="<%=book.usedNum %>">
+			<tr><td>recommendNum    <td><input type="text" name="recommendNum"  value="<%=book.recommendNum %>">
+			<tr><td>                <td><input class="btn btn-warning btn-xs" type="submit" value="Update">
+		</form>
+
+    </div>
+</div>

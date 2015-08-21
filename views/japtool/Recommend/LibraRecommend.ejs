@@ -1,0 +1,440 @@
+<% if(data.length <= 0){ %>
+<div class="content-group-friends clearfix content bg-white">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center"><%=__("Web site don't have data")%></h2>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="text-center text-danger"><%=__("About Page")%></h2>
+
+                        <div class="description">
+                            The standard Lorem Ipsum passage, used since the 1500s
+
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu
+                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                            officia
+                            deserunt mollit anim id est laborum."
+
+                            Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+
+                            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            laudantium, totam
+                            rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                            dicta sunt
+                            explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
+                            quia
+                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
+                            est, qui
+                            dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius
+                            modi tempora
+                            incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                            quis nostrum
+                            exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+                            consequatur? Quis autem
+                            vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                            vel illum
+                            qui dolorem eum fugiat quo voluptas nulla pariatur?"
+
+                            1914 translation by H. Rackham
+
+                            "But I must explain to you how all this mistaken idea of denouncing pleasure and praising
+                            pain was born
+                            and I will give you a complete account of the system, and expound the actual teachings of
+                            the great
+                            explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or
+                            avoids
+                            pleasure itself, because it is pleasure, but because those who do not know how to pursue
+                            pleasure
+                            rationally encounter consequences that are extremely painful. Nor again is there anyone who
+                            loves or
+                            pursues or desires to obtain pain of itself, because it is pain, but because occasionally
+                            circumstances
+                            occur in which toil and pain can procure him some great pleasure. To take a trivial example,
+                            which of us
+                            ever undertakes laborious physical exercise, except to obtain some advantage from it? But
+                            who has any
+                            right to find fault with a man who chooses to enjoy a pleasure that has no annoying
+                            consequences, or one
+                            who avoids a pain that produces no resultant pleasure?"
+
+                            Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+
+                            "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                            voluptatum
+                            deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate
+                            non
+                            provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et
+                            dolorum fuga.
+                            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta
+                            nobis est
+                            eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis
+                            voluptas
+                            assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis
+                            aut rerum
+                            necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+                            Itaque earum
+                            rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias
+                            consequatur aut
+                            perferendis doloribus asperiores repellat."
+
+                            1914 translation by H. Rackham
+
+                            "On the other hand, we denounce with righteous indignation and dislike men who are so
+                            beguiled and
+                            demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot
+                            foresee the
+                            pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their
+                            duty
+                            through weakness of will, which is the same as saying through shrinking from toil and pain.
+                            These cases
+                            are perfectly simple and easy to distinguish. In a free hour, when our power of choice is
+                            untrammelled
+                            and when nothing prevents our being able to do what we like best, every pleasure is to be
+                            welcomed and
+                            every pain avoided. But in certain circumstances and owing to the claims of duty or the
+                            obligations of
+                            business it will frequently occur that pleasures have to be repudiated and annoyances
+                            accepted. The wise
+                            man therefore always holds in these matters to this principle of selection: he rejects
+                            pleasures to
+                            secure other greater pleasures, or else he endures pains to avoid worse pains."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+<% if(data.length > 0){ %>
+<div class="container library-page example">
+    <% uniqueType.forEach(function(item, indexLibrary){ %>
+    <div class="row content library-<%= indexLibrary %>" id="">
+        <div class="media">
+            <div class="media-body">
+                <div class="col-sm-12 library-page-title">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h3><span><%= item %></span>
+                            </h3>
+                        </div>
+                        <% var num = 0; %>
+                        <% for(var i = 0;i < data.length;i++){ %>
+                        <% if(data[i].type == item){ %>
+                        <% num = num + 1 %>
+                        <% } %>
+                        <% } %>
+                        <% if(num > Constants.maxLibOnPage){ %>
+                        <div class="col-sm-2">
+                            <div class="join-learn btn label-primary">
+                                <a href="/japtool/Library/getAllLibrary/?type=<%= item %>"><%=__("View more Library")%></a>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                    <div class="library-page-line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div id="lib-1">
+            <% var index = 0;
+                    data.forEach(function(book){ %>
+            <% if(book.type == item) { %>
+            <% if(index < Constants.maxLibOnPage) {
+                index++;
+            %>
+            <div class="col-sm-4 lib-cell">
+                <div class="row">
+                    <div class="media libMaster">
+                        <div class="hidden-xs">
+                            <a href="#" data-toggle="modal" data-target="#lib-details-<%= book.id %>">
+                                <img class="media-object col-xs-3 libImg"
+
+                                        <% if (book.image) { %>
+                                     src="/media/image/<%= book.image %>"
+                                        <% } else { %>
+                                     src="/images/bookicon.jpg"
+                                        <% } %>
+
+                                     title="<%=__("Click to view this library details")%>">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <a href="#" class="text-primary" title="<%=__("Click to view this library details")%>"
+                                   data-toggle="modal" data-target="#lib-details-<%= book.id %>">
+                                    <%= book.name %>
+                                </a>
+                            </h4>
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                                    <%=__("Level")%>: <%= book.level %> -
+                                    <%=__("Used")%>: 1
+                                </li>
+                                <li>
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                    <%=__("Number Lesson")%>: <%= book.bookDetails.length %>
+                                </li>
+                                <li>
+                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                    <a href="#" title="<%=__("Click to view this library lesson")%>" data-toggle="modal"
+                                       data-target="#lib-review-<%= book.id %>" class="text-danger"><%=__("Preview")%></a> -
+                                    <span></span>
+                                    <a onclick="loadformLib('<%= book.id %>')"
+                                       title="<%=__("Click to learn this library")%>" class="text-info">
+                                        <%=__("Learning Library")%></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--lib details-->
+            <div class="modal fade" id="lib-details-<%= book.id %>" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">×</span></button>
+                            <h4 class="modal-title"><%=__("Library")%> - <%= book.name %></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <a>
+                                        <img class="library-detail-img"
+
+                                                <% if (book.image) { %>
+                                             src="/media/image/<%= book.image %>"
+                                                <% } else { %>
+                                             src="/images/book_default_cover.png"
+                                                <% } %>
+                                                />
+                                    </a>
+                                </div>
+                                <div class="col-sm-9">
+                                    <ul>
+                                        <h4><%=__("Details")%>:</h4>
+                                        <li>
+                                            <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                                            <%=__("Level")%>: <%= book.level %>
+                                        </li>
+                                        <li>
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                            <%=__("Type")%>: <%= book.type %>
+                                        </li>
+                                        <li>
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <%=__("Number Lesson")%>: <%= book.bookDetails.length %>
+                                        </li>
+                                        <li>
+                                            <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                                            <%=__("Estimate Hour")%>:
+                                            <% if(book.hourForLearn == 'undefined'){ %>
+                                            <%= 0 %>
+                                            <% }else{ %>
+                                            <%= book.hourForLearn %>
+                                            <% } %>
+                                        </li>
+                                        <li>
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                            <%=__("Number Of Recommend")%>:
+                                            <% if(book.recommendNum == undefined){ %>
+                                            <%= 0 %>
+                                            <% }else{ %>
+                                            <%= book.recommendNum %>
+                                            <% } %>
+                                        </li>
+                                        <li>
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                            <%=__("Used")%>: 1
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12">
+
+                                    <h4><%=__("Description")%>:</h4>
+
+                                    <div class="pre-scrollable mCustomScrollbar" data-mcs-theme="dark">
+                                        <%= book.description %>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <h4><%=__("Your friends are learning this library")%>: </h4>
+
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <div class="thumbnail">
+                                        <a href="#" title="Click to view profile.">
+                                            <img src="../images/avatar/a01.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a onclick="loadformLib('<%= book.id %>')"
+                               class="btn btn-success" role="button">
+                                <%=__("Learning This Library")%></a>
+                            <a href="#" class="btn btn-danger" role="button" data-dismiss="modal"><%=__("Close")%></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--lib review-->
+            <div class="modal fade" id="lib-review-<%= book.id %>" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">×</span></button>
+                            <h4 class="modal-title"><%=__("Library")%> - <%= book.name %></h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row libImg-modal">
+                                <div class="col-xs-3">
+                                    <div>
+                                        <h1><%=__("Lesson")%></h1>
+                                    </div>
+                                    <aside class="">
+                                        <!-- sidebar: style can be found in sidebar.less -->
+                                        <div class="pre-scrollable per-scroll-lib-review">
+                                            <section class="sidebar">
+
+                                                <!-- Sidebar user panel -->
+                                                <ul class="sidebar-menu">
+                                                    <% arrAllLesson.forEach(function(item){ %>
+                                                    <% if(item.idLesson == book.id){ %>
+                                                    <% item.arrLesson.forEach(function(uniqueLesson){ %>
+                                                    <li class="treeview">
+                                                        <a href="javascript: void(0)">
+                                                            <i class="fa fa-edit"></i>
+                                                            <span><%= uniqueLesson %></span>
+                                                            <i class="fa fa-angle-left pull-right"></i>
+                                                        </a>
+                                                        <% book.bookDetails.forEach(function(bookDetail){ %>
+                                                        <% if(uniqueLesson == bookDetail.lesson) { %>
+                                                        <ul class="treeview-menu">
+                                                            <li><a href='javascript: void(0)'
+                                                                   onclick="learn('<%= bookDetail.useModule %>', <%= bookDetail.dataExtractCondition %>, '<%= book.id %>')">- <%= bookDetail.subLesson %></a>
+                                                            </li>
+
+                                                        </ul>
+                                                        <% } %>
+                                                        <% }) %>
+                                                    </li>
+                                                    <% }) %>
+                                                    <% } %>
+                                                    <% }) %>
+                                                </ul>
+
+                                            </section>
+                                        </div>
+                                        <!-- /.sidebar -->
+                                    </aside>
+
+                                </div>
+                                <div class="col-xs-9 ">
+                                    <h3 class="text-center"><%= book.name %></h3>
+
+                                    <div class=" container-learn" id="<%= book.id %>"
+                                         style="min-height: 600px"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <a onclick="loadformLib('<%= book.id %>')" class="btn btn-success" role="button">
+                                <%=__("Learning This Library")%></a>
+                            <a href="#" class="btn btn-danger" role="button" data-dismiss="modal"><%=__("Close")%></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <% } %>
+            <% } %>
+            <% }) %>
+        </div>
+    </div>
+    <% }) %>
+    <form action="/japtool/learning/add" method="post" onsubmit="return validateCreatLearning()"
+          id="create-learning-japtool">
+
+        <div class="modal fade" id="formedit" data-keyboard="false">
+            <div class="modal-dialog modal-lg" id="editform"></div>
+        </div>
+    </form>
+    <div class="modal fade" id="show-books" data-backdrop="static" data-keyboard="false"></div>
+    <ul id="pagination-demo" class="pagination-sm row text-center pull-right"></ul>
+    <script type="text/javascript">
+        window.onload = function () {
+            $('.sub-lesson').click(function () {
+                var bookDetail = $(this).attr('name');
+                $('#add-book-detail').attr('name', bookDetail);
+                var user = '<%= session.User.id %>';
+                var selfLearning = $('#title-learning').attr('name');
+                var startDate = new Date();
+                var finishDate = new Date();
+                $.ajax({
+                    method: "POST",
+                    url: "/japtool/Learning/saveHistory",
+                    data: {
+                        user: user,
+                        bookDetail: bookDetail,
+                        selfLearning: selfLearning,
+                        startDate: startDate,
+                        finishDate: finishDate
+                    }
+                })
+                        .done(function (msg) {
+                            console.log(msg);
+                        });
+            });
+            $('.content').hide();
+            var itemOnPage = 2;
+            for (var i = 0; i < itemOnPage; i++) {
+                $('.library-' + i).show();
+            }
+            var totalPages =
+            <%= uniqueType.length %>/
+            itemOnPage;
+            $('#pagination-demo').twbsPagination({
+                totalPages: Math.ceil(totalPages),
+                visiblePages: 4,
+                onPageClick: function (event, page) {
+                    var itemShow = itemOnPage * page;
+                    $('.content').hide();
+                    for (var i = itemShow - itemOnPage; i < itemShow; i++) {
+                        $('.library-' + i).show();
+                    }
+                }
+            });
+        };
+        function learn(module, condition, id) {
+            var strCondition = JSON.stringify(condition);
+            if (module == 'test') {
+                $('#' + id).load('/japtool/' + module + '/previewTest/?condition=' + strCondition);
+            } else {
+                $('#' + id).load('/japtool/' + module + '/list/?condition=' + strCondition);
+            }
+        }
+    </script>
+</div>
+<% } %>
+

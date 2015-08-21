@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 form-info">
+    <div class="row">
+      <div class="col-sm-10">
+        <input type="hidden" value="<%= user.id %>" id="idUser">
+
+        <p class="leadInfo"><%= user.username %></p>
+      </div>
+      <div class="col-sm-2">
+        <button type="button" class="btn btn-sm btn-edit" id="btnShow"><%= __('Edit') %> <span
+            class="glyphicon glyphicon-edit"></span></button>
+      </div>
+    </div>
+    <hr>
+    <div class="detail-info"></div>
+    <p><%= __('First Name') %> : <span><%= user.firstname %></span></p>
+
+    <p><%= __('Last Name') %> : <span><%= user.lastname %></span></p>
+
+    <p><%= __('Email') %> : <span><%= user.email %></span></p>
+
+    <p><%= __('E-Telephone') %> : <span><%= user.telephone %></span></p>
+
+    <p><%= __('Fax') %> : <span><%= user.fax %></span></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 form-info">
+    <p class="leadInfo"><%= __('User Address') %></p>
+    <hr>
+
+    <p><%= __('Company') %> : <%= user.yourAddress.company %></p>
+
+    <p><%= __('Address') %> : <%= user.yourAddress.address %></p>
+
+    <p><%= __('City') %> : <%= user.yourAddress.city %></p>
+
+    <p><%= __('Post Code') %> : <%= user.yourAddress.postCode %></p>
+
+    <p><%= __('Country') %> :
+      <% if(user.yourAddress.country){ %>
+      <%= user.yourAddress.country %>
+      <% } %>
+    </p>
+  </div>
+</div>
+
+<script type="text/javascript">
+  // edit user profile page
+  $('#btnShow').click(function () {
+    var idUser = $('#idUser').val();
+    $.ajax({
+      url: '/japtool/user/edit',
+      type: 'GET',
+      data: {
+        id: idUser
+      },
+      cache: false,
+      async: false,
+      success: function (data) {
+        $('#default-show').html('');
+        $('#default-show').html(data);
+      },
+      error: function () {
+        alert('Error')
+      }
+    })
+  });
+</script>

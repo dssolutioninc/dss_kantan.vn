@@ -1,0 +1,97 @@
+<div class="vocabulary content clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="text-center clearfix">Learning Your Self</h2>
+
+                <p class="text-center desc-home">Hiển thị những bài học của thành viên</p>
+            </div>
+            <div class="vocabulary-item clearfix">
+                <div class="info clearfix">
+                    <% _.each(listLearnings, function (learning) { %>
+                    <div class="col-sm-12 clearfix">
+                        <h3><a class="text-primary"><%= learning.bookMaster.name %></a></h3>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-primary">Category: <%= learning.bookMaster.type %></p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-info">Level: <%= learning.bookMaster.level %></p>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-success">Pass: <span class="lesson-pass-<%= learning.id %>"></span> Lesson</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-danger">Failed: <span class="lesson-danger-<%= learning.id %>"></span> Lesson</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-primary">Tổng có: <%= learning.bookMaster.lessonNum %></p>
+                    </div>
+                    <div id="<%= learning.bookMaster.id %>" class="clearfix"></div>
+                    <% }) %>
+                </div>
+            </div>
+            <div class="bookMasterMore"></div>
+            <div class="col-sm-offset-4 col-sm-4 clearfix">
+                <div class="info-lesson label-primary loadmore"><a>Load View More</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        <% _.each(listLearnings, function (learning) { %>
+            $.ajax({
+                url: '/japtool/home/lessonHome',
+                type: 'GET',
+                data: {
+                    bookMasterId: '<%= learning.bookMaster.id %>',
+                    selfLesson: '<%= learning.id %>'
+                },
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#<%= learning.bookMaster.id %>').html('');
+                    $('#<%= learning.bookMaster.id %>').html(data);
+                },
+                error: function () {
+                    alert('Error')
+                }
+            })
+        <% }) %>
+
+        var loadMore = $(".loadmore");
+        var start = 3; //Mac dinh 3 ket qua dau dien khi load page
+        loadMore.on('click', function () {
+            if(!$(this).hasClass('clicked')){
+                $(this).addClass('clicked');
+                $.ajax({
+                    url: '/japtool/home/loadMoreIndex',
+                    type: 'GET',
+                    data: {
+                        start: start
+                    },
+                    cache: false,
+                    async: false,
+                    success: function (data) {
+                        if(data){
+                            $('.bookMasterMore').append(data);
+                            loadMore.removeClass('clicked');
+                            start += 1; //Cong them 1 gia tri tiep theo
+                        }else{
+                            loadMore.remove();
+                        }
+                    },
+                    error: function () {
+                        alert('Error')
+                    }
+                })
+            }
+
+        })
+
+
+    }
+</script>

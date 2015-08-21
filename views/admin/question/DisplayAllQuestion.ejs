@@ -1,0 +1,62 @@
+<%
+var size = questions.length;
+%>
+<%
+if(size == 0) {
+%>
+<h3>List articles is Empty ! Go to <a href="/addQuestion">Add question</a></h3>
+<%
+} else {
+%>
+<div class="all-question">
+    <div class="container">
+        <div class="row">
+            <h2>All Question</h2>
+            <table class="table">
+                <thead>
+                <tr class="success">
+                    <td>Question id</td>
+                    <td>Article's subject</td>
+                    <td>Question content</td>
+                    <td colspan="2">Action</td>
+                </tr>
+                </thead>
+                <%Articles.forEach(function (article) {
+                        questions.forEach(  function (question){
+
+                        if(article.id == question.articleID) {
+                        %>
+
+                        <tr>
+                            <td>
+                                <form action="displayQuestion" method="post">
+                                    <input type="text" hidden="hidden" value="<%= question.id %>" name="id">
+                                    <button type="submit" class="btn-update-article"><%= question.id %></button>
+                                </form>
+                            </td>
+                            <td><%=article.subject%></td>
+                            <td><%= question.question %></td>
+                            <td><a href="/deleteQuestion/<%= question.id %>">Delete</a></td>
+                            <td>
+                                <form action="editQues" method="post">
+                                    <input type="text" hidden="hidden" value="<%= question.id %>" name="id">
+                                    <button type="submit" class="btn-update-article">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%
+                        }
+                });
+                });
+                %>
+            </table>
+        </div>
+        <div class="row">
+            <a href="/showAllArticle" class="btn btn-success btn-show-ar" >Show All Article</a>
+        </div>
+    </div>
+</div>
+
+<%
+}
+%>

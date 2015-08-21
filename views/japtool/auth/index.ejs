@@ -1,0 +1,106 @@
+<div class="wrapper clearfix auth-login">
+	<div class="container">
+		<div class="row">
+			<!--login div-->
+			<div class="col-sm-6 right">
+				<div class="well">
+					<div class="login">
+						<h2 class="secondary-title"><%=__("Login")%></h2>
+						<hr>
+						<form action="/japtool/auth/login" method="POST" enctype="multipart/form-data">
+							<div class="login-wrap">
+								<% if(flash && flash.err) { %>
+								<ul class="alert alert-success">
+									<% Object.keys(flash.err).forEach(function(error) { %>
+									<li>
+										<h4> <%= flash.err[error].name %> </h4>
+										<%= flash.err[error].message %>
+									</li>
+									<% }) %>
+								</ul>
+								<% } %>
+								<div class="form-group">
+									<label class="control-label" for="input-email"><%=__("E-Mail Address")%></label>
+									<input type="text" name="email" value="" placeholder="<%=__('E-Mail Address')%>"
+										   id="input-email" class="form-control">
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="input-password"><%=__("Password")%></label>
+									<input type="password" name="password" value="" placeholder="<%=__('Password')%>"
+										   id="input-password" class="form-control">
+
+									<a href="/japtool/user/passforget"><%=__("Forgotten Password")%></a>
+								</div>
+								<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+							</div>
+							<!--login button-->
+							<input type="submit" value="<%=__('Login')%>" class="btn sd-learn-more login-page"/>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--Register div-->
+			<div class="col-sm-6 left">
+				<div class="well">
+					<div class="register">
+						<h2 class="secondary-title"><%=__("Register Account")%></h2>
+						<hr>
+						<div class="login-wrap">
+
+
+							<p> <%=__("If you don't have account . By creating an account you will be able to learn faster, join to group learning, and follow your learning process")%>.</p>
+						</div>
+
+						<a href="/japtool/user/new" class="btn sd-learn-more login-page" ><%=__("Sign Up")%></a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!--<div class="resgiter content" id="content">-->
+	<!--<form action="/auth/login" method="POST" class="form-horizontal form-signin1">-->
+		<!--<h2>Please sign in ...</h2>-->
+
+		<!--<div class="form-group">-->
+			<!--<label class="col-sm-3 control-label">Email</label>-->
+
+			<!--<div class="col-sm-9">-->
+				<!--<input type="text" class="form-control" placeholder="Email address" name="email">-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="form-group">-->
+			<!--<label class="col-sm-3 control-label">Password</label>-->
+
+			<!--<div class="col-sm-9">-->
+				<!--<input type="password" class="form-control" placeholder="Password" name="password">-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<input type="hidden" name="_csrf" value="<%= _csrf %>" />-->
+
+		<!--<div class="form-group">-->
+			<!--<div class="text-right col-sm-12">-->
+				<!--<button type="submit" class="btn btn-primary">Sign in</button>-->
+
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="form-group">-->
+			<!--<div class="text-center col-sm-6">-->
+
+				<!--<a class="btn btn-block btn-lg btn-social btn-facebook" href="/auth/facebook">-->
+					<!--<i class="fa fa-facebook"></i> Sign in with Facebook-->
+				<!--</a>-->
+
+			<!--</div>-->
+			<!--<div class="text-center col-sm-6">-->
+				<!--<a class="btn btn-block btn-lg btn-social btn-google-plus" href="/auth/facebook">-->
+					<!--<i class="fa fa-google-plus"></i> Sign in with Google-->
+				<!--</a>-->
+
+			<!--</div>-->
+		<!--</div>-->
+	<!--</form>-->
+
+<!--</div>-->

@@ -1,0 +1,24 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h2><%=__("message from system")%></h2>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+            <% if(msg == 1){ %>
+            <div id="mesageBook">
+                <h4><%=__("Studying has not yet begun")%> <u><%= day %></u> <%=__("more day")%></h4>
+            </div>
+            <% }else if(msg == 2){ %>
+            <h4><%=__("Studying finished . if you want to learn more click")%><a
+                        onclick="loadform('<%= learning.id %>')"><%=__("here")%></a></h4>
+            <% }else{ %>
+            <div id="mesageBook">
+                <h4><%=__("You can't delete this learning")%></h4>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-danger" role="button" data-dismiss="modal"><%=__("ok")%></a>
+    </div>
+</div>

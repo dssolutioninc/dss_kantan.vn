@@ -1,0 +1,49 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"><%=__("Recommended Libraries For You")%> - <%=__("Step")%> 3/3</h4>
+        </div>
+        <% if(surveies.length <= 0){ %>
+        <div class="modal-body">
+            <h2 class="text-center"><%=__("You don't have any survey , Click Skip to continue")%></h2>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-success" onclick="nextQuestion(-1,-1)" role="button" data-dismiss="modal"
+               data-toggle="modal"><%=__("skip")%></a>
+        </div>
+        <% } %>
+        <% if(surveies.length > 0){ %>
+        <div class="modal-body">
+            <input type="hidden" id="numberquestion" value="<%= surveies.length %>">
+            <% for(var i = 0;i < surveies.length;i++){ %>
+            <input type="hidden" id="surVeyid<%= i %>" value="<%= surveies[i].id %>">
+
+            <form class="form-group" id="qt<%= i + 1 %>">
+
+                <label><%= surveies[i].question %>?</label>
+                <% if(surveies[i].option1 != null && surveies[i].option1 != ""){ %>
+                <p><input type="radio" name="lib-recommend-3-q<%= i + 1 %>" onchange="checkAnswer3()"
+                          value="<%= surveies[i].option1 %>"> <%= surveies[i].option1 %></p>
+                <% } %>
+                <% if(surveies[i].option2 != null && surveies[i].option2 != ""){ %>
+                <p><input type="radio" name="lib-recommend-3-q<%= i + 1 %>" onchange="checkAnswer3()"
+                          value="<%= surveies[i].option2 %>"> <%= surveies[i].option2 %></p>
+                <% } %>
+                <% if(surveies[i].option3 != null && surveies[i].option3 != ""){ %>
+                <p><input type="radio" name="lib-recommend-3-q<%= i + 1 %>" onchange="checkAnswer3()"
+                          value="<%= surveies[i].option3 %>"> <%= surveies[i].option3 %></p>
+                <% } %>
+                <% if(surveies[i].option4 != null && surveies[i].option4 != ""){ %>
+                <p><input type="radio" name="lib-recommend-3-q<%= i + 1 %>" onchange="checkAnswer3()"
+                          value="<%= surveies[i].option4 %>"> <%= surveies[i].option4 %></p>
+                <% } %>
+            </form>
+            <% } %>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-success" role="button" data-dismiss="modal" data-toggle="modal"
+               data-target="#lib-recommend-2"><%=__("Back")%></a>
+        </div>
+        <% } %>
+    </div>
+</div>

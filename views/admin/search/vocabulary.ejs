@@ -1,0 +1,226 @@
+<script src="https://www.google.com/jsapi"></script>
+<script src="/js/dependencies/jquery.js"></script>
+<script type="text/javascript">
+
+  google.load('search', '1');
+  var imageSearch;
+  var vocabulary = <%- JSON.stringify(vocabulary) %>;
+
+  //remove all element of column [Search Results]
+  function removeElement() {
+    var rows = document.getElementById("vovabularyTbl").rows;
+    for (var i=1; i<= vocabulary.length; i++ ){
+      rows[i].cells[5].innerHTML = '<div id="content' + i + '"></div>';
+    }
+  }
+
+  //get all values of a row in table
+  function getValuesOfRows(e) {
+    e = e || window.event;
+    var data = [];
+    var target = e.srcElement || e.target;
+    while (target && target.nodeName !== "TR") {
+      target = target.parentNode;
+    }
+    if (target) {
+      var cells = target.getElementsByTagName("td");
+      for (var i = 0; i < cells.length; i++) {
+        data.push(cells[i].innerHTML);
+      }
+    }
+    return data;
+  }
+ 
+  // create radio button (IE, Firefox,...)
+  function createRadioElement( name, checked ) {
+    var radioInput;
+    try {
+      var radioHtml = '<input type="radio" name="' + name + '"';
+      if ( checked ) {
+        radioHtml += ' checked="checked"';
+      }
+      radioHtml += '/>';
+      radioInput = document.createElement(radioHtml);
+    } catch( err ) {
+      radioInput = document.createElement('input');
+      radioInput.setAttribute('type', 'radio');
+      radioInput.setAttribute('name', name);
+      if ( checked ) {
+        radioInput.setAttribute('checked', 'checked');
+      }
+    }
+    return radioInput;
+  }
+
+  function addPaginationLinks() {
+    // To paginate search results, use the cursor function.
+    var cursor = imageSearch.cursor;
+    var curPage = cursor.currentPageIndex; // check what page the app is on
+    var pagesDiv = document.createElement('div');
+    for (var i = 0; i < cursor.pages.length; i++) {
+      var page = cursor.pages[i];
+      if (curPage == i) { 
+
+      // If we are on the current page, then don't make a link.
+        var label = document.createTextNode(' ' + page.label + ' ');
+        pagesDiv.appendChild(label);
+      } else {
+
+        // Create links to other pages using gotoPage() on the searcher.
+        var link = document.createElement('a');
+        link.href="javascript:imageSearch.gotoPage("+i+');';
+        link.innerHTML = page.label;
+        link.style.marginRight = '2px';
+        pagesDiv.appendChild(link);
+      }
+    }
+    var contentDiv = document.getElementById('content' + imageSearch.index);
+    contentDiv.appendChild(pagesDiv);
+  }
+
+  function searchComplete(index) {
+    // Check that we got results
+    if (imageSearch.results && imageSearch.results.length > 0) {
+
+      // Grab our content div, clear it.
+      var contentDiv = document.getElementById('content' + index);
+      contentDiv.innerHTML = '';
+
+      // Loop through our results, printing them to the page.
+      var results = imageSearch.results;
+      for (var i = 0; i < results.length; i++) {
+        // For each result write it's radio button and image to the screen
+        var result = results[i];
+        var imgContainer = document.createElement('div');
+        var radio = createRadioElement("radio",false);
+        
+        var newImg = document.createElement('img');
+        imgContainer.id = 'image' + i;
+        imgContainer.style.cssText = 'display: inline';
+
+        // There is also a result.url property which has the escaped version
+        newImg.src=result.tbUrl;
+        imgContainer.appendChild(radio);
+        imgContainer.appendChild(newImg);
+
+        // Put our radio button + image in the content
+        contentDiv.appendChild(imgContainer);
+      }
+
+      // Now add links to additional pages of search results.
+      imageSearch.index = index;
+      addPaginationLinks(imageSearch);
+    }
+  }
+
+  function OnLoad(item, index) {
+    var index = [index];
+    // Create an Image Search instance.
+    imageSearch = new google.search.ImageSearch();
+
+    // Set searchComplete as the callback function when a search is 
+    // complete.  The imageSearch object will have results in it.
+    imageSearch.setSearchCompleteCallback(this, searchComplete, index);
+    imageSearch.setResultSetSize(4);
+
+    // Find me a beautiful car.
+    imageSearch.execute(item);
+    
+    // Include the required Google branding
+    google.search.Search.getBranding('branding');
+  }
+  //google.setOnLoadCallback(OnLoad);
+
+  $(function(){
+    //search button click event
+    $(".search").click(function(e){
+      var data = [];
+      data = getValuesOfRows(e);
+      removeElement();
+      OnLoad(data[3].trim(), data[0]);
+    });
+
+    //update button click event
+    $(".update").click(function(e){
+      var data = [];
+      data = getValuesOfRows(e);
+      var selected = $("#content"+ data[0] + " input[type='radio']:checked");
+      if(selected.length > 0){
+
+        var imageSrc = selected.next().attr('src');
+
+        $.ajax({
+        method : "POST",
+        url: "/admin/search/update",
+        cache : false,
+        data: { vocabularyID: data[1], imageSrc: imageSrc},
+
+        success: function(image) {
+          if (typeof image !== 'undefined' || image != null){
+            var rows = document.getElementById("vovabularyTbl").rows;
+            rows[data[0]].cells[2].innerHTML = '<td><img src="/media/image/'+ image.imageId +'"' +' height="70" width="50"></td>' ;
+          }
+        },
+
+        failure: function(msg) {
+          alert("Fail : " + msg);
+        },
+
+        error: function(xhr, status, text) {
+          console.log(text);
+          var response = jQuery.parseJSON(xhr, responseText);
+          alert(response.error);
+        }
+        });
+        
+      }else {
+        alert("Please search and check a radio button");
+      }
+    });
+  });      
+</script>
+
+<div id="branding"  style="float: left;"></div><br />
+    
+<div class="container">
+  <div class="row">
+
+  <table class='table table-bordered table-hover' id="vovabularyTbl">
+    <thead>
+      <tr>
+      <th>No</th>
+      <th style="display:none;">Id</th>
+      <th>cover</th>
+      <th>item</th>
+      <th>description</th>
+      <th>Search Results</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% vocabulary.forEach( function(vocabulary, index){ %>
+      <tr>
+      <td><%= index + 1 %></td>
+      <td style="display:none;"><%=vocabulary.id %></td>
+      <td>
+        <% if (vocabulary.image) { %>
+          <img src="/media/image/<%=vocabulary.image%>" height="70" width="50">
+        <% } else {%>
+          <img src="/images/book_default_cover.png" height="70" width="50">
+        <% } %>
+      </td>
+      <td><%= vocabulary.item %></td>
+      <td><%= vocabulary.description %></td>
+      <td >
+        <div id="content<%=index + 1%>"></div>
+      </td>
+      <td>
+      <button class="btn btn-warning btn-xs search" >Search</button>  
+      <button class="btn btn-warning btn-xs update" >Update</button>  
+      </td></tr>
+    <% }); %>
+    </tbody>
+  </table>
+
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<% _.each(listItemsMore, function (listItemsMoreL) { %>
+<% _.each(listItemsMoreL, function (itemMore) { %>
+<div class="info-book-more">
+    <div class="col-sm-12">
+        <div class="info-book clearfix">
+            <div class="col-sm-4">
+                <h3><%= itemMore.name %></h3>
+            </div>
+            <div class="col-sm-4">
+                7/10 Bài đã học
+            </div>
+            <div class="col-sm-4">
+                Pass 5/ 10 Bài
+            </div>
+            <div class="info-desc info-desc-<%= itemMore.id %> disactive clearfix">
+                <% _.each(itemMore.bookDetails, function (itemLessonMore) { %>
+                <div class="col-sm-2 col-xs-3 col-md-1">
+                    <div class="info-lesson label-danger"><a href="<%= itemLessonMore.id %>"><%= itemLessonMore.lesson %></a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+            <div class="col-sm-12">
+                <a class="view-detail-lesson view-detail-lesson-active-<%= itemMore.id %> pull-right">View Detail</a>
+                <a class="view-detail-lesson view-detail-lesson-hide-<%= itemMore.id %> pull-right disactive">Hide
+                    Detail</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<% }) %>
+<% }) %>
+<script>
+    /*
+     * Home after login
+     * Add Class to div when click view detail
+     * author: tuyentv1@fsoft.com.vn
+     */
+    <% _.each(listItemsMore, function (listItemsMoreL) { %>
+    <% _.each(listItemsMoreL, function (itemMore) { %>
+    $('.info-book-more .view-detail-lesson-active-<%= itemMore.id %>').click(function () {
+        $('.info-book-more .info-desc-<%= itemMore.id %>').removeClass('disactive');
+        $('.info-book-more .info-desc-<%= itemMore.id %>').addClass('active');
+        $('.view-detail-lesson-hide-<%= itemMore.id %>').removeClass('disactive');
+        $('.view-detail-lesson-hide-<%= itemMore.id %>').addClass('active');
+        $(this).addClass('disactive');
+    })
+    $('.info-book-more .view-detail-lesson-hide-<%= itemMore.id %>').click(function () {
+        $('.info-book-more .info-desc-<%= itemMore.id %>').addClass('disactive');
+        $('.info-book-more .info-desc-<%= itemMore.id %>').removeClass('active');
+        $('.view-detail-lesson-active-<%= itemMore.id %>').removeClass('disactive');
+        $('.view-detail-lesson-hide-<%= itemMore.id %>').removeClass('active');
+        $(this).addClass('disactive');
+    })
+    <% }) %>
+    <% }) %>
+
+
+</script>
+
