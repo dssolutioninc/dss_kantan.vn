@@ -79,6 +79,7 @@ parse(data, {delimiter : ',', comment: '#'}, function(err, vocabularies){
 				//var imgPath = config.kanji_image_folder + filename;
 				//console.log(filename);
 				if(fs.existsSync(filename)){
+					conn.setMaxListeners(0);
 					conn.once('open', function () {
 					    var gfs = Grid(conn.db, mongoose.mongo);
 					    // streaming to gridfs

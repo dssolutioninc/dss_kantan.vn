@@ -87,6 +87,7 @@ parse(data, {delimiter : ',', comment: '#'}, function(err, kanjis){
 				var filename = item[5] + '.gif' ;
 				var imgPath = config.kanji_image_folder + filename;
 				if(fs.existsSync(imgPath)){
+					conn.setMaxListeners(0);
 					conn.once('open', function () {
 					    var gfs = Grid(conn.db, mongoose.mongo);
 					    // streaming to gridfs
