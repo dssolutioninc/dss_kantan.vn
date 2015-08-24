@@ -14,101 +14,47 @@ module.exports = {
             where: {user: userId},
             limit: Constants.bookNumOnHome,
             sort: {finishDate: 0, startDate: 0}
-        }).populate('bookMaster').exec(function (err, listLearnings) {
+        }).populate('bookMaster').exec(function (err, learnings) {
             if (err) {
                 if (err) return res.serverError(err);
             } else {
 
-                // listLearnings.forEach(function (learning){
-                //     BookDetail.find({bookMaster: learning.bookMaster.id}).sort({sort: 'sort ASC'}).
-                //     exec(function(err, lessons){
+                var listLearnings = [];
+                learnings.forEach(function (learning){
+                    Database.learningSumary(
+                        {
+                            userID: req.session.User.id,
+                            id: learning.id,
+                            bookID: learning.bookMaster.id
+                        }, 
+                        function(err, sumary){
+                            learning.passedNum = sumary.passedNum;
+                            learning.fasledNum = sumary.fasledNum;
 
-                //         UserLearnHistory.find({
-                //             user: req.session.User.id,
-                //             selfLearning: learning.id
-                //         }).exec(function(err, learnedLessons){
+                            listLearnings.push(learning);
 
-                //             var lessonList = [];
-
-                //             lessons.forEach(function(lesson){
-                //                 lesson.learnedInfo = learnedLessons.filter(function(learnedLesson){
-                //                     return learnedLesson.bookDetail == lesson.id;
-                //                 });
-
-                //                 lessonList.push(lesson);
-                //             });
-
-                //             var passedNum = 0;
-                //             var fasledNum = 0;
-                //             var allPass = true;
-
-                //             for (var i = 0; i < lessonList.length; ++i){
+                            console.log('learning.passedNum: ' +  learning.passedNum);
+                            console.log('learning.fasledNum: ' +  learning.fasledNum);
 
 
+                        });
+                    
 
-                //             }
-
-                //         });
-                        
-                //     })
-
-                // });
-
-                // BookMaster.findOne({id: bookID}).populate('bookDetails', {sort: 'sort ASC'}).
-                // exec(function createCB(err, book) {
-                //     if (err) { sails.log(err) }
-                //     else {
-                //         var bookDetails = book.bookDetails;
-
-                //         var lessonList = [];
-
-                //         UserLearnHistory.find({selfLearning: learnID, sort: 'updatedAt DESC'}).
-                //         exec(function (err, learnedLessions){
-                //             if (err) { sails.log(err) }
-                //             else {
-                //                  bookDetails.forEach(function (lession) {
-
-                //                     learnedLessions.forEach(function (learnedItem) {
-                //                         if (lession.id == learnedItem.bookDetail) {
-                //                             lession.learnHistory = learnedItem;
-                //                             return false;
-                //                         } 
-                //                         else { 
-                //                             return true;
-                //                         }
-                //                     });
-
-                //                     lessonList.push(lession);
-                //                 });
-                //             }
-                //             // console.log('req.param(lessonID): ' + lessonID);
-
-                //             if (!lessonID) {
-                //                 if (learnedLessions[0]) { lessonID = learnedLessions[0].bookDetail; }
-                //                 // console.log('learnedLessions[0].bookDetail: ' + lessonID);
-                //             }
-                //             //console.log('book: ' + JSON.stringify(book));
-                //             //console.log('lessonList: ' + JSON.stringify(lessonList));
-
-                //             res.view('japtool/learning/show-book-detail', {
-                //                 learnID: learnID,
-                //                 book: book,
-                //                 lessonList: lessonList,
-                //                 goLessonID: lessonID
-                //             });
-                //         });
-                //     }
-                // });
+                });
 
 
 
 
 
 
-                res.view('japtool/home/home', {listLearnings: listLearnings});
+
+                res.view('japtool/home/home', {listLearnings: learnings});
 
             }
         })
+
+    },
+    loadSumary: function (req, res) {
 
     },
     lessonHome: function (req, res) {
