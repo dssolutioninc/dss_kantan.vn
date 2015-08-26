@@ -26,8 +26,9 @@
     // when slide is last slide
     $('.slider-for').on('afterChange', function (event, slick, currentSlide, nextSlide) {
         var slideCount = $("#countPage").text();
-        console.log(currentSlide);
-        if(slideCount==(currentSlide+3)){
+
+        //if(slideCount==(currentSlide+3)){
+        if(slideCount==(currentSlide)){
             audioconfig=false;
             infoconfig=false;
         }
@@ -80,15 +81,8 @@
         });
     });
     // Google TEXT TO SPEECH
-    function text2speech(w, tl, id) {
-//    var speech = 'select * from data.uri where url="http://translate.google.com/translate_tts?ie=utf-8&tl=' + encodeURIComponent(tl) + "&q=" + encodeURIComponent(w) + '"';
-//    $.getJSON('https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(speech) + '&format=json&diagnostics=true', function (data) {
-//      var audioSrc = data.query.results.url;
-//      if (data && audioSrc !== undefined) {
-//        $('#vocabulary-audio-' + id)[0].src = audioSrc;
-//      }
-//    });
-        $('#vocabulary-audio-' + id)[0].src = 'https://api.voicerss.org/?key=6e1c89141fe9405198f5c8c9e33e0dd3&hl=' + tl + "&r=0&c=mp3&f=48khz_16bit_stereo&src=" + w;
+    function text2speech(w, id) {
+        $('#vocabulary-audio-' + id)[0].src = "/media/audio/" + w;
     }
     function playAudio(id) {
         if (audioconfig) {
@@ -236,7 +230,7 @@
 <!--GET AUDIO DATA-->
 <script>
     <% vocabularies.forEach( function(vocabulary, index){ %>
-    text2speech('<%= vocabulary.reading %>', 'ja-jp', <%= index %>);
+        text2speech('<%= vocabulary.audio %>',<%= index %>);
     <% }) %>
     (function () {
         //Show details of first voca
