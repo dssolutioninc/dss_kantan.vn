@@ -27,7 +27,7 @@ module.exports = {
                     req.session.loadBookNum = learnings.length;
                 }
 
-                res.view('japtool/home/home', {listLearnings: learnings, noMore: noMore});
+                res.view('japtool/home/index', {listLearnings: learnings, noMore: noMore});
             }
         })
 
@@ -134,7 +134,7 @@ module.exports = {
     learningDetail: function (req, res) {
         var learningID = req.param('learningID');
         var bookID = req.param('bookID');
-        // var moreSelfLearningId = req.param('moreSelfLesson');
+
         BookDetail.find({
             bookMaster: bookID,
             sort: 'sort ASC'
@@ -142,62 +142,35 @@ module.exports = {
             if (err) {
                 console.log(err);
             } else {
-                // if(!moreSelfLearningId || moreSelfLearningId == undefined) {
-                    var lessonList = [];
-                    UserLearnHistory.find({selfLearning: learningID}).exec(function (err, selfLesson) {
-                        if (err) {
-                            console.log(err);
-                        } else {
+                var lessonList = [];
+                
+                UserLearnHistory.find({selfLearning: learningID}).exec(function (err, selfLesson) {
+                    if (err) {
+                        console.log(err);
+                    } else {
 
-                                listItems.forEach(function (lesson) {
-                                    selfLesson.forEach(function (learnedItem) {
-                                        if (lesson.id == learnedItem.bookDetail) {
-                                            lesson.learnHistory = learnedItem;
-                                            return false;
-                                        } else {
-                                            return true;
-                                        }
-
-                                    });
-                                    lessonList.push(lesson);
+                            listItems.forEach(function (lesson) {
+                                selfLesson.forEach(function (learnedItem) {
+                                    if (lesson.id == learnedItem.bookDetail) {
+                                        lesson.learnHistory = learnedItem;
+                                        return false;
+                                    } else {
+                                        return true;
+                                    }
 
                                 });
+                                lessonList.push(lesson);
 
-                            res.render('japtool/home/learningDetail', {
-                                lessonList: lessonList,
-                                selfLesson: selfLesson,
-                                learningID:learningID
                             });
 
-                        }
-                    })
-                // }else{
-                //     UserLearnHistory.find({selfLearning: moreSelfLearningId}).exec(function (err, selfLesson) {
-                //         if (err) {
-                //             console.log(err);
-                //         } else {
-                //             var lessonList = [];
-                //             listItems.forEach(function (lesson) {
-                //                 selfLesson.forEach(function (learnedItem) {
-                //                     if (lesson.id == learnedItem.bookDetail) {
-                //                         lesson.learnHistory = learnedItem;
-                //                         return false;
-                //                     } else {
-                //                         return true;
-                //                     }
+                        res.render('japtool/home/learningDetail', {
+                            lessonList: lessonList,
+                            selfLesson: selfLesson,
+                            learningID:learningID
+                        });
 
-                //                 });
-                //                 lessonList.push(lesson);
-                //             });
-                //             res.render('japtool/home/limitLessonHome', {
-                //                 lessonList: lessonList,
-                //                 moreSelfLesson: selfLesson,
-                //                 moreSelfLearningId:moreSelfLearningId
-                //             });
-
-                //         }
-                //     })
-                // }
+                    }
+                })
             }
         })
     },
