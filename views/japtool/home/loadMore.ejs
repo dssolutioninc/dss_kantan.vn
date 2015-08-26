@@ -1,30 +1,27 @@
 <div class="vocabulary-item clearfix">
     <div class="info clearfix">
-        <% _.each(listLearnings, function (item) { %>
+        <% _.each(listLearnings, function (learning) { %>
         <div class="col-sm-12">
-            <h3><a class="text-primary"><%= item.bookMaster.name %></a></h3>
+            <h3><a class="text-primary"><%= learning.bookMaster.name %></a></h3>
         </div>
         <div class="col-sm-2">
-            <p class="text-primary"><%= __('Category: ') %> <%= item.bookMaster.type %></p>
+            <p class="text-primary"><%= __('Category: ') %> <%= learning.bookMaster.type %></p>
         </div>
         <div class="col-sm-2">
-            <p class="text-info"><%= __('Level: ') %> <%= item.bookMaster.level %></p>
+            <p class="text-info"><%= __('Level: ') %> <%= learning.bookMaster.level %></p>
         </div>
         <div class="col-sm-2">
-            <p class="text-success"><%= __('Pass: ') %> <span id="passNum-<%= item.id %>"></span> Lesson</p>
+            <p class="text-success"><%= __('Pass: ') %> <span id="passNum-<%= learning.id %>"></span> Lesson</p>
         </div>
         <div class="col-sm-4">
-            <p class="text-danger"><%= __('False or in learning: ') %> <span id="falsedNum-<%= item.id %>"></span> Lesson</p>
+            <p class="text-danger"><%= __('False or in learning: ') %> <span id="falsedNum-<%= learning.id %>"></span> Lesson</p>
         </div>
         <div class="col-sm-2">
-            <p class="text-primary"><%= __('Total of Lesson: ') %> <%= item.bookMaster.lessonNum %></p>
+            <p class="text-primary"><%= __('Total of Lesson: ') %> <%= learning.bookMaster.lessonNum %></p>
         </div>
-        <div id="<%= item.id %>" class="disactive clearfix"></div>
+        <div id="detail-<%= learning.id %>" class="clearfix"></div>
         <div class="col-sm-12">
-            <a class="view-detail-lesson view-detail-lesson-active-<%= item.id %> pull-right"
-               id="<%= item.bookMaster.id %>">View Detail</a>
-            <a class="view-detail-lesson view-detail-lesson-hide-<%= item.id %> pull-right disactive">Hide
-                Detail</a>
+            <a class="show-hide-detail-<%= learning.id %> pull-right"><%= __('Hide Detail') %></a>
         </div>
         <% }) %>
     </div>
@@ -34,64 +31,52 @@
 <div class="info-book-more"></div>
 
 <script type="text/javascript">
-    <% _.each(listLearnings, function (item) { %>
-        $('#<%= item.bookMaster.id %>').on('click', function () {
+    <% _.each(listLearnings, function (learning) { %>
+        // $('#<%= learning.bookMaster.id %>').on('click', function () {
             $.ajax({
                 url: '/japtool/home/learningDetail',
                 type: 'GET',
                 data: {
-                    learningID: '<%= item.id %>',
-                    bookID: '<%= item.bookMaster.id %>'
+                    learningID: '<%= learning.id %>',
+                    bookID: '<%= learning.bookMaster.id %>'
                 },
                 cache: false,
                 async: false,
                 success: function (data) {
-                    $('#<%= item.id %>').html(data);
+                    $('#detail-<%= learning.id %>').html(data);
                 },
                 error: function () {
                     alert('Error')
                 }
             })
-        })
+        // })
 
         $.ajax({
             url: '/japtool/home/loadSumary',
             type: 'GET',
             data: {
-                learningID: '<%= item.id %>',
-                bookID: '<%= item.bookMaster.id %>'
+                learningID: '<%= learning.id %>',
+                bookID: '<%= learning.bookMaster.id %>'
             },
             cache: false,
             async: false,
             success: function (data) {
                 // console.log(data);
-                $('#passNum-<%= item.id %>').text(data.passedNum);
-                $('#falsedNum-<%= item.id %>').text(data.fasledNum);
+                $('#passNum-<%= learning.id %>').text(data.passedNum);
+                $('#falsedNum-<%= learning.id %>').text(data.fasledNum);
             },
             error: function () {
                 alert('Error')
             }
         })
+
+        $('.show-hide-detail-<%= learning.id %>').click(function () {
+            toggleDetail('<%= learning.id %>');
+        })
+
     <%})%>
 
     <% if (noMore) { %>
         $(".loadmore").remove();
     <% } %>
-
-    <% _.each(listLearnings, function (item) { %>
-    $('.view-detail-lesson-active-<%= item.id %>').click(function () {
-        $('#<%= item.id %>').removeClass('disactive');
-        $('#<%= item.id %>').addClass('active');
-        $('.view-detail-lesson-hide-<%= item.id %>').removeClass('disactive');
-        $('.view-detail-lesson-hide-<%= item.id %>').addClass('active');
-        $(this).addClass('disactive');
-    })
-    $('.view-detail-lesson-hide-<%= item.id %>').click(function () {
-        $('#<%= item.id %>').addClass('disactive');
-        $('#<%= item.id %>').removeClass('active');
-        $('.view-detail-lesson-active-<%= item.id %>').removeClass('disactive');
-        $('.view-detail-lesson-hide-<%= item.id %>').removeClass('active');
-        $(this).addClass('disactive');
-    })
-    <% }) %>
 </script>

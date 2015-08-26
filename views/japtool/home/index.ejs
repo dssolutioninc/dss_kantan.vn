@@ -26,7 +26,10 @@
                     <div class="col-sm-2">
                         <p class="text-primary"><%= __('Total of Lesson: ') %> <%= learning.bookMaster.lessonNum %></p>
                     </div>
-                    <div id="<%= learning.bookMaster.id %>" class="clearfix"></div>
+                    <div id="detail-<%= learning.id %>" class="clearfix"></div>
+                    <div class="col-sm-12">
+                        <a class="show-hide-detail-<%= learning.id %> pull-right"><%= __('Hide Detail') %></a>
+                    </div>
                     <% }) %>
                 </div>
             </div>
@@ -50,8 +53,8 @@
                 cache: false,
                 async: false,
                 success: function (data) {
-                    $('#<%= learning.bookMaster.id %>').html('');
-                    $('#<%= learning.bookMaster.id %>').html(data);
+                    $('#detail-<%= learning.id %>').html('');
+                    $('#detail-<%= learning.id %>').html(data);
                 },
                 error: function () {
                     alert('Error')
@@ -74,6 +77,10 @@
                 error: function () {
                     alert('Error')
                 }
+            })
+
+            $('.show-hide-detail-<%= learning.id %>').click(function () {
+                toggleDetail('<%= learning.id %>');
             })
 
         <% }) %>
@@ -105,6 +112,16 @@
                 })
             }
         })
+    }
+
+    function toggleDetail(learningID){
+        if ( $('#detail-' + learningID).hasClass('disactive') ) {
+            $('#detail-' + learningID).removeClass('disactive');
+            $('.show-hide-detail-' + learningID).text("<%= __('Hide Detail') %>");
+        } else {
+            $('#detail-' + learningID).addClass('disactive');
+            $('.show-hide-detail-' + learningID).text("<%= __('Show Detail') %>");
+        }
     }
 
 </script>
