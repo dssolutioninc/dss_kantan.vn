@@ -2,33 +2,29 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="text-center clearfix">Learning Your Self</h2>
-                <p class="text-center desc-home">Hiển thị những bài học của thành viên</p>
+                <h2 class="text-center clearfix"><%= __('Your learning status') %></h2>
+                <p class="text-center desc-home"><%= __('This site show all your learning status from pass till now') %></p>
             </div>
             <div class="vocabulary-item clearfix">
                 <div class="info clearfix">
-                    <% _.each(listLearnings, function (learning, index) { %>
+                    <% _.each(listLearnings, function (learning) { %>
                     <div class="col-sm-12 clearfix">
-                        <input type="hidden" id="bookid-<%= index %>" value="<%= learning.bookMaster.id %>">
-                        <input type="hidden" id="learnid-<%= index %>" value="<%= learning.id %>" >
                         <h3><a class="text-primary"><%= learning.bookMaster.name %></a></h3>
                     </div>
                     <div class="col-sm-2">
-                        <p class="text-primary">Category: <%= learning.bookMaster.type %></p>
+                        <p class="text-primary"><%= __('Category: ') %> <%= learning.bookMaster.type %></p>
                     </div>
                     <div class="col-sm-2">
-                        <p class="text-info">Level: <%= learning.bookMaster.level %></p>
+                        <p class="text-info"><%= __('Level: ') %> <%= learning.bookMaster.level %></p>
                     </div>
                     <div class="col-sm-2">
+                        <p class="text-success"><%= __('Pass: ') %> <span id="passNum-<%= learning.id %>" class="lesson-success"></span> Lesson</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-danger"><%= __('False or in learning: ') %> <span id="falsedNum-<%= learning.id %>" class="lesson-danger"></span> Lesson</p>
                     </div>
                     <div class="col-sm-2">
-                        <p class="text-success">Pass: <span id="passNum-<%= index %>" class="lesson-success"></span> Lesson</p>
-                    </div>
-                    <div class="col-sm-2">
-                        <p class="text-danger">Failed: <span id="falsedNum-<%= index %>" class="lesson-danger"></span> Lesson</p>
-                    </div>
-                    <div class="col-sm-2">
-                        <p class="text-primary">Tổng có: <%= learning.bookMaster.lessonNum %></p>
+                        <p class="text-primary"><%= __('Total of Lesson: ') %> <%= learning.bookMaster.lessonNum %></p>
                     </div>
                     <div id="<%= learning.bookMaster.id %>" class="clearfix"></div>
                     <% }) %>
@@ -36,7 +32,7 @@
             </div>
             <div class="bookMasterMore"></div>
             <div class="col-sm-offset-4 col-sm-4 clearfix">
-                <div class="info-lesson label-primary loadmore"><a>Load View More</a></div>
+                <div class="info-lesson label-primary loadmore"><a><%= __('View More') %></a></div>
             </div>
         </div>
     </div>
@@ -61,28 +57,44 @@
                     alert('Error')
                 }
             })
+
+            $.ajax({
+                url: '/japtool/home/loadSumary',
+                type: 'GET',
+                data: {
+                    learningID: '<%= learning.id %>',
+                    bookID: '<%= learning.bookMaster.id %>'
+                },
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#passNum-<%= learning.id %>').text(data.passedNum);
+                    $('#falsedNum-<%= learning.id %>').text(data.fasledNum);
+                },
+                error: function () {
+                    alert('Error')
+                }
+            })
+
         <% }) %>
 
-        
+        <% if (noMore) { %>
+            $(".loadmore").remove();
+        <% } %>        
 
         var loadMore = $(".loadmore");
-        var start = 3; //Mac dinh 3 ket qua dau dien khi load page
         loadMore.on('click', function () {
             if(!$(this).hasClass('clicked')){
                 $(this).addClass('clicked');
                 $.ajax({
-                    url: '/japtool/home/loadMoreIndex',
+                    url: '/japtool/home/loadMore',
                     type: 'GET',
-                    data: {
-                        start: start
-                    },
                     cache: false,
                     async: false,
                     success: function (data) {
                         if(data){
                             $('.bookMasterMore').append(data);
                             loadMore.removeClass('clicked');
-                            start += 1; //Cong them 1 gia tri tiep theo
                         }else{
                             loadMore.remove();
                         }
@@ -92,9 +104,7 @@
                     }
                 })
             }
-
         })
-
-
     }
+
 </script>

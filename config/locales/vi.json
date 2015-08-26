@@ -353,6 +353,17 @@
   "Kantan bring an one and only mission is to teach Japanese language for people around the world. To achieve this mission, we have provided a lesson system according to Japanese standards with a rich vocabulary and a great curriculum.":"Kantan mang một sứ mệnh duy nhất đó là đào tạo tiếng Nhật Bản cho mọi người trên khắp thế giới. Để đạt được sứ mệnh này, chúng tôi đã cung cấp một hệ thống bài học theo tiêu chuẩn Nhật Bản với vốn từ vựng phong phú và chương trình học tuyệt vời.",
   "Try again":"Thử lại",
   "Browser is":"Trình duyệt của bạn",
-  "not supported Must using":"không hỗ trợ , bạn phải dùng"
+  "not supported Must using":"không hỗ trợ , bạn phải dùng",
+  "Your learning status":"Tổng hợp kết quả học",
+  "This site show all your learning status from pass till now":"Trang này tổng hợp kết quả học của bạn từ trước đến nay",
+  "Category: ":"Phân loại: ",
+  "Level: ":"Trình độ: ",
+  "Pass: ":"Đạt: ",
+  "False or in learning: ":"Không đạt hoặc đang học: ",
+  "Total of Lesson: ":"Tổng bài học: ",
+  "View More":"Xem thêm",
+
+
+  "dummy":"dummy"
 
 }

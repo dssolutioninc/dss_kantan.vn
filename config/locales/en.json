@@ -365,6 +365,20 @@
 
   "Try again":"Try again",
   "Browser is":"Browser is",
-  "not supported Must using":"not supported Must using"
+  "not supported Must using":"not supported Must using",
+  "Your learning status":"Your learning status",
+  "This site show all your learning status from pass till now":"This site show all your learning status from pass till now",
+  "Category: ":"Category: ",
+  "Level: ":"Level: ",
+  "Pass: ":"Pass: ",
+  "False or in learning: ":"False or in learning: ",
+  "Total of Lesson: ":"Total of Lesson: ",
+  "View More":"View More",
+  "more":"more",
+  "more":"more",
+  "more":"more",
 
+
+
+  "dummy":"dummy"
 }

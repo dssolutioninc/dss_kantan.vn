@@ -1,4 +1,3 @@
-
 <%
 var lessionName = '';
 var lesson = '';
@@ -16,8 +15,6 @@ for (var i = 0; i < lessonList.length; i++) {
                     status = 'label-danger';
                 }
             }
-
-
         } else {
             break;
         }
@@ -26,15 +23,14 @@ for (var i = 0; i < lessonList.length; i++) {
     if (noHis){
         status = '';
     }
-if(lesson != lessonList[i].lesson) {
-    lesson = lessonList[i].lesson;
-%>
+    if(lesson != lessonList[i].lesson) {
+        lesson = lessonList[i].lesson;
+    %>
+        <div class="col-sm-2 col-xs-3 col-md-1">
+            <div class="info-lesson-home label-home <%= status %>" id="<%= lessonList[i].id %>">
+                <a href="/japtool/Learning/practice/?id=<%= lessonList[i].bookMaster %>&learnID=<%= selfLearningId %>&lessonID=<%= lessonList[i].id%>"> <%= lessonList[i].lesson %> </a>
+            </div>
+        </div>
 
-<div class="col-sm-2 col-xs-3 col-md-1">
-    <div class="info-lesson-home label-home <%= status %>" id="<%= lessonList[i].id %>">
-        <a href="/japtool/Learning/practice/?id=<%= lessonList[i].bookMaster %>&learnID=<%= selfLearningId %>&lessonID=<%= lessonList[i].id%>"> <%= lessonList[i].lesson %> </a>
-    </div>
-</div>
-
-<% }%>
+    <% }%>
 <% }%>

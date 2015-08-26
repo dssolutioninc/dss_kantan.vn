@@ -1,26 +1,23 @@
 <div class="vocabulary-item clearfix">
     <div class="info clearfix">
-        <% _.each(loadMorelistLessons, function (item) { %>
+        <% _.each(listLearnings, function (item) { %>
         <div class="col-sm-12">
             <h3><a class="text-primary"><%= item.bookMaster.name %></a></h3>
         </div>
         <div class="col-sm-2">
-            <p class="text-primary">Category: <%= item.bookMaster.type %></p>
+            <p class="text-primary"><%= __('Category: ') %> <%= item.bookMaster.type %></p>
         </div>
         <div class="col-sm-2">
-            <p class="text-info">Level: <%= item.bookMaster.level %></p>
+            <p class="text-info"><%= __('Level: ') %> <%= item.bookMaster.level %></p>
         </div>
         <div class="col-sm-2">
-            <p class="text-warning">Warning: <span class="lesson-warning-<%= item.id %>"></span> Lesson</p>
+            <p class="text-success"><%= __('Pass: ') %> <span id="passNum-<%= item.id %>"></span> Lesson</p>
+        </div>
+        <div class="col-sm-4">
+            <p class="text-danger"><%= __('False or in learning: ') %> <span id="falsedNum-<%= item.id %>"></span> Lesson</p>
         </div>
         <div class="col-sm-2">
-            <p class="text-success">Pass: <span class="lesson-pass-<%= item.id %>"></span> Lesson</p>
-        </div>
-        <div class="col-sm-2">
-            <p class="text-danger">Failed: <span class="lesson-danger-<%= item.id %>"></span> Lesson</p>
-        </div>
-        <div class="col-sm-2">
-            <p class="text-primary">Tổng có: <%= item.bookMaster.lessonNum %></p>
+            <p class="text-primary"><%= __('Total of Lesson: ') %> <%= item.bookMaster.lessonNum %></p>
         </div>
         <div id="<%= item.id %>" class="disactive clearfix"></div>
         <div class="col-sm-12">
@@ -37,28 +34,51 @@
 <div class="info-book-more"></div>
 
 <script type="text/javascript">
-    <% _.each(loadMorelistLessons, function (item) { %>
-    $('#<%= item.bookMaster.id %>').on('click', function () {
+    <% _.each(listLearnings, function (item) { %>
+        $('#<%= item.bookMaster.id %>').on('click', function () {
+            $.ajax({
+                url: '/japtool/home/lessonHome',
+                type: 'GET',
+                data: {
+                    bookMasterId: '<%= item.bookMaster.id %>',
+                    moreSelfLesson: '<%= item.id %>'
+                },
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#<%= item.id %>').html(data);
+                },
+                error: function () {
+                    alert('Error')
+                }
+            })
+        })
+
         $.ajax({
-            url: '/japtool/home/lessonHome',
+            url: '/japtool/home/loadSumary',
             type: 'GET',
             data: {
-                bookMasterId: '<%= item.bookMaster.id %>',
-                moreSelfLesson: '<%= item.id %>'
+                learningID: '<%= item.id %>',
+                bookID: '<%= item.bookMaster.id %>'
             },
             cache: false,
             async: false,
             success: function (data) {
-                $('#<%= item.id %>').html(data);
+                // console.log(data);
+                $('#passNum-<%= item.id %>').text(data.passedNum);
+                $('#falsedNum-<%= item.id %>').text(data.fasledNum);
             },
             error: function () {
                 alert('Error')
             }
         })
-    })
     <%})%>
 
-    <% _.each(loadMorelistLessons, function (item) { %>
+    <% if noMore { %>
+        $(".loadmore").remove();
+    <% } %>
+
+    <% _.each(listLearnings, function (item) { %>
     $('.view-detail-lesson-active-<%= item.id %>').click(function () {
         $('#<%= item.id %>').removeClass('disactive');
         $('#<%= item.id %>').addClass('active');
