@@ -41,11 +41,11 @@
     window.onload = function () {
         <% _.each(listLearnings, function (learning) { %>
             $.ajax({
-                url: '/japtool/home/lessonHome',
+                url: '/japtool/home/learningDetail',
                 type: 'GET',
                 data: {
-                    bookMasterId: '<%= learning.bookMaster.id %>',
-                    selfLesson: '<%= learning.id %>'
+                    learningID: '<%= learning.id %>',
+                    bookID: '<%= learning.bookMaster.id %>'
                 },
                 cache: false,
                 async: false,

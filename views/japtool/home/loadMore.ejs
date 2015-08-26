@@ -37,11 +37,11 @@
     <% _.each(listLearnings, function (item) { %>
         $('#<%= item.bookMaster.id %>').on('click', function () {
             $.ajax({
-                url: '/japtool/home/lessonHome',
+                url: '/japtool/home/learningDetail',
                 type: 'GET',
                 data: {
-                    bookMasterId: '<%= item.bookMaster.id %>',
-                    moreSelfLesson: '<%= item.id %>'
+                    learningID: '<%= item.id %>',
+                    bookID: '<%= item.bookMaster.id %>'
                 },
                 cache: false,
                 async: false,
@@ -74,7 +74,7 @@
         })
     <%})%>
 
-    <% if noMore { %>
+    <% if (noMore) { %>
         $(".loadmore").remove();
     <% } %>
 

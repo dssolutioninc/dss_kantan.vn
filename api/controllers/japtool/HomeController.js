@@ -131,21 +131,20 @@ module.exports = {
         })
     },
 
-    lessonHome: function (req, res) {
-        var bookMasterId = req.param('bookMasterId');
-        var selfLearningId = req.param('selfLesson');
-        var moreSelfLearningId = req.param('moreSelfLesson');
+    learningDetail: function (req, res) {
+        var learningID = req.param('learningID');
+        var bookID = req.param('bookID');
+        // var moreSelfLearningId = req.param('moreSelfLesson');
         BookDetail.find({
-            bookMaster: bookMasterId,
+            bookMaster: bookID,
             sort: 'sort ASC'
-
         }).exec(function (err, listItems) {
             if (err) {
                 console.log(err);
             } else {
-                if(!moreSelfLearningId || moreSelfLearningId == undefined) {
+                // if(!moreSelfLearningId || moreSelfLearningId == undefined) {
                     var lessonList = [];
-                    UserLearnHistory.find({selfLearning: selfLearningId}).exec(function (err, selfLesson) {
+                    UserLearnHistory.find({selfLearning: learningID}).exec(function (err, selfLesson) {
                         if (err) {
                             console.log(err);
                         } else {
@@ -164,41 +163,41 @@ module.exports = {
 
                                 });
 
-                            res.render('japtool/home/lessonHome', {
+                            res.render('japtool/home/learningDetail', {
                                 lessonList: lessonList,
                                 selfLesson: selfLesson,
-                                selfLearningId:selfLearningId
+                                learningID:learningID
                             });
 
                         }
                     })
-                }else{
-                    UserLearnHistory.find({selfLearning: moreSelfLearningId}).exec(function (err, selfLesson) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            var lessonList = [];
-                            listItems.forEach(function (lesson) {
-                                selfLesson.forEach(function (learnedItem) {
-                                    if (lesson.id == learnedItem.bookDetail) {
-                                        lesson.learnHistory = learnedItem;
-                                        return false;
-                                    } else {
-                                        return true;
-                                    }
+                // }else{
+                //     UserLearnHistory.find({selfLearning: moreSelfLearningId}).exec(function (err, selfLesson) {
+                //         if (err) {
+                //             console.log(err);
+                //         } else {
+                //             var lessonList = [];
+                //             listItems.forEach(function (lesson) {
+                //                 selfLesson.forEach(function (learnedItem) {
+                //                     if (lesson.id == learnedItem.bookDetail) {
+                //                         lesson.learnHistory = learnedItem;
+                //                         return false;
+                //                     } else {
+                //                         return true;
+                //                     }
 
-                                });
-                                lessonList.push(lesson);
-                            });
-                            res.render('japtool/home/limitLessonHome', {
-                                lessonList: lessonList,
-                                moreSelfLesson: selfLesson,
-                                moreSelfLearningId:moreSelfLearningId
-                            });
+                //                 });
+                //                 lessonList.push(lesson);
+                //             });
+                //             res.render('japtool/home/limitLessonHome', {
+                //                 lessonList: lessonList,
+                //                 moreSelfLesson: selfLesson,
+                //                 moreSelfLearningId:moreSelfLearningId
+                //             });
 
-                        }
-                    })
-                }
+                //         }
+                //     })
+                // }
             }
         })
     },
