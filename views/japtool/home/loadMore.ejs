@@ -32,24 +32,22 @@
 
 <script type="text/javascript">
     <% _.each(listLearnings, function (learning) { %>
-        // $('#<%= learning.bookMaster.id %>').on('click', function () {
-            $.ajax({
-                url: '/japtool/home/learningDetail',
-                type: 'GET',
-                data: {
-                    learningID: '<%= learning.id %>',
-                    bookID: '<%= learning.bookMaster.id %>'
-                },
-                cache: false,
-                async: false,
-                success: function (data) {
-                    $('#detail-<%= learning.id %>').html(data);
-                },
-                error: function () {
-                    alert('Error')
-                }
-            })
-        // })
+        $.ajax({
+            url: '/japtool/home/learningDetail',
+            type: 'GET',
+            data: {
+                learningID: '<%= learning.id %>',
+                bookID: '<%= learning.bookMaster.id %>'
+            },
+            cache: false,
+            async: false,
+            success: function (data) {
+                $('#detail-<%= learning.id %>').html(data);
+            },
+            error: function () {
+                alert('Error')
+            }
+        })
 
         $.ajax({
             url: '/japtool/home/loadSumary',
