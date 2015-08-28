@@ -60,7 +60,7 @@ module.exports = {
                 var arrTag = [];
                 var arrAllLesson = [];
                 if (data.length == 0) {
-                    res.view('japtool/library/notFound', {layout: 'layout/layout-japtool'});
+                    res.render('japtool/library/notFound', {layout: 'layout/layout-japtool'});
                 } else {
                     if (err) {
                         return res.serverError(__("Error when get and process BookMaster data"));
