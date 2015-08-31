@@ -230,7 +230,9 @@
 <!--GET AUDIO DATA-->
 <script>
     <% vocabularies.forEach( function(vocabulary, index){ %>
-        text2speech('<%= vocabulary.audio %>',<%= index %>);
+       <% if(typeof vocabulary.audio!=='undefined' && vocabulary.audio!=null){ %>
+            text2speech('<%= vocabulary.audio %>',<%= index %>);
+       <% } %>
     <% }) %>
     (function () {
         //Show details of first voca
