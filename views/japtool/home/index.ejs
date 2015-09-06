@@ -28,7 +28,7 @@
                     </div>
                     <div id="detail-<%= learning.id %>" class="clearfix"></div>
                     <div class="col-sm-12">
-                        <a class="show-hide-detail-<%= learning.id %> pull-right"><%= __('Hide Detail') %></a>
+                        <a class="show-hide-detail-<%= learning.id %> pull-right disactive"><%= __('Hide Detail') %></a>
                     </div>
                     <% }) %>
                 </div>
@@ -55,6 +55,7 @@
                 success: function (data) {
                     $('#detail-<%= learning.id %>').html('');
                     $('#detail-<%= learning.id %>').html(data);
+                    $('.show-hide-detail-<%= learning.id %>').removeClass('disactive');
                 },
                 error: function () {
                     alert('Error')

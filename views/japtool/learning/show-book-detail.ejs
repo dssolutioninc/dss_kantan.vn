@@ -140,10 +140,6 @@
                                 </div>
                             </section>
                         </div>
-
-
-
-
                     </div>
                     <!-- ./wrapper -->
                 </div>
@@ -241,14 +237,14 @@
         var currentItemID = $('#currentLessonID').val();
         $(".sidebar-menu .treeview-menu").find(".menu-open").removeClass("menu-open");
         $("a.sub-lesson").each(function (index) {
+            if ( $(this).prop('id') == currentItemID ){
+                nextIndex = index + 1;
+            }
             if (index == nextIndex) {
                 var nextItemID = $(this).prop('id');
                 openTreeView(nextItemID);
                 $("#"+nextItemID).trigger("click");
                 return false;
-            }
-            if ( $(this).prop('id') == currentItemID ){
-                nextIndex = index + 1;
             }
         });
     }

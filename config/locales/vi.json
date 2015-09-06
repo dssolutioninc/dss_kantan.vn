@@ -27,11 +27,9 @@
   "Your friends are learning this library:": "Những người bạn của bạn đang học tài liệu này:",
   "Click to view profile.": "Click để xem profile.",
   "Click to change language interface": "Click để đổi ngôn ngữ hiển thị",
-  "more": "more",
-
 
   "Active Success": "Kích hoạt thành công",
-  "Welcome to Japtool Learning": "Chào mừng đến với Japtool Learning.",
+  "Welcome to Japtool Learning": "Chào mừng đến với Kantan.vn.",
   "Click here to login system": "Click vào đây để đăng nhập",
   "Login": "Đăng nhập",
   "Active Fail": "Kích hoạt thất bại",
@@ -123,7 +121,7 @@
 
 
   "Overview of exercise":"Tổng quan việc luyện tập",
-  "Back":"Back",
+  "Back":"Quay lại",
   "Total of question":"Tổng số câu hỏi",
   "answered":"Đã trả lời",
   "Result Lesson":"Kết quả bài học",
@@ -301,10 +299,6 @@
   "Your inputed email address is not correct. Check and do it again.":"Địa chỉ hòm thư bạn nhập không đúng. Hãy kiểm tra và thử lại.",
   "Sigin Please!":"Hãy đăng nhập",
   "You must be sign in if you want using this page.":"Bạn phải đăng nhập nếu muốn sử dụng chức năng này.",
-  
-
-
-  "last":"dummy",
 
   "Account is not activated yet. Please check your mail and get activate link":"Tài Khoản của bạn chưa được kích hoạt. Làm ơn kiểm tra email và dùng đường link chúng tôi gửi tới bạn để kích hoạt",
 
@@ -367,5 +361,4 @@
 
 
   "dummy":"dummy"
-
 }

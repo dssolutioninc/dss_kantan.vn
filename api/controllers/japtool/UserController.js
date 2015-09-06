@@ -59,7 +59,9 @@ module.exports = {
             User.update({id: user.id}, {yourAddress: yourAddress}, function (err, updateUser) {
             });
 
-            var homeUrl = req.protocol + '://' + req.host + ':' + sails.config.port;
+            var strPort = sails.config.port == 80 ? '' : ':' + sails.config.port;
+
+            var homeUrl = req.protocol + '://' + req.host + strPort;
             var activateUrl = homeUrl + '/japtool/user/active?activatecode=' + user.id;
             var subject = req.__('Account activate mail subject');
             var mailLayoutFile = 'activeAccount_' + req.session.lang + '.ejs';

@@ -700,43 +700,43 @@ $(document).ready(function () {
     });
 
 
-    // localization
-    $("#lang-en-option").click(function () {
-        var url = window.location.href;
-        url = url.replace("lang=vi", "lang=en");
-        url = url.replace("lang=ja", "lang=en");
-        if (url.indexOf("lang=en") < 0) {
-            if (url.indexOf("?") < 0)
-                url += "?lang=en";
-            else
-                url += "&lang=en";
-        }
-        window.location.replace(url);
-    });
-    $("#lang-vi-option").click(function () {
-        var url = window.location.href;
-        url = url.replace("lang=en", "lang=vi");
-        url = url.replace("lang=ja", "lang=vi");
-        if (url.indexOf("lang=vi") < 0) {
-            if (url.indexOf("?") < 0)
-                url += "?lang=vi";
-            else
-                url += "&lang=vi";
-        }
-        window.location.replace(url);
-    });
-    $("#lang-ja-option").click(function () {
-        var url = window.location.href;
-        url = url.replace("lang=en", "lang=ja");
-        url = url.replace("lang=vi", "lang=ja");
-        if (url.indexOf("lang=ja") < 0) {
-            if (url.indexOf("?") < 0)
-                url += "?lang=ja";
-            else
-                url += "&lang=ja";
-        }
-        window.location.replace(url);
-    });
+    // // localization
+    // $("#lang-en-option").click(function () {
+    //     var url = window.location.href;
+    //     url = url.replace("lang=vi", "lang=en");
+    //     url = url.replace("lang=ja", "lang=en");
+    //     if (url.indexOf("lang=en") < 0) {
+    //         if (url.indexOf("?") < 0)
+    //             url += "?lang=en";
+    //         else
+    //             url += "&lang=en";
+    //     }
+    //     window.location.replace(url);
+    // });
+    // $("#lang-vi-option").click(function () {
+    //     var url = window.location.href;
+    //     url = url.replace("lang=en", "lang=vi");
+    //     url = url.replace("lang=ja", "lang=vi");
+    //     if (url.indexOf("lang=vi") < 0) {
+    //         if (url.indexOf("?") < 0)
+    //             url += "?lang=vi";
+    //         else
+    //             url += "&lang=vi";
+    //     }
+    //     window.location.replace(url);
+    // });
+    // $("#lang-ja-option").click(function () {
+    //     var url = window.location.href;
+    //     url = url.replace("lang=en", "lang=ja");
+    //     url = url.replace("lang=vi", "lang=ja");
+    //     if (url.indexOf("lang=ja") < 0) {
+    //         if (url.indexOf("?") < 0)
+    //             url += "?lang=ja";
+    //         else
+    //             url += "&lang=ja";
+    //     }
+    //     window.location.replace(url);
+    // });
 });
 
 //XOA KHOANG TRANG TRONG CHUOI
