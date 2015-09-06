@@ -411,6 +411,7 @@ module.exports = {
         var bookID = req.param('id');
         var learnID = req.param('learnID');
         var lessonID = req.param('lessonID');
+        var preview = req.param('preview');
         // var array = require("array-extended");
 
         BookMaster.findOne({id: bookID}).populate('bookDetails', {sort: 'sort ASC'}).
@@ -418,6 +419,17 @@ module.exports = {
             if (err) { sails.log(err) }
             else {
                 var bookDetails = book.bookDetails;
+
+                if (preview == 'yes') {
+                    res.view('japtool/learning/show-book-detail', {
+                        learnID: null,
+                        book: book,
+                        lessonList: bookDetails,
+                        goLessonID: null,
+                        preview: true
+                    });
+                    return;
+                }
 
                 var lessonList = [];
 
@@ -453,7 +465,8 @@ module.exports = {
                         learnID: learnID,
                         book: book,
                         lessonList: lessonList,
-                        goLessonID: lessonID
+                        goLessonID: lessonID,
+                        preview: false
                     });
                 });
             }

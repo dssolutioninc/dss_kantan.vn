@@ -71,9 +71,7 @@
                                 </li>
                                 <li>
                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                    <a href="#" title="<%= __('Click to view this library lesson.') %>"
-                                       data-toggle="modal"
-                                       data-target="#lib-review-<%= book.id %>"
+                                    <a href="/japtool/Learning/practice/?id=<%= book.id %>&preview=yes" title="<%= __('Click to view this library lesson.') %>"
                                        class="text-danger"><%= __("Preview") %></a> -
                                     <span></span>
                                     <a onclick="loadformLib('<%= book.id %>')"

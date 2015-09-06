@@ -154,8 +154,10 @@
         loadContent(module, condition);
 
         setCurrentStatus(subLessonID, lesson, subLesson);
-
-        logStart(subLessonID);
+        
+        <% if( !preview ){ %>
+            logStart(subLessonID);
+        <% } %>
     }
     function loadContent(module, condition) {
         var strCondition = JSON.stringify(condition);
@@ -172,38 +174,42 @@
     }
 
     function logStart(subLessonID) {
-        var learnID = $('#learnID').val();
-        $.ajax({
-            method: "POST",
-            url: "/japtool/Learning/saveHistory",
-            data: {
-                selfLearning: learnID,
-                bookDetail: subLessonID
-            }
-        })
-        .done(function (msg) {
-            console.log(msg);
-        });
+        <% if( !preview ){ %>
+            var learnID = $('#learnID').val();
+            $.ajax({
+                method: "POST",
+                url: "/japtool/Learning/saveHistory",
+                data: {
+                    selfLearning: learnID,
+                    bookDetail: subLessonID
+                }
+            })
+            .done(function (msg) {
+                console.log(msg);
+            });
+        <% } %>
     }
     function logFinish(mark) {
-        var learnID = $('#learnID').val();
-        var subLessonID = $('#currentLessonID').val();
-        mark = Number(mark);
-        
-        updateTreeViewStatus(subLessonID, mark);
+        <% if( !preview ){ %>
+            var learnID = $('#learnID').val();
+            var subLessonID = $('#currentLessonID').val();
+            mark = Number(mark);
+            
+            updateTreeViewStatus(subLessonID, mark);
 
-        $.ajax({
-            method: "POST",
-            url: "/japtool/Learning/saveHistory",
-            data: {
-                selfLearning: learnID,
-                bookDetail: subLessonID,
-                mark: mark
-            }
-        })
-        .done(function (msg) {
-            console.log(msg);
-        });
+            $.ajax({
+                method: "POST",
+                url: "/japtool/Learning/saveHistory",
+                data: {
+                    selfLearning: learnID,
+                    bookDetail: subLessonID,
+                    mark: mark
+                }
+            })
+            .done(function (msg) {
+                console.log(msg);
+            });
+        <% } %>
     }
     function updateTreeViewStatus(subLessonID, mark){
         var currentItem = $('#' + subLessonID);
