@@ -4,7 +4,7 @@
 module.exports = {
 //This loads index.ejs
     index: function (req, res) {
-        res.view({layout: 'layout/layout-japtool'});
+        res.view();
     },
 
     getLibrary: function (req, res) {
@@ -13,7 +13,7 @@ module.exports = {
             .populate('bookDetails', {sort: 'sort ASC'}).exec(function createCB(err, data) {
                 var arrTag = [];
                 if (data.length == 0) {
-                    res.view('japtool/library/notFound', {layout: 'layout/layout-japtool'});
+                    res.view('japtool/library/notFound');
                 } else {
                     data.forEach(function (item, index) {
                         arrTag.push(item.type);
@@ -21,8 +21,8 @@ module.exports = {
                             var array = require("array-extended");
                             var uniqueType = array(arrTag).unique().value();
                             res.view('japtool/library/index', {
-                                uniqueType: uniqueType,
-                                layout: 'layout/layout-japtool'
+                                uniqueType: uniqueType
+
                             })
                         }
                     })
@@ -60,7 +60,7 @@ module.exports = {
                 var arrTag = [];
                 var arrAllLesson = [];
                 if (data.length == 0) {
-                    res.render('japtool/library/notFound', {layout: 'layout/layout-japtool'});
+                    res.render('japtool/library/notFound');
                 } else {
                     if (err) {
                         return res.serverError(__("Error when get and process BookMaster data"));
@@ -91,8 +91,8 @@ module.exports = {
                                 res.render('japtool/library/libraryContent', {
                                     data: data,
                                     uniqueType: uniqueType,
-                                    arrAllLesson: arrAllLesson,
-                                    layout: 'layout/layout-japtool'
+                                    arrAllLesson: arrAllLesson
+
                                 })
                             }
                         })
@@ -129,10 +129,14 @@ module.exports = {
                 });
                 res.view('japtool/library/showCategory', {
                     data: data,
-                    arrAllLesson: arrAllLesson,
-                    layout: 'layout/layout-japtool'
+                    arrAllLesson: arrAllLesson
                 })
             })
+    },
+    _config: {
+        locals: {
+            layout: 'layout/layout-japtool'
+        }
     }
 
 }
