@@ -45,9 +45,9 @@
 </div>
 <script>
     window.onload = function () {
-        $("#typeSearch").val(<%= req.session.searchType %>);
-        $("#levelSearch").val(<%= req.session.searchLevel %>);
-        $("#textSearch").val(<%= req.session.searchBookName %>);
+        $("#typeSearch").val("<%= req.session.searchType %>");
+        $("#levelSearch").val("<%= req.session.searchLevel %>");
+        $("#textSearch").val("<%= req.session.searchBookName %>");
         
         fillLibrary();
     }
@@ -81,4 +81,5 @@
             }
         });
     }
+    
 </script>

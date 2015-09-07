@@ -9,18 +9,18 @@
                             <h3><span><%= __(item) %></span>
                             </h3>
                         </div>
-                        <% var num = 0; %>
-                        <% for(var i = 0;i < data.length;i++){ %>
-                        <% if(data[i].type == item){ %>
-                        <% num = num + 1 %>
-                        <% } %>
-                        <% } %>
-                        <% if(num > Constants.maxLibOnPage){ %>
-                        <div class="col-sm-2">
-                            <div class="join-learn btn label-primary">
-                                <a href="/japtool/Library/getAllLibrary/?type=<%= item %>"><%= __("View more Library") %></a>
+                        <% var num = 0;
+                        for(var i = 0;i < data.length;i++){
+                            if(data[i].type == item){
+                                num = num + 1;
+                            } 
+                        } 
+                        if(num > Constants.maxLibOnPage){ %>
+                            <div class="col-sm-2">
+                                <div class="join-learn btn label-primary">
+                                    <a href="/japtool/Library/getAllLibrary/?type=<%= item %>"><%= __("View more Library") %></a>
+                                </div>
                             </div>
-                        </div>
                         <% } %>
                     </div>
                     <div class="library-page-line"></div>
@@ -30,10 +30,10 @@
         <div class="clearfix"></div>
         <div id="lib-1">
             <% var index = 0;
-                    data.forEach(function(book){ %>
-            <% if(book.type == item) { %>
-            <% if(index < Constants.maxLibOnPage) {
-                index++;
+            data.forEach(function(book){
+                if(book.type == item) {
+                    if(index < Constants.maxLibOnPage) {
+                        index++;
             %>
             <div class="col-sm-4 lib-cell">
                 <div class="">
@@ -63,11 +63,11 @@
                                 <li>
                                     <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
                                     <%= __("Level") %>: <%= book.level %> -
-                                    <%= __("Used") %>: 1
+                                    <%= __("Used") %>: <%= book.usedNum %>
                                 </li>
                                 <li>
                                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                    <%= __("Number Lesson") %>: <%= book.bookDetails.length %>
+                                    <%= __("Number Lesson") %>: <%= book.lessonNum %>
                                 </li>
                                 <li>
                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -90,7 +90,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">×</span></button>
+                                        aria-hidden="true">x</span></button>
                             <h4 class="modal-title"><%= __("Library") %> - <%= book.name %></h4>
                         </div>
                         <div class="modal-body">
@@ -120,29 +120,15 @@
                                         </li>
                                         <li>
                                             <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                            <%= __("Number Lesson") %>: <%= book.bookDetails.length %>
+                                            <%= __("Number Lesson") %>: <%= book.lessonNum %>
                                         </li>
                                         <li>
                                             <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-                                            <%= __("Estimate Hour") %>:
-                                            <% if(book.hourForLearn == 'undefined'){ %>
-                                            <%= 0 %>
-                                            <% }else{ %>
-                                            <%= book.hourForLearn %>
-                                            <% } %>
-                                        </li>
-                                        <li>
-                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                            <%= __("Number Of Recommend") %>:
-                                            <% if(book.recommendNum == undefined){ %>
-                                            <%= 0 %>
-                                            <% }else{ %>
-                                            <%= book.recommendNum %>
-                                            <% } %>
-                                        </li>
+                                            <%= __("Estimate Hour") %>: <%= book.hourForLearn %>
+                                        </li>                                        
                                         <li>
                                             <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                                            <%= __("Used") %>: 1
+                                            <%= __("Used") %>: <%= book.usedNum %>
                                         </li>
 
                                     </ul>
@@ -157,8 +143,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <h4><%= __('Your friends are learning this library:') %> </h4>
 
+                            <!-- <h4><%= __('Your friends are learning this library:') %> </h4>
                             <div class="row">
                                 <div class="col-sm-1">
                                     <div class="thumbnail">
@@ -167,7 +153,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="modal-footer">
                             <a onclick="loadformLib('<%= book.id %>')"
@@ -180,7 +166,7 @@
                 </div>
             </div>
             <!--lib review-->
-            <div class="modal fade" id="lib-review-<%= book.id %>" tabindex="-1" role="dialog"
+            <!--<div class="modal fade" id="lib-review-<%= book.id %>" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -190,7 +176,7 @@
                             <h4 class="modal-title"><%= __("Library") %> - <%= book.name %></h4>
                         </div>
 
-                        <!-- <div class="modal-body">
+                        <div class="modal-body">
                             <div class="row libImg-modal">
                                 <div class="col-xs-3">
                                     <div>
@@ -240,7 +226,7 @@
                                          style="min-height: 600px"></div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="modal-footer">
                             <a onclick="loadformLib('<%= book.id %>')" class="btn btn-success" role="button">
@@ -251,7 +237,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
             <% } %>
             <% } %>
             <% }) %>

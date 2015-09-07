@@ -33,9 +33,9 @@ module.exports = {
         var level = req.param('level');
         var bookName = req.param('name');
 
-        req.session.searchType = type? "\"" + type + "\"" : 0;
-        req.session.searchLevel = level? "\"" + level + "\"" : "\"" + req.session.User.currentLevel + "\"";
-        req.session.searchBookName = bookName? "\"" + bookName + "\"" : '';
+        req.session.searchType = type? type : 0;
+        req.session.searchLevel = level? level : req.session.User.currentLevel;
+        req.session.searchBookName = bookName? bookName : '';
 
 
         res.view();
