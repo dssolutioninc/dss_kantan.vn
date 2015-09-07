@@ -1,7 +1,12 @@
-<div class="home-slideshow">
-    <div></div>
-    <img src="/images/slider.jpg"/>
-</div>
+<ul class="rslides" id="slider1">
+    <li><img src="/images/slider.jpg" alt=""></li>
+    <li><img src="/images/slider.jpg" alt=""></li>
+    <li><img src="/images/slider.jpg" alt=""></li>
+</ul>
+<!--<div class="home-slideshow">-->
+    <!--<div></div>-->
+    <!--<img src="/images/slider.jpg"/>-->
+<!--</div>-->
 <div class="who-are-we text-center">
     <div class="container">
         <div class="col-sm-12">
@@ -102,5 +107,14 @@
                 </div>
             </div>
         </div>
-
 </div>
+<script>
+    window.onload = function () {
+        $("#slider1").responsiveSlides({
+            maxwidth: 1920,
+            speed: 800,
+            nav: false,             // Boolean: Show navigation, true or false
+            random: true          // Boolean: Randomize the order of the slides, true or false
+        });
+    }
+</script>
