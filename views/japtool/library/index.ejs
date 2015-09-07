@@ -2,12 +2,13 @@
     <div class="row" style="margin-top: 20px">
         <div class="col-sm-offset-1 col-sm-3 col-xs-12">
             <div class="form-group form-horizontal">
-                <!--<label for="groupSearch"><%= __("Library Category") %>:</label>-->
-                <select class="form-control" id="groupSearch">
+                <!--<label for="typeSearch"><%= __("Library Category") %>:</label>-->
+                <select class="form-control" id="typeSearch">
                     <option value="0"><%= __("Choose category") %></option>
-                    <% uniqueType.forEach(function(item, indexLibrary){ %>
-                    <option value="<%= item %>"><%= item %></option>
-                    <% }) %>
+                    <option value="vocabulary"><%= __("vocabulary") %></option>
+                    <option value="kanji"><%= __("kanji") %></option>
+                    <option value="test"><%= __("test") %></option>
+                    <option value="grammar"><%= __("grammar") %></option>
                 </select>
 
             </div>
@@ -44,14 +45,18 @@
 </div>
 <script>
     window.onload = function () {
+        $("#typeSearch").val(<%= req.session.searchType %>);
+        $("#levelSearch").val(<%= req.session.searchLevel %>);
+        $("#textSearch").val(<%= req.session.searchBookName %>);
+        
         fillLibrary();
     }
     function fillLibrary() {
-        var groupSearch = $("#groupSearch").val();
+        var typeSearch = $("#typeSearch").val();
         var levelSearch = $("#levelSearch").val();
         var textSearch = $("#textSearch").val();        
         var data = {
-            groupSearch: groupSearch,
+            typeSearch: typeSearch,
             levelSearch: levelSearch,
             textSearch: textSearch
         };

@@ -190,18 +190,16 @@
                             <h4 class="modal-title"><%= __("Library") %> - <%= book.name %></h4>
                         </div>
 
-                        <div class="modal-body">
+                        <!-- <div class="modal-body">
                             <div class="row libImg-modal">
                                 <div class="col-xs-3">
                                     <div>
                                         <h1><%= __("Lesson") %></h1>
                                     </div>
                                     <aside class="">
-                                        <!-- sidebar: style can be found in sidebar.less -->
                                         <div class="pre-scrollable per-scroll-lib-review">
                                             <section class="sidebar">
 
-                                                <!-- Sidebar user panel -->
                                                 <ul class="sidebar-menu">
                                                     <% arrAllLesson.forEach(function(item){ %>
                                                     <% if(item.idLesson == book.id){ %>
@@ -232,7 +230,6 @@
 
                                             </section>
                                         </div>
-                                        <!-- /.sidebar -->
                                     </aside>
 
                                 </div>
@@ -243,7 +240,7 @@
                                          style="min-height: 600px"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="modal-footer">
                             <a onclick="loadformLib('<%= book.id %>')" class="btn btn-success" role="button">
