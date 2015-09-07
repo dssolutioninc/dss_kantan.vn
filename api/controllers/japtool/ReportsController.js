@@ -4,7 +4,12 @@
 module.exports = {
 //This load
     learningReport: function(req, res){
-        res.view('japtool/reports/learningReport',{ layout: 'layout/layout-japtool'});
+        res.view('japtool/reports/learningReport');
+    },
+    _config: {
+        locals: {
+            layout: 'layout/layout-japtool'
+        }
     }
 
 };
