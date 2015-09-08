@@ -383,8 +383,13 @@
   "more":"more",
   "more":"more",
   "more":"more",
+  "dummy":"dummy",
 
-
-
-  "dummy":"dummy"
+  "you learn slowly":"you are learning slowly",
+  "you learn fast":"you are learning fast",
+  "you catch up time's learning":"you are catching up time's learning",
+  "lesson each day":"lesson each day",
+  "Recommend":"Recommend",
+  "you should learn":"you should learn",
+  "Your learning's status":"Your learning's status"
 }

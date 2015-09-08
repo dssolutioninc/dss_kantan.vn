@@ -1502,6 +1502,22 @@ ul.timeline li .timeline-panel:after {
     background-color: white;
 }
 
+
+.body-manager-learning .lb-date{
+    border-radius: 0px;
+    background-color: rgba(119, 119, 119, 0.7);
+}
+.body-manager-learning .progress{
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+.body-manager-learning .div-progress{
+    padding-right: 0px;
+}
+.body-manager-learning .lib-cell .lb{
+    font-weight: 500;
+}
+
 .default-show .col-sm-1, .default-show .col-sm-2 {
     margin-top: 20px
 }
