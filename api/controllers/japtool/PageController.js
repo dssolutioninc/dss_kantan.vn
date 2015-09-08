@@ -3,13 +3,13 @@
  */
 
 module.exports = {
-    'about': function (req, res) {
+    about: function (req, res) {
         res.view();
     },
-    'guide': function (req, res) {
+    guide: function (req, res) {
         res.view();
     },
-    'contact':function(req,res){
+    contact:function(req,res){
         res.view();
     },
     _config: {

@@ -65,3 +65,25 @@
         </div>
     </div>
 </div>
+
+<div id="popup-modals"></div>
+
+
+<script>
+    window.onload = function () {
+        $.ajax({
+            url: '/japtool/survey/index',
+            type: 'GET',
+            success: function (resHtml) {
+                if(resHtml){
+                    $('#popup-modals').append(resHtml);
+                    
+                }
+            },
+            error: function () {
+                console.log('Surveys get Error')
+            }
+        })
+    }
+
+</script>
