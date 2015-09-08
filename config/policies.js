@@ -56,6 +56,18 @@ module.exports.policies = {
     },
     'japtool/Library': {
         '*': ["generalize", "authenticated"]
+    },
+    'japtool/recommend': {
+        '*': ["generalize", "authenticated"]
+    },
+    'admin/book': {
+        '*': ["generalize", "admin"]
+    },
+    'admin/search': {
+        '*': ["generalize", "admin"]
+    },
+    'admin/vocabulary': {
+        '*': ["generalize", "admin"]
     }
     /***************************************************************************
      *                                                                          *

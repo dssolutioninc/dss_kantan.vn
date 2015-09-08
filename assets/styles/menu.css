@@ -1,3 +1,6 @@
+.header-bottom{
+    background: #4D366B;
+}
 #cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
@@ -35,10 +38,11 @@
 }
 
 .menu-page {
-    padding-bottom: 4.5rem !important;
-    padding-top: 4.5rem !important;
-}
 
+}
+#cssmenu > ul > li.active{
+    background: #C33E2E;
+}
 #cssmenu > ul > li {
     float: left;
 }
@@ -67,7 +71,7 @@
     letter-spacing: 1px;
     text-decoration: none;
     color: #dddddd;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 #cssmenu > ul > li:last-child > a {

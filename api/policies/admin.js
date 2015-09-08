@@ -12,7 +12,8 @@ module.exports = function (req, res, ok) {
         req.session.flash = {
             err: requireAdminError
         }
-        res.redirect('/japtool/auth');
-        return;
+        // res.redirect('/japtool/auth');
+        // return;
+        return res.json(requireAdminError);
     }
 }

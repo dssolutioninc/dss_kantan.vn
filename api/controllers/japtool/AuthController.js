@@ -8,7 +8,11 @@ var passport = require('passport');
 var bcrypt = require('bcryptjs');
 module.exports = {
     'index': function (req, res) {
-        res.view();
+        if(req.session.User){
+            res.redirect('/japtool/user/index');
+        }else{
+            res.view();
+        }
     },
     login: function (req, res, next) {
         // Check for email and password in params sent via the form, if none

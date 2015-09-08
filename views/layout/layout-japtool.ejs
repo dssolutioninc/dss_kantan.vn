@@ -51,34 +51,41 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <% if(session.authenticated){ %>
+                    <div class="header-logo">
+                        <% if(session.authenticated){ %>
                         <a class="logo" href="/japtool/home"><img src="/images/logo.png"></a>
-                    <% } else { %>
+                        <% } else { %>
                         <a class="logo" href="/"><img src="/images/logo.png"></a>
-                    <% } %>
+                        <% } %>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <div id='cssmenu' class="pull-right">
+
+            </div>
+        </div>
+        <div class="stripe_color"></div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id='cssmenu' class="">
                         <ul class="menu-page">
                             <% if(session.authenticated){ %>
-                                <li><a href='/japtool/home'><%= __('Home') %></a></li>
+                            <li class='active'><a href='/japtool/home'><%= __('Home') %></a></li>
                             <% } else { %>
-                                <li><a href='/'><%= __('Home') %></a></li>
+                            <li class='active'><a href='/'><%= __('Home') %></a></li>
                             <% } %>
-                            
-                            <!--<li><a href='/japtool/page/about'><%= __('About') %></a></li>-->
-                            <li class='active'><a href='/japtool/Library/index'><%= __('Library') %></a>
+                            <li><a href='/japtool/page/about'><%= __('About') %></a></li>
+                            <li><a href='/japtool/Library/index'><%= __('Library') %></a>
                             </li>
                             <li><a href="/japtool/learning"><%= __('Learning') %></a></li>
-                            <!--<li><a href="/japtool/page/guide"><%= __('Use Guide') %></a></li>-->
-                            <!--<li><a href='/japtool/page/contact'><%= __('Contact') %></a></li>-->
+                            <li><a href="/japtool/page/guide"><%= __('Use Guide') %></a></li>
+                            <li><a href='/japtool/page/contact'><%= __('Contact') %></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="stripe_color"></div>
     </div>
 </div>
 
