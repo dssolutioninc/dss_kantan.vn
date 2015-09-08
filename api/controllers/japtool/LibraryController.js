@@ -7,149 +7,219 @@ module.exports = {
             layout: 'layout/layout-japtool'
         }
     },
+
     index: function (req, res) {
-        // BookMaster.find()
-        //     .disctinc('sort asc')
-        //     .exec(function createCB(err, data) {
-        //         var arrTag = [];
-        //         if (data.length == 0) {
-        //             res.view('japtool/library/notFound');
-        //         } else {
-        //             data.forEach(function (item, index) {
-        //                 arrTag.push(item.type);
-        //                 if (index == (data.length - 1)) {
-        //                     var array = require("array-extended");
-        //                     var uniqueType = array(arrTag).unique().value();
-        //                     res.view('japtool/library/index', {
-        //                         uniqueType: uniqueType
-        //                     })
-        //                 }
-        //             })
-        //         }
-
-        //     })
-
         var type = req.param('type');
         var level = req.param('level');
         var bookName = req.param('name');
 
-        req.session.searchType = type? type : 0;
-        req.session.searchLevel = level? level : req.session.User.currentLevel;
-        req.session.searchBookName = bookName? bookName : '';
+        // get search condition if exist
+        if (type) req.session.searchType = type;
+        if (level) req.session.searchLevel = level;
+        if (bookName != null) req.session.searchBookName = bookName;
 
+        // if search condition is not exist in session or request params, set default
+        if (!req.session.searchType) req.session.searchType = 'all';
+        if (!req.session.searchLevel) req.session.searchLevel = req.session.User.currentLevel;
+        if (!req.session.searchBookName) req.session.searchBookName = '';
 
-        res.view();
-    },
-
-    fillLibrary: function (req, res) {
-        //******************Build condition****************************
-        var condition = '';
-        var comma = '';
-        var typeSearch = req.param('typeSearch');
-        if (typeSearch != undefined && typeSearch != 0)
-            condition = "\"type\":\"" + typeSearch + "\"";
-        var levelSearch = req.param('levelSearch');
-        if (levelSearch != undefined && levelSearch != 0) {
-            if (condition != '')
-                comma = ",";
-            condition += comma + "\"level\":\"" + levelSearch + "\"";
+        var searchCondition = '';
+        if (req.session.searchType != 'all'){
+            searchCondition += "\"type\":\"" + req.session.searchType + "\",";
         }
-        var textSearch = req.param('textSearch');
-        if (textSearch != undefined && textSearch != "") {
-            if (condition != '')
-                comma = ",";
-            else
-                comma = "";
-            condition += comma + "\"name\":\"%" + textSearch + "%\"";
+        if (req.session.searchLevel != 'all'){
+            searchCondition += "\"level\":\"" + req.session.searchLevel + "\",";
         }
-        condition = "{" + condition + "}";
-        //******************Ended Build condition***********************
-        BookMaster.find({where: JSON.parse(condition)})
-            .sort('sort asc')
-            .exec(function createCB(err, data) {
-                var arrTag = [];
-                var arrAllLesson = [];
-                if (data.length == 0) {
-                    res.render('japtool/library/notFound');
+        if (req.session.searchBookName != ''){
+            searchCondition += "\"name\":\"%" + req.session.searchBookName + "%\",";
+        }
+
+        if (searchCondition != '') {
+            // remove the comma in the tail of string
+            searchCondition = searchCondition.substring(0, searchCondition.length - 1);
+        }
+
+        // make json style
+        searchCondition = "{" + searchCondition + "}";
+        
+        BookMaster.find({where: JSON.parse(searchCondition)})
+        .sort('sort asc')
+        .exec(function (err, books) {
+            if (err) {
+                return res.serverError(__("Error when get and process BookMaster data"));
+            } else {
+                var arrTypes = [];
+                if (req.session.searchType == 'all'){
+                    arrTypes = ['vocabulary','kanji','speech'];
+
+                    // initial loaded books in session
+                    var loadedBookCount = {};
+                    loadedBookCount['vocabulary'] = Constants.maxLibOnPage;
+                    loadedBookCount['kanji'] = Constants.maxLibOnPage;
+                    loadedBookCount['speech'] = Constants.maxLibOnPage;
+
+                    req.session.loadedBookCount = loadedBookCount;
+
                 } else {
-                    if (err) {
-                        return res.serverError(__("Error when get and process BookMaster data"));
-                    }
-                    else {
-                        // data.forEach(function (item, index) {
-                        //     arrTag.push(item.type);
-                        //     if (index == (data.length - 1)) {
-                        //         data.forEach(function (book) {
-                        //             var arrLesson = [];
-                        //             if (book.bookDetails.length != 0) {
-                        //                 book.bookDetails.forEach(function (item, index) {
-                        //                     arrLesson.push(item.lesson);
-                        //                     if (index == (book.bookDetails.length - 1)) {
-                        //                         var array = require("array-extended");
-                        //                         var uniqueArrLesson = array(arrLesson).unique().value();
-                        //                         var objLesson = {
-                        //                             arrLesson: uniqueArrLesson,
-                        //                             idLesson: book.id
-                        //                         };
-                        //                         arrAllLesson.push(objLesson);
-                        //                     }
-                        //                 })
-                        //             }
-                        //         });
-                        //         var array = require("array-extended");
-                        //         var uniqueType = array(arrTag).unique().value();
-                        //         res.render('japtool/library/libraryContent', {
-                        //             data: data,
-                        //             uniqueType: uniqueType,
-                        //             arrAllLesson: arrAllLesson
-                        //         })
-                        //     }
-                        // })
+                    arrTypes.push(req.session.searchType);
 
-                        arrTag = ['vocabulary','kanji','test','grammar','speech'];
+                    // initial loaded books in session
+                    var loadedBookCount = {};
+                    loadedBookCount[req.session.searchType] = Constants.maxLibOnPage;
 
-                        res.render('japtool/library/libraryContent', {
-                            data: data,
-                            uniqueType: arrTag,
-                            arrAllLesson: arrAllLesson
-                        })
-
-                        
-                    }
+                    req.session.loadedBookCount = loadedBookCount;
                 }
 
-            })
+                res.view('japtool/library/index', {
+                    books: books,
+                    arrTypes: arrTypes
+                })
+            }
+        })
     },
 
-    getAllLibrary: function (req, res) {
+    loadMore: function (req, res) {
         var type = req.param('type');
-        BookMaster.find({type: type})
-            .sort('sort asc')
-            .populate('bookDetails', {sort: 'sort ASC'}).exec(function createCB(err, data) {
-                var arrAllLesson = [];
+        var positionIndex = req.param('positionIndex');
 
-                data.forEach(function (book) {
-                    var arrLesson = [];
-                    if (book.bookDetails.length != 0) {
-                        book.bookDetails.forEach(function (item, index) {
-                            arrLesson.push(item.lesson);
-                            if (index == (book.bookDetails.length - 1)) {
-                                var array = require("array-extended");
-                                var uniqueArrLesson = array(arrLesson).unique().value();
-                                var objLesson = {
-                                    arrLesson: uniqueArrLesson,
-                                    idLesson: book.id
-                                };
-                                arrAllLesson.push(objLesson);
+        BookMaster.count({
+            where: {type: type}
+        }).exec(function (err, count){
 
-                            }
-                        })
+            BookMaster.find({
+                where: {type: type},
+                limit: Constants.maxLibOnPage,
+                skip: req.session.loadedBookCount[type],
+                sort: {sort: 0}
+            }).exec(function (err, books) {
+                if (err) {
+                    if (err) return res.serverError(err);
+                } else {
+
+                    if(books.length == '' || books.length == null){
+                        res.ok();
+                    }else{
+                        req.session.loadedBookCount[type] += books.length;
+                        var noMore = (req.session.loadedBookCount[type] == count);
+
+                        res.render('japtool/library/loadMore', {
+                            books: books, positionIndex: positionIndex, noMore: noMore
+                        });
                     }
-                });
-                res.view('japtool/library/showCategory', {
-                    data: data,
-                    arrAllLesson: arrAllLesson
-                })
+                }
             })
+        })
     }
+
+    // fillLibrary: function (req, res) {
+    //     //******************Build condition****************************
+    //     var condition = '';
+    //     var comma = '';
+    //     var typeSearch = req.param('typeSearch');
+    //     if (typeSearch != undefined && typeSearch != 'all')
+    //         condition = "\"type\":\"" + typeSearch + "\"";
+    //     var levelSearch = req.param('levelSearch');
+    //     if (levelSearch != undefined && levelSearch != 'all') {
+    //         if (condition != '')
+    //             comma = ",";
+    //         condition += comma + "\"level\":\"" + levelSearch + "\"";
+    //     }
+    //     var textSearch = req.param('textSearch');
+    //     if (textSearch != undefined && textSearch != "") {
+    //         if (condition != '')
+    //             comma = ",";
+    //         else
+    //             comma = "";
+    //         condition += comma + "\"name\":\"%" + textSearch + "%\"";
+    //     }
+    //     condition = "{" + condition + "}";
+    //     //******************Ended Build condition***********************
+    //     BookMaster.find({where: JSON.parse(condition)})
+    //         .sort('sort asc')
+    //         .exec(function createCB(err, data) {
+    //             var arrTag = [];
+    //             var arrAllLesson = [];
+    //             if (data.length == 0) {
+    //                 res.render('japtool/library/notFound');
+    //             } else {
+    //                 if (err) {
+    //                     return res.serverError(__("Error when get and process BookMaster data"));
+    //                 }
+    //                 else {
+    //                     // data.forEach(function (item, index) {
+    //                     //     arrTag.push(item.type);
+    //                     //     if (index == (data.length - 1)) {
+    //                     //         data.forEach(function (book) {
+    //                     //             var arrLesson = [];
+    //                     //             if (book.bookDetails.length != 0) {
+    //                     //                 book.bookDetails.forEach(function (item, index) {
+    //                     //                     arrLesson.push(item.lesson);
+    //                     //                     if (index == (book.bookDetails.length - 1)) {
+    //                     //                         var array = require("array-extended");
+    //                     //                         var uniqueArrLesson = array(arrLesson).unique().value();
+    //                     //                         var objLesson = {
+    //                     //                             arrLesson: uniqueArrLesson,
+    //                     //                             idLesson: book.id
+    //                     //                         };
+    //                     //                         arrAllLesson.push(objLesson);
+    //                     //                     }
+    //                     //                 })
+    //                     //             }
+    //                     //         });
+    //                     //         var array = require("array-extended");
+    //                     //         var uniqueType = array(arrTag).unique().value();
+    //                     //         res.render('japtool/library/libraryContent', {
+    //                     //             data: data,
+    //                     //             uniqueType: uniqueType,
+    //                     //             arrAllLesson: arrAllLesson
+    //                     //         })
+    //                     //     }
+    //                     // })
+
+    //                     arrTag = ['vocabulary','kanji','test','grammar','speech'];
+
+    //                     res.render('japtool/library/libraryContent', {
+    //                         data: data,
+    //                         uniqueType: arrTag,
+    //                         arrAllLesson: arrAllLesson
+    //                     })
+
+                        
+    //                 }
+    //             }
+
+    //         })
+    // },
+
+    // getAllLibrary: function (req, res) {
+    //     var type = req.param('type');
+    //     BookMaster.find({type: type})
+    //         .sort('sort asc')
+    //         .populate('bookDetails', {sort: 'sort ASC'}).exec(function createCB(err, data) {
+    //             var arrAllLesson = [];
+
+    //             data.forEach(function (book) {
+    //                 var arrLesson = [];
+    //                 if (book.bookDetails.length != 0) {
+    //                     book.bookDetails.forEach(function (item, index) {
+    //                         arrLesson.push(item.lesson);
+    //                         if (index == (book.bookDetails.length - 1)) {
+    //                             var array = require("array-extended");
+    //                             var uniqueArrLesson = array(arrLesson).unique().value();
+    //                             var objLesson = {
+    //                                 arrLesson: uniqueArrLesson,
+    //                                 idLesson: book.id
+    //                             };
+    //                             arrAllLesson.push(objLesson);
+
+    //                         }
+    //                     })
+    //                 }
+    //             });
+    //             res.view('japtool/library/showCategory', {
+    //                 data: data,
+    //                 arrAllLesson: arrAllLesson
+    //             })
+    //         })
+    // }
 }
