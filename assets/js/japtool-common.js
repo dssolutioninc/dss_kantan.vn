@@ -1,113 +1,113 @@
 //mahainam begin
 //RECOMMENT POPUP
-var answer1;
-var answer2;
-var answer3 = new Array();
-var listIdSurvey = new Array();
+// var answer1;
+// var answer2;
+// var answer3 = new Array();
+// var listIdSurvey = new Array();
 var lang = $("#lang").val();
-$(document).ready(function () {
-    var lv = $("#lv").val();
-    var crt = $("#crt").val();
-    if (lv == '' || lv == null) {
-        checkAnswer1(1, 2);
-        $('#lib-recommend-1').modal('show');
-    }
-    else {
-        answer1 = lv;
-        answer2 = crt;
-        $('#lib-recommend-3').load('/japtool/recommend/getStep3?lv=' + answer1);
-        $('#lib-recommend-3').addClass('fade').modal('show');
-    }
+// $(document).ready(function () {
+//     var lv = $("#lv").val();
+//     var crt = $("#crt").val();
+//     if (lv == '' || lv == null) {
+//         checkAnswer1(1, 2);
+//         $('#lib-recommend-1').modal('show');
+//     }
+//     else {
+//         answer1 = lv;
+//         answer2 = crt;
+//         $('#lib-recommend-3').load('/japtool/recommend/getStep3?lv=' + answer1);
+//         $('#lib-recommend-3').addClass('fade').modal('show');
+//     }
 
 
-});
-function nextQuestion(pre, next) {
+// });
+// function nextQuestion(pre, next) {
 
-    $('#lib-recommend-' + pre).removeClass('fade').modal('hide');
-    if (next !== -1 && next !== 3) {
-        $('#lib-recommend-' + next).addClass('fade').modal('show');
-    }
-    if (next == 3) {
-        $('#lib-recommend-' + next).load('/japtool/recommend/getStep3?lv=' + answer1);
-        $('#lib-recommend-' + next).addClass('fade').modal('show');
-    }
-}
-function checkAnswer1btn(pre, next) {
-    answer1 = $("#recommend-1").val();
-    if (answer1 == 'Choose one') {
-    }
-    else {
-        nextQuestion(pre, next);
-    }
-}
-function checkAnswer1(pre, next) {
-    $("#recommend-1").each(function () {
-        $(this).on('change', function () {
-            answer1 = $("#recommend-1").val();
-            if (answer1 == 'Choose one') {
-            }
-            else {
-                nextQuestion(pre, next);
-            }
+//     $('#lib-recommend-' + pre).removeClass('fade').modal('hide');
+//     if (next !== -1 && next !== 3) {
+//         $('#lib-recommend-' + next).addClass('fade').modal('show');
+//     }
+//     if (next == 3) {
+//         $('#lib-recommend-' + next).load('/japtool/recommend/getStep3?lv=' + answer1);
+//         $('#lib-recommend-' + next).addClass('fade').modal('show');
+//     }
+// }
+// function checkAnswer1btn(pre, next) {
+//     answer1 = $("#recommend-1").val();
+//     if (answer1 == 'Choose one') {
+//     }
+//     else {
+//         nextQuestion(pre, next);
+//     }
+// }
+// function checkAnswer1(pre, next) {
+//     $("#recommend-1").each(function () {
+//         $(this).on('change', function () {
+//             answer1 = $("#recommend-1").val();
+//             if (answer1 == 'Choose one') {
+//             }
+//             else {
+//                 nextQuestion(pre, next);
+//             }
 
-        });
-    });
-}
-function checkAnswer2(pre, next) {
-    answer2 = $("#rcm2 input[type='radio']:checked").val();
-    if (answer2 == 4) {
-        window.location.replace('/japtool/recommend/getLibraryForFirtLogin?lv=' + answer1 + '&cLT=' + answer2);
-    }
-    else {
-        nextQuestion(pre, next);
-    }
-}
+//         });
+//     });
+// }
+// function checkAnswer2(pre, next) {
+//     answer2 = $("#rcm2 input[type='radio']:checked").val();
+//     if (answer2 == 4) {
+//         window.location.replace('/japtool/recommend/getLibraryForFirtLogin?lv=' + answer1 + '&cLT=' + answer2);
+//     }
+//     else {
+//         nextQuestion(pre, next);
+//     }
+// }
 
-function checkAnswer3() {
-    var check = new Array();
-    var equa = 0;
-    var lengt = $("#numberquestion").val();
-    for (var i = 0; i < lengt; i++) {
-        listIdSurvey[i] = $("#surVeyid" + i + "").val();
-        var q = false;
-        var chosed;
-        $('input[type="radio"][name="lib-recommend-3-q' + (i + 1) + '"]').each(function () {
-            if ($(this).prop("checked")) {
-                q = true;
-                /*chosed =$(this).prop("checked").val();*/
-                chosed = $("#qt" + (i + 1) + " input[type='radio']:checked").val();
-                console.log(chosed);
-            }
-            else {
-            }
-        });
-        answer3[i] = chosed;
-        check[i] = q;
-    }
-    console.log(answer3);
-    for (var i = 0; i < lengt; i++) {
-        if (check[i]) {
-            equa = equa + 1;
-        }
-    }
-    if (equa == (lengt)) {
-        window.location.replace('/japtool/recommend/getLibraryForFirtLogin?lv=' + answer1 + '&cLT=' + answer2 + '&sV=' + answer3 + '&id=' + listIdSurvey);
-    }
-}
+// function checkAnswer3() {
+//     var check = new Array();
+//     var equa = 0;
+//     var lengt = $("#numberquestion").val();
+//     for (var i = 0; i < lengt; i++) {
+//         listIdSurvey[i] = $("#surVeyid" + i + "").val();
+//         var q = false;
+//         var chosed;
+//         $('input[type="radio"][name="lib-recommend-3-q' + (i + 1) + '"]').each(function () {
+//             if ($(this).prop("checked")) {
+//                 q = true;
+//                 /*chosed =$(this).prop("checked").val();*/
+//                 chosed = $("#qt" + (i + 1) + " input[type='radio']:checked").val();
+//                 console.log(chosed);
+//             }
+//             else {
+//             }
+//         });
+//         answer3[i] = chosed;
+//         check[i] = q;
+//     }
+//     console.log(answer3);
+//     for (var i = 0; i < lengt; i++) {
+//         if (check[i]) {
+//             equa = equa + 1;
+//         }
+//     }
+//     if (equa == (lengt)) {
+//         window.location.replace('/japtool/recommend/getLibraryForFirtLogin?lv=' + answer1 + '&cLT=' + answer2 + '&sV=' + answer3 + '&id=' + listIdSurvey);
+//     }
+// }
 //END RECOMMENT POPUP
 //Recommend login
-$(document).ready(function () {
-    $('#lib-recommend-4').modal('show');
-});
-function checkAnswer1Login() {
-    answer2 = $("#rcmlogin input[type='radio']:checked").val();
-    if (answer2 == 1) {
-        window.location.replace('/japtool/recommend/getLibraryLogin');
-    }
-    if (answer2 == 2) {
-        window.location.replace('/japtool/home');
-    }
-}
+// $(document).ready(function () {
+//     $('#lib-recommend-4').modal('show');
+// });
+// function checkAnswer1Login() {
+//     answer2 = $("#rcmlogin input[type='radio']:checked").val();
+//     if (answer2 == 1) {
+//         window.location.replace('/japtool/recommend/getLibraryLogin');
+//     }
+//     if (answer2 == 2) {
+//         window.location.replace('/japtool/home');
+//     }
+// }
 /*choose book*/
 
 function addbook(i) {
