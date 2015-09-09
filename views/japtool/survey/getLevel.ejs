@@ -20,8 +20,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-success" role="button"
+                <a class="btn btn-success" role="button" data-dismiss="modal"
                    onclick="updateLevel()"><%=__("Next")%></a>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="updateLevel()">Close</button>
             </div>
         </div>
     </div>
@@ -42,7 +43,7 @@
                 data: {currentLevel: level},
                 success: function (resHtml) {
                     $('#modal-userCurrentLevel').modal('hide');
-                    $('#modal-userCurrentLevel').remove();
+                    // $('#modal-userCurrentLevel').remove();
                 },
                 error: function () {
                     console.log('update level get Error');

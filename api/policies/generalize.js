@@ -8,7 +8,7 @@ module.exports = function(req, res, next) {
     req.session.lang = req.param('lang');
     if (req.session.authenticated){
       // update interface language for user
-      User.update({id: req.session.User.id}, {language: req.session.lang}, function (err, updateUser) {
+      User.update({id: req.session.user.id}, {language: req.session.lang}, function (err, updateUser) {
       });
     }
 	}

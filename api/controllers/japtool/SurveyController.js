@@ -10,9 +10,11 @@ module.exports = {
     },
     index: function (req, res) {
 
+        sails.log(JSON.stringify(req.session.user));
     	if (!req.session.authenticated) {
 	        res.ok();
-	    } else if (req.session.User.currentLevel == null) {
+	    } else if (req.session.user.currentLevel == null) {
+            sails.log('req.session.user.currentLevel: ' + req.session.user.currentLevel);
 	    	res.render('japtool/survey/getLevel',
                 {
                 }

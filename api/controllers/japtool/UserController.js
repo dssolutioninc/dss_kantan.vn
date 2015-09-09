@@ -52,7 +52,7 @@ module.exports = {
               return res.redirect('/japtool/user/new');
             }
 
-            req.session.User = user;
+            req.session.user = user;
             //console.log(JSON.stringify(user));
             
             //Update user address
@@ -142,15 +142,22 @@ module.exports = {
     var params = req.params.all();
     delete params.id;
 
-    if (!req.session.User.id) {
-      res.err();
+    sails.log(JSON.stringify(req.session.user));
+    if (!req.session.authenticated) {
+      res.send(404);
+      sails.log('!req.session.authenticated');
     } else {
-      User.update(req.session.User.id, params, function (err, user) {
+      User.update(req.session.user.id, params, function (err, user) {
         if (err) {
-          res.err();
+          res.send(404);
+          sails.log('res.send(404);');
         } else {
-          req.session.User = user;
+          sails.log("req.session.user before set: " + JSON.stringify(req.session.user));
+          delete req.session.user;
+          req.session.user = user;
+          sails.log("req.session.user after set: " + JSON.stringify(req.session.user));
           res.ok();
+          sails.log('res.ok();');
         }
       });
     }
@@ -184,7 +191,7 @@ module.exports = {
     //Get an array of all user in the user collection (ex: SQL select table)
     var lv;
     var crt;
-    var userId = req.session.User.id
+    var userId = req.session.user.id
     User.findOne({id: userId}).exec(function (err, user) {
       if (err) {
       }
@@ -243,7 +250,7 @@ module.exports = {
     var newPassCf = req.param('newPassCf');
     var mess = '';
     //check user pass with input pass
-    bcrypt.compare(oldPass, req.session.User.encryptedPassword, function (err, valid) {
+    bcrypt.compare(oldPass, req.session.user.encryptedPassword, function (err, valid) {
       //if the input password doesn't match the password from the database...
       if (err || !valid) {
         mess = req.__('Your password is invalid');
@@ -262,7 +269,7 @@ module.exports = {
                 res.send({mess: mess, code: 'error'});
               } else {
                 mess = req.__('Update success');
-                req.session.User.encryptedPassword = userUpdated[0].encryptedPassword;
+                req.session.user.encryptedPassword = userUpdated[0].encryptedPassword;
                 res.send({mess: mess, code: 'valid'});
               }
             });

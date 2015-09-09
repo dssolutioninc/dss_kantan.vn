@@ -14,7 +14,7 @@ module.exports = {
      */
     create: function (req, res) {
         var bookid = req.param('bookid');
-        var userId = req.session.User.id;
+        var userId = req.session.user.id;
         var create = null;
         SelfLearning.findOne({
             user: userId,
@@ -122,7 +122,7 @@ module.exports = {
 
         try {
             var lbr = req.param('lbr');
-            var userId = req.session.User.id;
+            var userId = req.session.user.id;
             var notes = req.param('notes');
             var bookMaster = req.param('bookMaster');
             var startDatepr = req.param('startDate');
@@ -347,13 +347,13 @@ module.exports = {
     },
     index: function (req, res) {
         var arrTag = [];
-        SelfLearning.find({user: req.session.User.id}).populate('bookMaster', {sort: 'startDate'}).exec(function (err, selfLearnings) {
+        SelfLearning.find({user: req.session.user.id}).populate('bookMaster', {sort: 'startDate'}).exec(function (err, selfLearnings) {
             if (err) {
                 sails.log("Err");
             }else {
                 var arraySize = selfLearnings.length;
                 //Check status and get book master
-                SelfLearning.find({user: req.session.User.id}).populate('bookMaster', {sort: 'startDate'}).exec(function (err, selfLearnings) {
+                SelfLearning.find({user: req.session.user.id}).populate('bookMaster', {sort: 'startDate'}).exec(function (err, selfLearnings) {
                     if (err) {
                         sails.log("Err")
                     }
@@ -375,7 +375,7 @@ module.exports = {
                             //get user's data lesson
                             BookDetail.find({where: {bookMaster: item.bookMaster.id}, sort: {sort: 1}}).exec(function (err, lessons) {
                                 // get learn history of these lessons
-                                UserLearnHistory.find({where: {user: req.session.User.id, selfLearning: item.id}}).exec(function (err, learnedLessons) {
+                                UserLearnHistory.find({where: {user: req.session.user.id, selfLearning: item.id}}).exec(function (err, learnedLessons) {
                                     // console.log('learnedLessons: ' + JSON.stringify(learnedLessons));
                                     var lessonList = [];
 
@@ -575,12 +575,12 @@ module.exports = {
         // console.log('pars: ' + JSON.stringify(pars));
 
         UserLearnHistory.findOne({
-            user: req.session.User.id,
+            user: req.session.user.id,
             selfLearning: pars.selfLearning,
             bookDetail: pars.bookDetail
         }).exec(function (err, data) {
             if (!data) {
-                pars.user = req.session.User.id;
+                pars.user = req.session.user.id;
                 pars.startDate = new Date();
                 pars.status = 'started';
                 pars.mark = 0;
@@ -624,7 +624,7 @@ module.exports = {
      if (currentDate < startDate || currentDate > finishDate) {
      return res.send([]);
      }
-     SelfLearning.findOne({user: req.session.User.id, id: learningId})
+     SelfLearning.findOne({user: req.session.user.id, id: learningId})
      .populate('bookMaster')
      .populate('userLearnHistories').exec(function (err, selfLearning) {
      if (err) {

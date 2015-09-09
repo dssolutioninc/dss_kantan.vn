@@ -35,7 +35,7 @@ module.exports = {
         var listSv = req.param('sV');
         if (listSv == null) {
             BookMaster.find({level: lv}).populate('bookDetails', {sort: 'sort ASC'}).limit(Constants.maxLibraRs).exec(function createCB(err, data) {
-                User.update({id: req.session.User.id}, {
+                User.update({id: req.session.user.id}, {
                     currentLevel: lv,
                     currentLearningTime: cLT
                 }).exec(function (err, ok) {
@@ -77,7 +77,7 @@ module.exports = {
         else {
             var listid = req.param("id").split(",");
             BookMaster.find({level: lv}).populate('bookDetails', {sort: 'sort ASC'}).limit(Constants.maxLibraRs).exec(function createCB(err, data) {
-                User.update({id: req.session.User.id}, {
+                User.update({id: req.session.user.id}, {
                     currentLevel: lv,
                     currentLearningTime: cLT
                 }).exec(function (err, ok) {
@@ -87,7 +87,7 @@ module.exports = {
                     for (var i = 0; i < listid.length; i++) {
                         SurveyResult.create({
                             surveyID: listid[i],
-                            UserID: req.session.User.id,
+                            UserID: req.session.user.id,
                             Answer: ArraySvResult[i]
                         }).exec(function (err, sur) {
                             if (err) {
@@ -131,7 +131,7 @@ module.exports = {
     },
 
     getLibraryLogin: function (req, res) {
-        var lv = req.session.User.currentLevel;
+        var lv = req.session.user.currentLevel;
         BookMaster.find({level: lv}).populate('bookDetails', {sort: 'sort ASC'}).limit(Constants.maxLibraRs).exec(function createCB(err, data) {
             var arrTag = [];
             var arrAllLesson = [];

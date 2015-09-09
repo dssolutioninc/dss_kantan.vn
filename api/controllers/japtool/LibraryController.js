@@ -20,7 +20,7 @@ module.exports = {
 
         // if search condition is not exist in session or request params, set default
         if (!req.session.searchType) req.session.searchType = 'all';
-        if (!req.session.searchLevel) req.session.searchLevel = req.session.User.currentLevel;
+        if (!req.session.searchLevel) req.session.searchLevel = req.session.user.currentLevel;
         if (!req.session.searchBookName) req.session.searchBookName = '';
 
         var searchCondition = '';

@@ -3,7 +3,7 @@
  */
 module.exports = function (req, res, ok) {
     //User is allowed. proceed to controller
-    if (req.session.User && req.session.User.admin) {
+    if (req.session.user && req.session.user.admin) {
         return ok();
     }
     //User is not allowed
