@@ -15,6 +15,7 @@
                 </div>
             </div>
         </div>
+        <!--display all user's learning-->
         <% for(var j = 0;j < uniqueType.length;j++){ %>
         <div class="row content library-<%= j %>" id="">
             <div class="row">
@@ -27,6 +28,7 @@
                     <div class="library-page-line"></div>
                 </div>
             </div>
+            <!--display books (kanji , vocabulary , ....)-->
             <div class="row manager-learning-item">
                 <% for(var i = 0;i < learnList.length;i++){ %>
                 <% if(learnList[i].bookMaster.type == uniqueType[j]){ %>
@@ -57,6 +59,12 @@
                                 </h4>
                                 <ul>
                                     <li>
+                                        <span class="lb"> <%=__("Your learning's status")%></span> : <%=learnList[i].statusLearning%>
+                                    </li>
+                                    <li>
+                                        <span class="lb"><%=__("Recommend")%></span>:<%=__("you should learn")%> <b><%=learnList[i].eachDayLesson%></b> <%=__('lesson each day')%>
+                                    </li>
+                                    <li>
                                         <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                                         <%= learnList[i].bookMaster.name %>
 
@@ -70,11 +78,20 @@
                                         <a class="text-danger" data-toggle="modal"
                                            data-target="#lib-<%= learnList[i].id %>"><%=__("Preview")%></a> -
                                         <a onclick="Learn('<%= learnList[i].id %>')"><%=__("Go to Learn")%>
-                                            </a>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
-
+                            <div class="col-sm-offset-1 col-sm-3 text-right"><span class="label label-default lb-date"><%=learnList[i].stringStartDate%></span></div>
+                            <div class="col-sm-4 div-progress">
+                                <div class="progress">
+                                    <div id="bar-<%=learnList[i].id%>" class="progress-bar" role="progressbar" aria-valuenow="<%=learnList[i].percentDay%>"
+                                         aria-valuemin="0" aria-valuemax="100" style="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 text-right"><span class="label label-default lb-date"><%=learnList[i].stringFinishDate%></span></div>
+                            <!--popup display-->
                             <div class="modal fade" data-backdrop="static" id="lib-<%= learnList[i].id %>">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
@@ -167,6 +184,9 @@
     </div>
     <script type="text/javascript">
         window.onload = function () {
+            <% _.each(learnList, function (learn) { %>
+                $('#bar-<%=learn.id%>').width( <%=learn.percentDay%>+'%' );
+            <% }) %>
             $('.content').hide();
             var itemOnPage = 2;
             for (var i = 0; i < itemOnPage; i++) {

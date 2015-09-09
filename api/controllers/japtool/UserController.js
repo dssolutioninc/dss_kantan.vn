@@ -137,6 +137,24 @@ module.exports = {
       res.render('japtool/user/show-user-info', {user: user[0]});
     });
   },
+  // common update user infor function
+  commonUpdate: function (req, res) {
+    var params = req.params.all();
+    delete params.id;
+
+    if (!req.session.User.id) {
+      res.err();
+    } else {
+      User.update(req.session.User.id, params, function (err, user) {
+        if (err) {
+          res.err();
+        } else {
+          req.session.User = user;
+          res.ok();
+        }
+      });
+    }
+  },
   //edit avatar user
   editAvatar: function (req, res, next) {
     var userCodeID = req.param('userCodeID');

@@ -115,12 +115,10 @@ module.exports = {
                     //}
 
                     //Redirect to their profile page (e.g. /views/user/show.ejs)
-                    var UserLv = user.currentLevel;
-                    if (UserLv == '' || UserLv == null) {
-                        res.redirect('/japtool/user/index');
+                    if (user.currentLevel == null) {
+                        res.redirect('/japtool/page/guide');
 
-                    }
-                    else {
+                    } else {
                         SurveyResult.findOne({UserID: user.id}).exec(function (err, svus) {
                             if (err) {
 
