@@ -1,5 +1,5 @@
 /**
- * Vocabulary.js
+ * Survey.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
@@ -11,17 +11,8 @@ module.exports = {
         sort: {
             type: 'Integer'
         },
-        level: {
-            type: "String"
-        },
-        firstUsing: {
+        oneTime: {
             type: "Boolean"
-        },
-        uniqueUsing: {
-            type: "Boolean"
-        },
-        qType: {
-            type: "Integer"
         },
         question: {
             type: "String"
@@ -29,28 +20,19 @@ module.exports = {
         option1: {
             type: "String"
         },
-        correct1: {
-            type: "Boolean"
-        },
         option2: {
             type: "String"
-        },
-        correct2: {
-            type: "Boolean"
         },
         option3: {
             type: "String"
         },
-        correct3: {
-            type: "Boolean"
-        },
         option4: {
             type: "String"
         },
-        correct4: {
-            type: "Boolean"
+        surveyResult: {
+            collection: 'surveyResult',
+            via: 'survey'
         }
-
     }
 
 };
