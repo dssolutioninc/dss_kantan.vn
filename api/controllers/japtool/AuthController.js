@@ -119,19 +119,7 @@ module.exports = {
                         res.redirect('/japtool/page/guide');
 
                     } else {
-                        SurveyResult.findOne({UserID: user.id}).exec(function (err, svus) {
-                            if (err) {
-
-                            }
-                            else {
-                                if (svus == null || svus == '') {
-                                    res.redirect('/japtool/user/index');
-                                }
-                                else {
-                                    res.view('japtool/user/afterLogin');
-                                }
-                            }
-                        })
+                        res.redirect('/japtool/home');
 
                     }
                 });

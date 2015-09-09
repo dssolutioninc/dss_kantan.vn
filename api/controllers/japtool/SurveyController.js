@@ -28,13 +28,13 @@ module.exports = {
 	    			doneSurveyIDs.push(doneSurvey.survey);
 	    		});
 
-	    		sails.log("doneSurveyIDs: " + doneSurveyIDs);
+	    		// sails.log("doneSurveyIDs: " + doneSurveyIDs);
 	    		Survey.find({
 	    			where: {id: {'!': doneSurveyIDs}},
 	    			limit: 1,
 	    			sort: {sort: 1} })
 	    		.exec(function(err, surveys){
-	    			sails.log("surveys: " + JSON.stringify(surveys));
+	    			// sails.log("surveys: " + JSON.stringify(surveys));
 	    			if (surveys.length > 0) {
 		    			res.render('japtool/survey/getSurvey', {survey: surveys[0], timeStamp: new Date().getTime()});
 		    		}　else {
