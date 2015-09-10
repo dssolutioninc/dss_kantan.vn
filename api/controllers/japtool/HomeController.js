@@ -13,7 +13,7 @@ module.exports = {
             req.session.loadBookNum = Constants.bookNumOnHome;
         }
 
-        SelfLearning.count({where: {user: req.session.User.id}}).exec(function (err, count){
+        SelfLearning.count({where: {user: req.session.user.id}}).exec(function (err, count){
             req.session.learningCount = count;
 
             var noMore = false;
@@ -22,7 +22,7 @@ module.exports = {
                 noMore = true;
             }
             SelfLearning.find({
-                where: {user: req.session.User.id},
+                where: {user: req.session.user.id},
                 limit: req.session.loadBookNum,
                 sort: {finishDate: 0, startDate: 0}
             }).populate('bookMaster').exec(function (err, learnings) {
@@ -37,7 +37,7 @@ module.exports = {
 
     loadMore: function (req, res) {
         SelfLearning.find({
-            where: {user: req.session.User.id},
+            where: {user: req.session.user.id},
             limit: Constants.bookNumOnHomeMore,
             skip: req.session.loadBookNum,
             sort: {finishDate: 0, startDate: 0}
@@ -107,7 +107,7 @@ module.exports = {
         exec(function(err, lessons){
 
             // get learn history of these lessons
-            UserLearnHistory.find({where: {user: req.session.User.id, selfLearning: req.param('learningID')}
+            UserLearnHistory.find({where: {user: req.session.user.id, selfLearning: req.param('learningID')}
             }).exec(function(err, learnedLessons){
 
                 // console.log('learnedLessons: ' + JSON.stringify(learnedLessons));

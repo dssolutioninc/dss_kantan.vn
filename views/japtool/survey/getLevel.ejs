@@ -2,14 +2,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><%=__("Recommended Libraries For You")%> - <%=__("Step")%> 1/3</h4>
+                <h4 class="modal-title"><%=__("Update your learning level")%></h4>
             </div>
             <div class="modal-body">
                 <form class="form-inline">
                     <div class="form-group">
                         <label><%=__("What level do you want to learn or practices")%>?</label>
                         <select class="form-control" id="choose-currentLevel">
-                            <option value=''><%=__("Choose one")%></option>
+                            <option value="" disabled selected><%=__("Choose one")%></option>
                             <option value="N1">N1</option>
                             <option value="N2">N2</option>
                             <option value="N3">N3</option>
@@ -21,34 +21,42 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-success" role="button"
-                   onclick="updateLevel()"><%=__("Next")%></a>
+                   onclick="updateLevel()"><%=__("OK")%></a>
             </div>
         </div>
     </div>
+
+    <script>
+        $('#modal-userCurrentLevel').modal('show');
+
+        jQuery('#modal-userCurrentLevel').on('hidden.bs.modal',function(e){
+            jQuery(this).remove();
+        });
+
+        function updateLevel(){
+
+            var level = $("#choose-currentLevel").val();
+            if (!level) {
+                return false;
+            }
+            else {
+                $.ajax({
+                    url: '/japtool/user/commonUpdate',
+                    type: 'PUT',
+                    data: {currentLevel: level},
+                    success: function (resHtml) {
+                        $('#modal-userCurrentLevel').modal('hide');
+                        
+                        // load next the survey
+                        loadSurvey();
+                    },
+                    error: function () {
+                        console.log('update level get Error');
+                    }
+                });
+            }
+        }
+
+    </script>
 </div>
 
-<script>
-    $('#modal-userCurrentLevel').modal('show');
-
-    function updateLevel(){
-
-        var level = $("#choose-currentLevel").val();
-        if (level == '') {
-        }
-        else {
-            $.ajax({
-                url: '/japtool/user/commonUpdate',
-                type: 'PUT',
-                data: {currentLevel: level},
-                success: function (resHtml) {
-                    $('#modal-userCurrentLevel').modal('hide');
-                    $('#modal-userCurrentLevel').remove();
-                },
-                error: function () {
-                    console.log('update level get Error');
-                }
-            });
-        }
-    }
-
-</script>

@@ -8,8 +8,8 @@
  */
 
 module.exports = {
-    schema: true,
-    adapter: 'mongo',
+    // schema: true,
+    // adapter: 'mongo',
     attributes: {
         provider: {
             type: 'string'
@@ -101,6 +101,10 @@ module.exports = {
         },
         bookUseHistories: {
             collection: 'BookUseHistory',
+            via: 'user'
+        },
+        surveyResult: {
+            collection: 'surveyResult',
             via: 'user'
         }
     },

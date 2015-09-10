@@ -8,17 +8,21 @@
 module.exports = {
 
     attributes: {
-        surveyID:{
-            type: 'String'
+        // surveyID:{
+        //     type: 'String'
+        // },
+        // UserID:{
+        //     type: 'String'
+        // },
+        user: {
+            model: 'User'
         },
-        UserID:{
-            type: 'String'
+        survey: {
+            model: 'Survey'
         },
-        Answer: {
+        answer: {
             type:"String"
         }
-
-
     }
 
 };

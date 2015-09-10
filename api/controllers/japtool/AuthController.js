@@ -8,7 +8,7 @@ var passport = require('passport');
 var bcrypt = require('bcryptjs');
 module.exports = {
     'index': function (req, res) {
-        if(req.session.User){
+        if(req.session.user){
             res.redirect('/japtool/user/index');
         }else{
             res.view();
@@ -85,12 +85,12 @@ module.exports = {
                 }
 
                 req.session.authenticated = true;
-                req.session.User = user;
+                req.session.user = user;
                 req.session.lang = user.language;
 
                 //If the user is also an admin redirect to the user list(/view/user/index.ejs)
                 //This is user in conjuntion with config/policies.js file
-                //if (req.session.User.admin) {
+                //if (req.session.user.admin) {
                 //    res.redirect('/japtool/user');
                 //    return;
                 //}
@@ -109,7 +109,7 @@ module.exports = {
 
                     // If the user is also an admin redirect to the user list (e.g. /views/user/index.ejs)
                     // This is used in conjunction with config/policies.js file
-                    //if (req.session.User.admin) {
+                    //if (req.session.user.admin) {
                     //    res.redirect('/japtool/user');
                     //    return;
                     //}
@@ -119,19 +119,7 @@ module.exports = {
                         res.redirect('/japtool/page/guide');
 
                     } else {
-                        SurveyResult.findOne({UserID: user.id}).exec(function (err, svus) {
-                            if (err) {
-
-                            }
-                            else {
-                                if (svus == null || svus == '') {
-                                    res.redirect('/japtool/user/index');
-                                }
-                                else {
-                                    res.view('japtool/user/afterLogin');
-                                }
-                            }
-                        })
+                        res.redirect('/japtool/home');
 
                     }
                 });

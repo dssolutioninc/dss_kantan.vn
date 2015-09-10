@@ -387,7 +387,7 @@
             $('.sub-lesson').click(function () {
                 var bookDetail = $(this).attr('name');
                 $('#add-book-detail').attr('name', bookDetail);
-                var user = '<%= session.User.id %>';
+                var user = '<%= session.user.id %>';
                 var selfLearning = $('#title-learning').attr('name');
                 var startDate = new Date();
                 var finishDate = new Date();

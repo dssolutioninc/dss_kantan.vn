@@ -1,0 +1,73 @@
+<div class="modal fade" id="modal-getSurvey-<%= timeStamp %>" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%=__("For improve the quality of your learning, Please answer some questions")%></h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="surveyID" value="<%= survey.id %>">
+
+                <label><%= survey.question %>?</label>
+                <% if(survey.option1 != null && survey.option1 != ""){ %>
+                    <p><input type="radio" id="survey-option-1" value="<%= survey.option1 %>"> <%= survey.option1 %></p>
+                <% } %>
+                <% if(survey.option2 != null && survey.option2 != ""){ %>
+                    <p><input type="radio" id="survey-option-2" value="<%= survey.option2 %>"> <%= survey.option2 %></p>
+                <% } %>
+                <% if(survey.option3 != null && survey.option3 != ""){ %>
+                    <p><input type="radio" id="survey-option-3" value="<%= survey.option3 %>"> <%= survey.option3 %></p>
+                <% } %>
+                <% if(survey.option4 != null && survey.option4 != ""){ %>
+                    <p><input type="radio" id="survey-option-4" value="<%= survey.option4 %>"> <%= survey.option4 %></p>
+                <% } %>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-success" role="button"
+                   onclick="postSurvey()"><%=__("OK")%></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#modal-getSurvey-<%= timeStamp %>').modal('show');
+
+        jQuery('#modal-getSurvey-<%= timeStamp %>').on('hidden.bs.modal',function(e){
+            jQuery(this).remove();
+        });
+
+        function postSurvey(){
+
+            var surveyID = $("#surveyID").val();
+            var selectedAnswer;
+            for (i = 1; i < 5; ++i){
+                if ($('#survey-option-' + i).is(':checked')) {
+                    selectedAnswer = $('#survey-option-' + i).val();
+                    // return false;
+                } 
+            }
+
+            if (!selectedAnswer) {
+                return false;
+            }
+            else {
+                $.ajax({
+                    url: '/japtool/survey/postsurvey',
+                    type: 'POST',
+                    data: {surveyID: surveyID, selectedAnswer: selectedAnswer},
+                    success: function (resHtml) {
+                        $('#modal-getSurvey-<%= timeStamp %>').modal('hide');
+                        
+                        // load next the survey
+                        loadSurvey();
+                    },
+                    error: function () {
+                        console.log('update level get Error');
+                    }
+                });
+            }
+        }
+
+    </script>
+
+</div>
+

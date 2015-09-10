@@ -52,7 +52,7 @@ module.exports = {
               return res.redirect('/japtool/user/new');
             }
 
-            req.session.User = user;
+            req.session.user = user;
             //console.log(JSON.stringify(user));
             
             //Update user address
@@ -130,26 +130,27 @@ module.exports = {
   //Process the info from edit view
   update: function (req, res, next) {
     var id = req.param('userInfoId');
-    User.update(id, req.params.all(), function (err, user) {
+    User.update(id, req.params.all(), function (err, users) {
       if (err) {
         return next(err);
       }
-      res.render('japtool/user/show-user-info', {user: user[0]});
+      res.render('japtool/user/show-user-info', {user: users[0]});
     });
   },
   // common update user infor function
   commonUpdate: function (req, res) {
-    var params = req.params.all();
+    var params = req.allParams();
     delete params.id;
 
-    if (!req.session.User.id) {
-      res.err();
+    if (!req.session.authenticated || req.method != 'PUT') {
+      res.send(404);
     } else {
-      User.update(req.session.User.id, params, function (err, user) {
+      User.update(req.session.user.id, params, function (err, users) {
         if (err) {
-          res.err();
+          res.send(404);
         } else {
-          req.session.User = user;
+          req.session.user = users[0];
+
           res.ok();
         }
       });
@@ -184,7 +185,7 @@ module.exports = {
     //Get an array of all user in the user collection (ex: SQL select table)
     var lv;
     var crt;
-    var userId = req.session.User.id
+    var userId = req.session.user.id
     User.findOne({id: userId}).exec(function (err, user) {
       if (err) {
       }
@@ -243,7 +244,7 @@ module.exports = {
     var newPassCf = req.param('newPassCf');
     var mess = '';
     //check user pass with input pass
-    bcrypt.compare(oldPass, req.session.User.encryptedPassword, function (err, valid) {
+    bcrypt.compare(oldPass, req.session.user.encryptedPassword, function (err, valid) {
       //if the input password doesn't match the password from the database...
       if (err || !valid) {
         mess = req.__('Your password is invalid');
@@ -262,7 +263,7 @@ module.exports = {
                 res.send({mess: mess, code: 'error'});
               } else {
                 mess = req.__('Update success');
-                req.session.User.encryptedPassword = userUpdated[0].encryptedPassword;
+                req.session.user.encryptedPassword = userUpdated[0].encryptedPassword;
                 res.send({mess: mess, code: 'valid'});
               }
             });
