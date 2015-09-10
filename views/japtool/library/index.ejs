@@ -29,7 +29,7 @@
         <div class="col-sm-3 col-xs-12">
             <div class="form-group form-horizontal">
                 <!--<label for="textSearch"><%= __("Select key Search") %>:</label>-->
-                <input type="text" class="form-control" id="textSearch">
+                <input type="text" class="form-control" id="textSearch" placeholder="<%= __("Book's name for searching") %>">
             </div>
         </div>
         <div class="col-sm-1 col-xs-12">
@@ -233,9 +233,6 @@
     <div id="error" style="display: none"></div>
 </div>
 
-
-
-
 <script>
     window.onload = function () {
         $("#typeSearch").val("<%= req.session.searchType %>");
@@ -272,37 +269,5 @@
             }
         })
     }
-
-    
-    // function fillLibrary() {
-    //     var typeSearch = $("#typeSearch").val();
-    //     var levelSearch = $("#levelSearch").val();
-    //     var textSearch = $("#textSearch").val();        
-    //     var data = {
-    //         typeSearch: typeSearch,
-    //         levelSearch: levelSearch,
-    //         textSearch: textSearch
-    //     };
-    //     // $.ajax({
-    //     //  method: "GET",
-    //     //  url: "/japtool/Library/fillLibrary",
-    //     //  data: data
-    //     //  }).done(function (data) {
-    //     //  $("#libraryContent").html("");
-    //     //  $("#libraryContent").html(data);
-    //     //  })
-    //     $("#libraryContent").load("/japtool/Library/fillLibrary/", data, function (response, status, xhr) {
-    //         if (status == "error") {
-    //             var msg = "Sorry but there was an error: ";
-    //             $("#error").prop('disabled',true);
-    //             $("#error").html(msg + xhr.status + " " + xhr.statusText);
-    //         }
-    //         else {
-    //             $("#error").prop('disabled',false);
-    //             console.log(response);
-    //             pagingInit();
-    //         }
-    //     });
-    // }
     
 </script>

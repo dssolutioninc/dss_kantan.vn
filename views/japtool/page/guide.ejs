@@ -71,6 +71,10 @@
 
 <script>
     window.onload = function () {
+        loadSurvey();
+    }
+
+    function loadSurvey(){
         $.ajax({
             url: '/japtool/survey/index',
             type: 'GET',

@@ -159,6 +159,7 @@
   "Studying has not yet begun":"Ngày học chưa bắt đầu",
   "more day":"nhiều ngày hơn",
   "ok":"ok",
+  "OK":"OK",
   "You can't delete this learning":"Bạn không thể xóa bài học này",
   "here":"Đây",
   "Studying finished . if you want to learn more click":"Khóa học đã kết thúc . Nếu bạn muốn học tiếp ấn vào ",
@@ -360,12 +361,17 @@
   "Hide Detail":"Ẩn bớt",
 
 
-  "dummy":"dummy",
+  "Book's name for searching":"Nhập tên tài liệu cần tìm",
   "you learn slowly":"bạn đang học chậm",
   "you learn fast":"bạn đang học nhanh",
   "you catch up time's learning":"Bạn đang học kịp tiến độ",
   "lesson each day":"bài mỗi ngày",
   "Recommend":"Gợi ý",
   "you should learn":"Bạn nên học",
-  "Your learning's status":"Tình trạng"
+  "Your learning's status":"Tình trạng",
+  "Update your learning level":"Đăng ký trình độ bạn đang học",
+  "For improve the quality of your learning, Please answer some questions":"Nhằm mục đích tạo ra chương trình học phù hợp với bạn, hãy trả lời vài câu hỏi về bạn",
+
+
+  "":""
 }

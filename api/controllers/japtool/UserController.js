@@ -130,34 +130,28 @@ module.exports = {
   //Process the info from edit view
   update: function (req, res, next) {
     var id = req.param('userInfoId');
-    User.update(id, req.params.all(), function (err, user) {
+    User.update(id, req.params.all(), function (err, users) {
       if (err) {
         return next(err);
       }
-      res.render('japtool/user/show-user-info', {user: user[0]});
+      res.render('japtool/user/show-user-info', {user: users[0]});
     });
   },
   // common update user infor function
   commonUpdate: function (req, res) {
-    var params = req.params.all();
+    var params = req.allParams();
     delete params.id;
 
-    sails.log(JSON.stringify(req.session.user));
-    if (!req.session.authenticated) {
+    if (!req.session.authenticated || req.method != 'PUT') {
       res.send(404);
-      sails.log('!req.session.authenticated');
     } else {
-      User.update(req.session.user.id, params, function (err, user) {
+      User.update(req.session.user.id, params, function (err, users) {
         if (err) {
           res.send(404);
-          sails.log('res.send(404);');
         } else {
-          sails.log("req.session.user before set: " + JSON.stringify(req.session.user));
-          delete req.session.user;
-          req.session.user = user;
-          sails.log("req.session.user after set: " + JSON.stringify(req.session.user));
+          req.session.user = users[0];
+
           res.ok();
-          sails.log('res.ok();');
         }
       });
     }

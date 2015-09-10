@@ -52,13 +52,18 @@ module.exports.policies = {
         '*': ["generalize", "authenticated"]
     },
     'japtool/Learning': {
-        '*': ["generalize", "authenticated"]
+        // '*': ["generalize", "authenticated"],
+        // '/*&preview=yes*': ["generalize"]
+        '*': ["generalize"]
     },
     'japtool/Library': {
         '*': ["generalize", "authenticated"]
     },
     'japtool/recommend': {
         '*': ["generalize", "authenticated"]
+    },
+    'japtool/viewtour': {
+        '*': ["generalize"]
     },
     'admin/book': {
         '*': ["generalize", "admin"]
@@ -68,7 +73,7 @@ module.exports.policies = {
     },
     'admin/vocabulary': {
         '*': ["generalize", "admin"]
-    }
+    },
     /***************************************************************************
      *                                                                          *
      * Here's an example of mapping some policies to run before a controller    *

@@ -1,0 +1,152 @@
+<div class="container library-page example">
+    <div id="libraryContent">
+        <div class="clearfix" id="books">
+            <% arrTypes.forEach(function(type, index){ %>
+            <div class="row content">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="col-sm-12 library-page-title">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <h3><span><%= __(type) %></span>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="library-page-line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                
+                <div id="books-type-<%= index %>">
+                    <% 
+                    var count = 0;
+                    books.forEach(function(book){
+                        if(book.type == type) {
+                    %>
+                        <div class="col-sm-4 lib-cell">
+                            <div class="">
+                                <div class="media libMaster">
+                                    <div class="hidden-xs">
+                                        <a href="#" data-toggle="modal" data-target="#lib-details-<%= book.id %>">
+                                            <img class="media-object col-xs-3 libImg"
+
+                                                    <% if (book.image) { %>
+                                                 src="/media/image/<%= book.image %>"
+                                                    <% } else { %>
+                                                 src="/images/bookicon.jpg"
+                                                    <% } %>
+
+                                                 title="<%= __('Click to view this library details') %>">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a href="#" class="text-primary"
+                                               title="<%= __('Click to view this library details') %>"
+                                               data-toggle="modal" data-target="#lib-details-<%= book.id %>">
+                                                <%= book.name %>
+                                            </a>
+                                        </h4>
+                                        <ul>
+                                            <li>
+                                                <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                                                <%= __("Level") %>: <%= book.level %> -
+                                                <%= __("Used") %>: <%= book.usedNum %>
+                                            </li>
+                                            <li>
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                <%= __("Number Lesson") %>: <%= book.lessonNum %>
+                                            </li>
+                                            <li>
+                                                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                                <a href="/japtool/Learning/practice/?id=<%= book.id %>&preview=yes" title="<%= __('Click to view this library lesson.') %>"
+                                                   class="text-danger"><%= __("Preview") %></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--lib details-->
+                        <div class="modal fade" id="lib-details-<%= book.id %>" tabindex="-1">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                    aria-hidden="true">x</span></button>
+                                        <h4 class="modal-title"><%= __("Library") %> - <%= book.name %></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <a>
+                                                    <img class="library-detail-img"
+
+                                                            <% if (book.image) { %>
+                                                         src="/media/image/<%= book.image %>"
+                                                            <% } else { %>
+                                                         src="/images/book_default_cover.png"
+                                                            <% } %>
+                                                            />
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <ul>
+                                                    <h4><%= __("Details") %>:</h4>
+                                                    <li>
+                                                        <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                                                        <%= __("Level") %>: <%= book.level %>
+                                                    </li>
+                                                    <li>
+                                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                        <%= __("Type") %>: <%= book.type %>
+                                                    </li>
+                                                    <li>
+                                                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                        <%= __("Number Lesson") %>: <%= book.lessonNum %>
+                                                    </li>
+                                                    <li>
+                                                        <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                                                        <%= __("Estimate Hour") %>: <%= book.hourForLearn %>
+                                                    </li>                                        
+                                                    <li>
+                                                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                        <%= __("Used") %>: <%= book.usedNum %>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-12">
+
+                                                <h4><%= __("Description") %>:</h4>
+
+                                                <div class="pre-scrollable mCustomScrollbar" data-mcs-theme="dark">
+                                                    <%= book.description %>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a onclick="loadformLib('<%= book.id %>')"
+                                           class="btn btn-success" role="button">
+                                            <%= __("Learning This Library") %></a>
+                                        <a href="#" class="btn btn-danger" role="button"
+                                           data-dismiss="modal"><%= __("Close") %></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <% } %>
+                    <% }) %>
+                </div>
+
+            </div>
+            <% }) %>
+        </div>
+
+    </div>
+</div>
