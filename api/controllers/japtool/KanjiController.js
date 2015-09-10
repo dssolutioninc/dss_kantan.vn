@@ -14,7 +14,7 @@ module.exports = {
         var CVExtractDataCondition = extractDataCondition.replace('lesson', 'Bài ');
         var arr = CVExtractDataCondition.split(',');
         var lessonn = arr[3];
-        sails.log(lessonn);
+        // sails.log(lessonn);
         Kanji.selectByLevel({condition: extractDataCondition}, function (err, kanjis) {
             if (err) return res.send(err.status);
             var min = 1;
