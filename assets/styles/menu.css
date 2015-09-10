@@ -40,7 +40,7 @@
 .menu-page {
 
 }
-#cssmenu > ul > li.active{
+#cssmenu > ul > li a.active{
     background: #C33E2E;
 }
 #cssmenu > ul > li {
@@ -72,10 +72,6 @@
     text-decoration: none;
     color: #dddddd;
     font-weight: 300;
-}
-
-#cssmenu > ul > li:last-child > a {
-    padding-right: 0;
 }
 
 #cssmenu > ul > li:hover > a {

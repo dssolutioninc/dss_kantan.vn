@@ -95,3 +95,13 @@ $("#cssmenu").menumaker({
     });
   });
 })(jQuery);
+
+$(function() {
+  aObj = document.getElementById('cssmenu').getElementsByTagName('a');
+  for(i=0;i<aObj.length;i++) {
+    if(document.location.href.indexOf(aObj[i].href)>=0) {
+      $("#cssmenu li a").removeClass("active");
+      aObj[i].className='active';
+    }
+  }
+});
