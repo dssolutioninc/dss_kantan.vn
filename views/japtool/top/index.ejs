@@ -13,12 +13,32 @@
         <div class="col-sm-12">
             <h1><%= __('WHO ARE WE') %></h1>
             <p><%= __('Kantan bring an one and only mission is to teach Japanese language for people around the world. To achieve this mission, we have provided a lesson system according to Japanese standards with a rich vocabulary and a great curriculum.') %></p>
-            <a class="btn btn-social-icon btn-sm btn-facebook"><i class="fa fa-facebook"></i></a>
-            <a class="btn btn-social-icon btn-sm btn-flickr"><i class="fa fa-flickr"></i></a>
-            <a class="btn btn-social-icon btn-sm btn-github"><i class="fa fa-github"></i></a>
-            <a class="btn btn-social-icon btn-sm btn-google-plus"><i class="fa fa-google-plus"></i></a>
-            <a class="btn btn-social-icon btn-sm btn-linkedin"><i class="fa fa-linkedin"></i></a>
-            <a class="btn btn-social-icon btn-sm btn-twitter"><i class="fa fa-twitter"></i></a>
+
+            <% if (!req.session.authenticated) { %>
+                <p class=""><%= __("If you haven't account, you can click") %> <a href="japtool/user/new"><%= __('register') %></a> <%= __("or you can login with other accounts follow") %></p>
+                <a class="btn btn-social-icon btn-sm btn-facebook"><i class="fa fa-facebook"></i></a>
+                <a class="btn btn-social-icon btn-sm btn-flickr"><i class="fa fa-flickr"></i></a>
+                <a class="btn btn-social-icon btn-sm btn-github"><i class="fa fa-github"></i></a>
+                <a class="btn btn-social-icon btn-sm btn-google-plus"><i class="fa fa-google-plus"></i></a>
+                <a class="btn btn-social-icon btn-sm btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                <a class="btn btn-social-icon btn-sm btn-twitter"><i class="fa fa-twitter"></i></a>
+                
+
+                <div>
+                    <p>
+                        </br>
+                        <%= __('If you forget your login password, click here') %>
+                        <a href="/japtool/user/passforget"><%=__("Forgotten Password")%></a>
+                    </p>                    
+                </div>
+
+                <div class="no-user">
+                    <p><%= __('If you want not to register') %></p>
+                    <p>
+                        <a class="label label-success" href="/japtool/viewtour"><%= __('Click Here To Take Your View Tour') %></a>
+                    </p>
+                </div>
+            <% } %>
         </div>
     </div>
 </div>
