@@ -1,211 +1,233 @@
-<div class="body-manager-learning">
+<div class="vocabulary content clearfix">
     <div class="container">
-        <% if(learnList.length <= 0){ %>
-        <div class="container">
-            <div class="row">
-                <h2 class="text-center"><%=__("You don't have any learning , Click")%> <u><a
-                                onclick="loadform(2)"><%=__("here")%></a></u> <%=__("or cancle")%></h2>
-            </div>
-        </div>
-        <% }%>
         <div class="row">
-            <div id="default-show" class="clearfix">
-                <div class="default-show">
-                    <button onclick="loadform(2)" id="btn-create-learning" class="btn btn-danger"><%=__("Create New Learning")%></button>
-                </div>
+            <!--<div class="col-sm-12">-->
+            <!--<h2 class="text-center clearfix"><%= __('Your learning status') %></h2>-->
+            <!--<p class="text-center desc-home"><%= __('This site show all your learning status from pass till now') %></p>-->
+            <!--</div>-->
+            <div class="col-sm-offset-10 col-sm-2 div-btn-crt">
+                <button onclick="loadform(2)" id="btn-create-learning" class="btn btn-danger"><%=__("Create New Learning")%></button>
             </div>
-        </div>
-        <!--display all user's learning-->
-        <% for(var j = 0;j < uniqueType.length;j++){ %>
-        <div class="row content library-<%= j %>" id="">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h2>
-                        <%= uniqueType[j] %>
-                    </h2>
-                </div>
-                <div class="col-sm-12 clearfix">
-                    <div class="library-page-line"></div>
-                </div>
-            </div>
-            <!--display books (kanji , vocabulary , ....)-->
-            <div class="row manager-learning-item">
-                <% for(var i = 0;i < learnList.length;i++){ %>
-                <% if(learnList[i].bookMaster.type == uniqueType[j]){ %>
-
-                <div class="col-sm-4 lib-cell">
-                    <div class="row">
-                        <div class="media libMaster">
-                            <div class="col-xs-4 hidden-xs">
-                                <a class="text-primary lb-learn-name"
-                                   title="Click to view this library details"
-                                   data-toggle="modal" data-target="#lib-<%= learnList[i].id %>"><img
-                                            class="media-object col-xs-3 libImg"
-
-                                            <% if (learnList[i].bookMaster.image) { %>
-                                            src="/media/image/<%= learnList[i].bookMaster.image %>"
-                                            <% } else { %>
-                                            src="/images/bookicon.jpg"
-                                            <% } %>
-
-                                            title="<%=__("Click to view this library details")%>"></a>
-                            </div>
-                            <div class="col-lg-8">
-                                <h4 class="media-heading">
-                                    <a href="#" class="text-primary lb-learn-name"
-                                       title="Click to view this library details"
-                                       data-toggle="modal"
-                                       data-target="#lib-<%= learnList[i].id %>"><%= learnList[i].bookMaster.name %></a>
-                                </h4>
-                                <ul>
-                                    <li>
-                                        <span class="lb"> <%=__("Your learning's status")%></span> : <%=learnList[i].statusLearning%>
-                                    </li>
-                                    <li>
-                                        <span class="lb"><%=__("Recommend")%></span>:<%=__("you should learn")%> <b><%=learnList[i].eachDayLesson%></b> <%=__('lesson each day')%>
-                                    </li>
-                                    <li>
-                                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                                        <%= learnList[i].bookMaster.name %>
-
-                                    </li>
-                                    <li>
-                                        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                        <%= learnList[i].status %>
-                                    </li>
-                                    <li>
-                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                        <a class="text-danger" data-toggle="modal"
-                                           data-target="#lib-<%= learnList[i].id %>"><%=__("Preview")%></a> -
-                                        <a onclick="Learn('<%= learnList[i].id %>')"><%=__("Go to Learn")%>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-offset-1 col-sm-3 text-right"><span class="label label-default lb-date"><%=learnList[i].stringStartDate%></span></div>
-                            <div class="col-sm-4 div-progress">
+            <div class="vocabulary-item clearfix">
+                <div class="info clearfix">
+                    <% _.each(listLearnings, function (learning) { %>
+                    <div class="col-sm-12 clearfix">
+                        <h3><a class="text-primary" title="<%=__('Click to view this library details')%>"
+                               data-toggle="modal" data-target="#lib-<%= learning.id %>"><%= learning.bookMaster.name %></a></h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="">
+                            <div class="col-sm-1"><span class="label label-default lb-date"><%=learning.stringStartDate%></span></div>
+                            <div class="col-sm-3">
                                 <div class="progress">
-                                    <div id="bar-<%=learnList[i].id%>" class="progress-bar" role="progressbar" aria-valuenow="<%=learnList[i].percentDay%>"
+                                    <div id="bar-<%=learning.id%>" class="progress-bar" role="progressbar" aria-valuenow=""
                                          aria-valuemin="0" aria-valuemax="100" style="">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3 text-right"><span class="label label-default lb-date"><%=learnList[i].stringFinishDate%></span></div>
-                            <!--popup display-->
-                            <div class="modal fade" data-backdrop="static" id="lib-<%= learnList[i].id %>">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close"><span
-                                                        aria-hidden="true">×</span></button>
-                                            <h4 class="modal-title"><%=__("Learning Details")%></h4>
-                                        </div>
-                                        <div class="modal-body">
+                            <div class="col-sm-1"><span class="label label-default lb-date"><%=learning.stringFinishDate%></span></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <i><span class=""><%=__("Recommend")%></span>:<%=__("you should learn")%> <b><span id="rcd-<%=learning.id%>"></span></b> <%=__('lesson each day')%> |
+                            <span class=""> <%=__("Your learning's status")%></span> : <lable id="stt-<%=learning.id%>"><%=learning.statusLearning%></lable></i>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-primary"><%= __('Category: ') %> <%= learning.bookMaster.type %></p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-info"><%= __('Level: ') %> <%= learning.bookMaster.level %></p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-success"><%= __('Pass: ') %> <span id="passNum-<%= learning.id %>" class="lesson-success"></span> Lesson</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-danger"><%= __('False or in learning: ') %> <span id="falsedNum-<%= learning.id %>" class="lesson-danger"></span> Lesson</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="text-primary"><%= __('Total of Lesson: ') %> <%= learning.bookMaster.lessonNum %></p>
+                    </div>
+                    <div id="detail-<%= learning.id %>" class="clearfix"></div>
+                    <div class="col-sm-12">
+                        <a class="show-hide-detail-<%= learning.id %> pull-right disactive"><%= __('Hide Detail') %></a>
+                    </div>
+                    <!--popup book-->
+                    <div class="modal fade" data-backdrop="static" id="lib-<%= learning.id %>">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close"><span
+                                                aria-hidden="true">x</span></button>
+                                    <h4 class="modal-title"><%=__("Learning Details")%></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
                                             <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="row">
-                                                        <div class="media">
-                                                            <div class="media-left">
-                                                                <img class="media-object img-book"
-                                                                     src="/images/track.jpg">
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <ul>
-                                                                    <h4><%=__("Details")%>:</h4>
-                                                                    <li>
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <img class="media-object img-book"
+                                                             src="/images/track.jpg">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <ul>
+                                                            <h4><%=__("Details")%>:</h4>
+                                                            <li>
                                                                 <span class="glyphicon glyphicon-play"
                                                                       aria-hidden="true"></span> <%=__("From")%>
-                                                                        : <%= learnList[i].stringStartDate %>
-                                                                    </li>
-                                                                    <li>
+                                                                : <%= learning.stringStartDate %>
+                                                            </li>
+                                                            <li>
                                                                 <span class="glyphicon glyphicon-stop"
                                                                       aria-hidden="true"></span> <%=__("To")%>
-                                                                        : <%= learnList[i].stringFinishDate %>
-                                                                    </li>
-                                                                    <li>
+                                                                : <%= learning.stringFinishDate %>
+                                                            </li>
+                                                            <li>
                                                                 <span class="glyphicon glyphicon-book"
                                                                       aria-hidden="true"></span>
-                                                                        <%= learnList[i].bookMaster.name %>
-                                                                    </li>
-                                                                    <li>
-                                                                        <h4><%=__("Description")%></h4>
-                                                                        <%= learnList[i].bookMaster.description %>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                                                <%= learning.bookMaster.name %>
+                                                            </li>
+                                                            <li>
+                                                                <h4><%=__("Description")%></h4>
+                                                                <%= learning.bookMaster.description %>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <a onclick="deleteLearning('<%= learnList[i].id %>')"
-                                               class="btn btn-danger" role="button"><%=__("delete")%></a>
-                                            <button onclick="loadform('<%= learnList[i].id %>')"
-                                                    class="btn btn-success">
-                                                <%=__("Edit")%>
-                                            </button>
-                                            <a href="#" class="btn btn-warning" role="button"
-                                               data-dismiss="modal"><%=__("Close")%></a>
-                                        </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a onclick="deleteLearning('<%= learning.id %>')"
+                                       class="btn btn-danger" role="button"><%=__("delete")%></a>
+                                    <button onclick="loadform('<%= learning.id %>')"
+                                            class="btn btn-success">
+                                        <%=__("Edit")%>
+                                    </button>
+                                    <a href="#" class="btn btn-warning" role="button"
+                                       data-dismiss="modal"><%=__("Close")%></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <% }) %>
                 </div>
-                <% } %>
-                <% } %>
             </div>
-        </div>
-        <% } %>
-        <form action="/japtool/learning/edit" method="post" id="edit-learning-japtool"
-              onsubmit="return validateEditLearning()">
-            <div class="modal fade" id="formedit" data-backdrop="static" data-keyboard="false">
-                <div class="modal-dialog modal-lg" id="editform"></div>
+            <form action="/japtool/learning/edit" method="post" id="edit-learning-japtool"
+                  onsubmit="return validateEditLearning()">
+                <div class="modal fade" id="formedit" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog modal-lg" id="editform"></div>
+                </div>
+            </form>
+            <form id="create-learning-japtool">
+                <input type="hidden" id="listLearn" value="<%= listLearnings %>">
+                <input type="hidden" id="iduser" value="<%= session.user.id %>">
+
+                <div class="modal fade" data-backdrop="static" id="formecr" data-keyboard="false">
+                    <div class="modal-dialog modal-lg" id="crform"></div>
+                </div>
+            </form>
+            <div class="modal fade" id="show-books" data-keyboard="false">
+
             </div>
-        </form>
-        <form id="create-learning-japtool">
-            <input type="hidden" id="listLearn" value="<%= learnList %>">
-            <input type="hidden" id="iduser" value="<%= session.user.id %>">
-
-            <div class="modal fade" data-backdrop="static" id="formecr" data-keyboard="false">
-                <div class="modal-dialog modal-lg" id="crform"></div>
+            <div class="bookMasterMore"></div>
+            <div class="col-sm-offset-4 col-sm-4 clearfix">
+                <div class="info-lesson label-primary loadmore"><a><%= __('View More') %></a></div>
             </div>
-        </form>
-        <div class="modal fade" id="show-books" data-keyboard="false">
-
-        </div>
-
-        <div class="col-sm-offset-8 col-sm-4 row-pagination-mng-learning">
-            <ul id="pagination-demo" class="pagination-sm row text-center pull-right"></ul>
         </div>
     </div>
-    <script type="text/javascript">
-        window.onload = function () {
-            <% _.each(learnList, function (learn) { %>
-                $('#bar-<%=learn.id%>').width( <%=learn.percentDay%>+'%' );
-            <% }) %>
-            $('.content').hide();
-            var itemOnPage = 2;
-            for (var i = 0; i < itemOnPage; i++) {
-                $('.library-' + i).show();
-            }
-            var totalPages =
-            <%= uniqueType.length %>/
-            itemOnPage;
-            $('#pagination-demo').twbsPagination({
-                totalPages: Math.ceil(totalPages),
-                visiblePages: 4,
-                onPageClick: function (event, page) {
-                    var itemShow = itemOnPage * page;
-                    $('.content').hide();
-                    for (var i = itemShow - itemOnPage; i < itemShow; i++) {
-                        $('.library-' + i).show();
-                    }
-                }
-            });
-        };
-    </script>
 </div>
+<script type="text/javascript">
+    window.onload = function () {
+        <% _.each(listLearnings, function (learning) {%>
+        $.ajax({
+            url: '/japtool/learning/learningDetail',
+            type: 'GET',
+            data: {
+                learningID: '<%= learning.id %>',
+                bookID: '<%= learning.bookMaster.id %>'
+            },
+            cache: false,
+            async: false,
+            success: function (data) {
+                $('#detail-<%= learning.id %>').html('');
+                $('#detail-<%= learning.id %>').html(data);
+                $('.show-hide-detail-<%= learning.id %>').removeClass('disactive');
+            },
+            error: function () {
+                alert('Error')
+            }
+        })
+        $.ajax({
+            url: '/japtool/learning/loadSumary',
+            type: 'GET',
+            data: {
+                learningID: '<%= learning.id %>',
+                bookID: '<%= learning.bookMaster.id %>',
+                finishDate :'<%=learning.finishDate%>',
+                startDate :'<%=learning.startDate%>',
+                bookMasterLessonNum:'<%=learning.bookMaster.lessonNum%>'
+            },
+            cache: false,
+            async: false,
+            success: function (data) {
+                $('#passNum-<%= learning.id %>').text(data.passedNum);
+                $('#falsedNum-<%= learning.id %>').text(data.fasledNum);
+                $('#bar-<%=learning.id%>').width( data.percentDay+'%' );
+                $('#bar-<%=learning.id%>').attr("aria-valuenow" , data.percentDay );
+                $('#stt-<%=learning.id%>').text(data.statusLearning);
+                $('#rcd-<%=learning.id%>').text(data.eachDayLesson);
+            },
+            error: function () {
+                alert('Error')
+            }
+        })
+
+        $('.show-hide-detail-<%= learning.id %>').click(function () {
+            toggleDetail('<%= learning.id %>');
+        })
+
+        <% }) %>
+
+        <% if (noMore) { %>
+        $(".loadmore").remove();
+        <% } %>
+
+        var loadMore = $(".loadmore");
+        loadMore.on('click', function () {
+            if(!$(this).hasClass('clicked')){
+                $(this).addClass('clicked');
+                $.ajax({
+                    url: '/japtool/learning/loadMore',
+                    type: 'GET',
+                    cache: false,
+                    async: false,
+                    success: function (data) {
+                        if(data){
+                            $('.bookMasterMore').append(data);
+                            loadMore.removeClass('clicked');
+                        }else{
+                            loadMore.remove();
+                        }
+                    },
+                    error: function () {
+                        alert('Error')
+                    }
+                })
+            }
+        })
+    }
+
+    function toggleDetail(learningID){
+        if ( $('#detail-' + learningID).hasClass('disactive') ) {
+            $('#detail-' + learningID).removeClass('disactive');
+            $('.show-hide-detail-' + learningID).text("<%= __('Hide Detail') %>");
+        } else {
+            $('#detail-' + learningID).addClass('disactive');
+            $('.show-hide-detail-' + learningID).text("<%= __('Show Detail') %>");
+        }
+    }
+
+</script>

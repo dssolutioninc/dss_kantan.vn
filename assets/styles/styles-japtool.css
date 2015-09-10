@@ -2987,3 +2987,14 @@ ul.timeline li .timeline-panel:after {
         background: #E2E2E2;
     }
 }
+/*new learning*/
+.button-crt-learning #btn-create-learning{
+    margin-top: 30px;
+    margin-left: 1003px;
+}
+.content .media-left .img-book{
+    width: 209px;
+}
+.content .container .div-btn-crt{
+    margin-top: 29px;
+}

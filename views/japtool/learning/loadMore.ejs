@@ -1,0 +1,163 @@
+<div class="vocabulary-item clearfix">
+    <div class="info clearfix">
+        <% _.each(listLearnings, function (learning) { %>
+        <div class="col-sm-12">
+            <h3><a title="<%=__('Click to view this library details')%>"
+                   data-toggle="modal" data-target="#lib-<%= learning.id %>" class="text-primary"><%= learning.bookMaster.name %></a></h3>
+        </div>
+        <div class="col-sm-12">
+            <div class="">
+                <div class="col-sm-1"><span class="label label-default lb-date"><%=learning.stringStartDate%></span></div>
+                <div class="col-sm-3">
+                    <div class="progress">
+                        <div id="bar-<%=learning.id%>" class="progress-bar" role="progressbar" aria-valuenow="<%=learning.percentDay%>"
+                             aria-valuemin="0" aria-valuemax="100" style="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1"><span class="label label-default lb-date"><%=learning.stringFinishDate%></span></div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <i><span class=""><%=__("Recommend")%></span>:<%=__("you should learn")%> <b><span id="rcd-<%=learning.id%>"><%=learning.eachDayLesson%></span></b> <%=__('lesson each day')%> |
+                <span class=""> <%=__("Your learning's status")%></span> : <lable id="stt-<%=learning.id%>"><%=learning.statusLearning%></lable></i>
+        </div>
+        <div class="col-sm-2">
+            <p class="text-primary"><%= __('Category: ') %> <%= learning.bookMaster.type %></p>
+        </div>
+        <div class="col-sm-2">
+            <p class="text-info"><%= __('Level: ') %> <%= learning.bookMaster.level %></p>
+        </div>
+        <div class="col-sm-2">
+            <p class="text-success"><%= __('Pass: ') %> <span id="passNum-<%= learning.id %>"></span> Lesson</p>
+        </div>
+        <div class="col-sm-4">
+            <p class="text-danger"><%= __('False or in learning: ') %> <span id="falsedNum-<%= learning.id %>"></span> Lesson</p>
+        </div>
+        <div class="col-sm-2">
+            <p class="text-primary"><%= __('Total of Lesson: ') %> <%= learning.bookMaster.lessonNum %></p>
+        </div>
+        <div id="detail-<%= learning.id %>" class="clearfix"></div>
+        <div class="col-sm-12">
+            <a class="show-hide-detail-<%= learning.id %> pull-right"><%= __('Hide Detail') %></a>
+        </div>
+        <!--popup book-->
+        <div class="modal fade" data-backdrop="static" id="lib-<%= learning.id %>">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close"><span
+                                    aria-hidden="true">x</span></button>
+                        <h4 class="modal-title"><%=__("Learning Details")%></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object img-book"
+                                                 src="/images/track.jpg">
+                                        </div>
+                                        <div class="media-body">
+                                            <ul>
+                                                <h4><%=__("Details")%>:</h4>
+                                                <li>
+                                                                <span class="glyphicon glyphicon-play"
+                                                                      aria-hidden="true"></span> <%=__("From")%>
+                                                    : <%= learning.stringStartDate %>
+                                                </li>
+                                                <li>
+                                                                <span class="glyphicon glyphicon-stop"
+                                                                      aria-hidden="true"></span> <%=__("To")%>
+                                                    : <%= learning.stringFinishDate %>
+                                                </li>
+                                                <li>
+                                                                <span class="glyphicon glyphicon-book"
+                                                                      aria-hidden="true"></span>
+                                                    <%= learning.bookMaster.name %>
+                                                </li>
+                                                <li>
+                                                    <h4><%=__("Description")%></h4>
+                                                    <%= learning.bookMaster.description %>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a onclick="deleteLearning('<%= learning.id %>')"
+                           class="btn btn-danger" role="button"><%=__("delete")%></a>
+                        <button onclick="loadform('<%= learning.id %>')"
+                                class="btn btn-success">
+                            <%=__("Edit")%>
+                        </button>
+                        <a href="#" class="btn btn-warning" role="button"
+                           data-dismiss="modal"><%=__("Close")%></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end popup-->
+        <% }) %>
+    </div>
+</div>
+
+
+<div class="info-book-more"></div>
+
+<script type="text/javascript">
+    <% _.each(listLearnings, function (learning) {   %>
+        $('#bar-<%=learning.id%>').width( <%=learning.percentDay%>+'%' );
+        $.ajax({
+            url: '/japtool/learning/learningDetail',
+            type: 'GET',
+            data: {
+                learningID: '<%= learning.id %>',
+                bookID: '<%= learning.bookMaster.id %>'
+            },
+            cache: false,
+            async: false,
+            success: function (data) {
+                $('#detail-<%= learning.id %>').html(data);
+            },
+            error: function (error) {
+                alert('Error')
+                console.log(error);
+            }
+        })
+
+        $.ajax({
+            url: '/japtool/learning/loadSumary',
+            type: 'GET',
+            data: {
+                learningID: '<%= learning.id %>',
+                bookID: '<%= learning.bookMaster.id %>'
+            },
+            cache: false,
+            async: false,
+            success: function (data) {
+                // console.log(data);
+                $('#passNum-<%= learning.id %>').text(data.passedNum);
+                $('#falsedNum-<%= learning.id %>').text(data.fasledNum);
+            },
+            error: function (error) {
+                alert('Error')
+                console.log(error);
+            }
+        })
+
+        $('.show-hide-detail-<%= learning.id %>').click(function () {
+            toggleDetail('<%= learning.id %>');
+        })
+
+    <%})%>
+
+    <% if (noMore) { %>
+        $(".loadmore").remove();
+    <% } %>
+</script>
