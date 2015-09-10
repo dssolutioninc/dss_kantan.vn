@@ -661,7 +661,7 @@ label.valid, p.valid {
     display: block;
     height: 1px;
     width: 27%;
-    z-index: 99999;
+    z-index: 10;
     border: 1px solid #2BA9E1;
     position: relative;
     top: 11.5px;
