@@ -166,10 +166,16 @@ module.exports = {
 
                                 }
                                 else {
-                                    res.send('japtool/learning/');
+                                    BookMaster.find({id: bookMaster})
+                                    .exec(function(err, book){
+                                        var usedNum = book.usedNum? book.usedNum + 1: 1;
+                                        BookMaster.update({id: bookMaster}, {usedNum:usedNum})
+                                        .exec(function(err, book){
+                                            res.send('japtool/learning/');
+                                        })
+                                    })
                                 }
                             })
-
                         });
                     }
                     else {
@@ -257,7 +263,14 @@ module.exports = {
 
                                 }
                                 else {
-                                    res.send('japtool/learning/practice/?id=' + bookMaster);
+                                    BookMaster.find({id: bookMaster})
+                                    .exec(function(err, book){
+                                        var usedNum = book.usedNum? book.usedNum + 1: 1;
+                                        BookMaster.update({id: bookMaster}, {usedNum:usedNum})
+                                        .exec(function(err, book){
+                                            res.send('japtool/learning/practice/?id=' + bookMaster);
+                                        })
+                                    })
                                 }
                             })
                         });
