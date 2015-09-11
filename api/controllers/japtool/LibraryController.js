@@ -100,7 +100,7 @@ module.exports = {
                 where: {type: type},
                 limit: Constants.maxLibOnPage,
                 skip: req.session.loadedBookCount[type],
-                sort: {sort: 0}
+                sort: {sort: 1}
             }).exec(function (err, books) {
                 if (err) {
                     if (err) return res.serverError(err);
