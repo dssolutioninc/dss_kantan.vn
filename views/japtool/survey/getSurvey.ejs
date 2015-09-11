@@ -9,16 +9,16 @@
 
                 <label><%= survey.question %>?</label>
                 <% if(survey.option1 != null && survey.option1 != ""){ %>
-                    <p><input type="radio" id="survey-option-1" value="<%= survey.option1 %>"> <%= survey.option1 %></p>
+                    <p><input type="radio" name="survey" id="survey-option-1" value="<%= survey.option1 %>"> <%= survey.option1 %></p>
                 <% } %>
                 <% if(survey.option2 != null && survey.option2 != ""){ %>
-                    <p><input type="radio" id="survey-option-2" value="<%= survey.option2 %>"> <%= survey.option2 %></p>
+                    <p><input type="radio" name="survey" id="survey-option-2" value="<%= survey.option2 %>"> <%= survey.option2 %></p>
                 <% } %>
                 <% if(survey.option3 != null && survey.option3 != ""){ %>
-                    <p><input type="radio" id="survey-option-3" value="<%= survey.option3 %>"> <%= survey.option3 %></p>
+                    <p><input type="radio" name="survey" id="survey-option-3" value="<%= survey.option3 %>"> <%= survey.option3 %></p>
                 <% } %>
                 <% if(survey.option4 != null && survey.option4 != ""){ %>
-                    <p><input type="radio" id="survey-option-4" value="<%= survey.option4 %>"> <%= survey.option4 %></p>
+                    <p><input type="radio" name="survey" id="survey-option-4" value="<%= survey.option4 %>"> <%= survey.option4 %></p>
                 <% } %>
             </div>
             <div class="modal-footer">
