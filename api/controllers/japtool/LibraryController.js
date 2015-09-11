@@ -28,7 +28,7 @@ module.exports = {
             searchCondition += "\"type\":\"" + req.session.searchType + "\",";
         } 
         else {
-            searchCondition += "\"type\":\"['vocabulary','kanji','speech']\",";
+            searchCondition += "\"type\":[\"vocabulary\",\"kanji\",\"speech\"],";
         }
         if (req.session.searchLevel != 'all'){
             searchCondition += "\"level\":\"" + req.session.searchLevel + "\",";
@@ -44,6 +44,7 @@ module.exports = {
 
         // make json style
         searchCondition = "{" + searchCondition + "}";
+        // sails.log("searchCondition : " + searchCondition);
         
         BookMaster.find({where: JSON.parse(searchCondition)})
         .sort('sort asc')
