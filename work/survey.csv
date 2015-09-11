@@ -1,4 +1,2 @@
 sort,type,oneTime,tag,question,option1,option2,option3,option4
-"1","1","TRUE","","Khả năng học ngoại ngữ của bạn?","Tốt","Bình thường","Kém","Rất kém"
-"2","1","FALSE","","Khả năng nhớ từ mới?","Nhanh","Chậm","",""
-"3","1","TRUE","","Bạn đã từng học ở level này hoặc tương đương?","Đã từng","Chưa bao giờ.","",""
+"1","1","TRUE","","Hiện tại dự định dành thời gian cho việc học tiếng Nhật của bạn thế nào?","Tôi đang tập trung học tiếng Nhật nhanh nhất có thể nên dành toàn bộ thời gian cho việc học tiếng nhật","Mỗi ngày tôi có hơn 1 giờ cho việc học tiếng Nhật","Mỗi ngày tôi có dưới 1 giờ cho việc học tiếng Nhật","Tôi chỉ muốn học thử một chút xem sao"
