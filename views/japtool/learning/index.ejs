@@ -8,7 +8,7 @@
             <div class="col-sm-offset-10 col-sm-2 div-btn-crt">
                 <button onclick="loadform(2)" id="btn-create-learning" class="btn btn-danger"><%=__("Create New Learning")%></button>
             </div>
-            <div class="vocabulary-item clearfix">
+            <div class="table-learning vocabulary-item clearfix">
                 <div class="info clearfix">
                     <% _.each(listLearnings, function (learning) { %>
                     <div class="col-sm-12 clearfix">
@@ -28,7 +28,7 @@
                             <div class="col-sm-1"><span class="label label-default lb-date"><%=learning.stringFinishDate%></span></div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 rcd-div">
                         <i><span class=""><%=__("Recommend")%></span>:<%=__("you should learn")%> <b><span id="rcd-<%=learning.id%>"></span></b> <%=__('lesson each day')%> |
                             <span class=""> <%=__("Your learning's status")%></span> : <lable id="stt-<%=learning.id%>"><%=learning.statusLearning%></lable></i>
                     </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div id="detail-<%= learning.id %>" class="clearfix"></div>
                     <div class="col-sm-12">
-                        <a class="show-hide-detail-<%= learning.id %> pull-right disactive"><%= __('Hide Detail') %></a>
+                        <a class="show-hide-detail show-hide-detail-<%= learning.id %> pull-right disactive"><%= __('Hide Detail') %></a>
                     </div>
                     <!--popup book-->
                     <div class="modal fade" data-backdrop="static" id="lib-<%= learning.id %>">
