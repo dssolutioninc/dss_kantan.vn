@@ -52,7 +52,7 @@ module.exports = {
               return res.redirect('/japtool/user/new');
             }
 
-            req.session.user = user;
+            // req.session.user = user;
             //console.log(JSON.stringify(user));
             
             //Update user address

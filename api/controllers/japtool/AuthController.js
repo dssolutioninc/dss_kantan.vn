@@ -7,7 +7,7 @@
 var passport = require('passport');
 var bcrypt = require('bcryptjs');
 module.exports = {
-    'index': function (req, res) {
+    index: function (req, res) {
         if(req.session.user){
             res.redirect('/japtool/user/index');
         }else{
