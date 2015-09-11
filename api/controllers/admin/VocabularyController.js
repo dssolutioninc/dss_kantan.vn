@@ -173,7 +173,7 @@ module.exports = {
   view: function (req, res) {
 
       var id=req.param("id",null);
-      console.log("Constants.upFileMaxBytes: " + Constants.upFileMaxBytes);
+      // console.log("Constants.upFileMaxBytes: " + Constants.upFileMaxBytes);
 
       Vocabulary.findOne(id).exec(function(err,vocabulary){
    

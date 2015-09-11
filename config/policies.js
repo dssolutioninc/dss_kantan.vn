@@ -42,9 +42,9 @@ module.exports.policies = {
     // 'japtool/auth': {
     //     '*': "generalize"
     // },
-    'japtool/vocabulary': {
-        '*': ["generalize", "authenticated"]
-    },
+    // 'japtool/vocabulary': {
+    //     '*': ["generalize", "authenticated"]
+    // },
     'japtool/BookMaster': {
         '*': ["generalize", "authenticated"]
     },
