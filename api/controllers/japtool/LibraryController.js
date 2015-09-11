@@ -26,7 +26,10 @@ module.exports = {
         var searchCondition = '';
         if (req.session.searchType != 'all'){
             searchCondition += "\"type\":\"" + req.session.searchType + "\",";
-        }
+        } 
+        // else {
+        //     searchCondition += "\"type\":\"['vocabulary','kanji','speech']\",";
+        // }
         if (req.session.searchLevel != 'all'){
             searchCondition += "\"level\":\"" + req.session.searchLevel + "\",";
         }
@@ -50,7 +53,14 @@ module.exports = {
             } else {
                 var arrTypes = [];
                 if (req.session.searchType == 'all'){
-                    arrTypes = ['vocabulary','kanji','speech'];
+
+                    books.forEach(function (book) {
+                        arrTypes.push(book.type);
+                    })
+
+                    var array = require("array-extended");
+                    arrTypes = array(arrTypes).unique().value();
+                    // arrTypes = ['vocabulary','kanji','speech'];
 
                     // initial loaded books in session
                     var loadedBookCount = {};
