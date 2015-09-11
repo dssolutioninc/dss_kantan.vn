@@ -254,7 +254,10 @@
         $.ajax({
             url: '/japtool/library/loadMore',
             type: 'GET',
-            data: {"type":type, "positionIndex": positionIndex},
+            data: {
+                "type":type,
+                "positionIndex": positionIndex
+            },
             success: function (resData) {
                 if(resData){
                     $('#books-type-' + positionIndex).append(resData);

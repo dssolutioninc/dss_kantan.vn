@@ -92,12 +92,30 @@ module.exports = {
         var type = req.param('type');
         var positionIndex = req.param('positionIndex');
 
+        var searchCondition = "\"type\":\"" + type + "\",";
+        
+        if (req.session.searchLevel != 'all'){
+            searchCondition += "\"level\":\"" + req.session.searchLevel + "\",";
+        }
+        if (req.session.searchBookName != ''){
+            searchCondition += "\"name\":\"%" + req.session.searchBookName + "%\",";
+        }
+
+        if (searchCondition != '') {
+            // remove the comma in the tail of string
+            searchCondition = searchCondition.substring(0, searchCondition.length - 1);
+        }
+
+        // make json style
+        searchCondition = "{" + searchCondition + "}";
+        
+
         BookMaster.count({
-            where: {type: type}
+            where: JSON.parse(searchCondition)
         }).exec(function (err, count){
 
             BookMaster.find({
-                where: {type: type},
+                where: JSON.parse(searchCondition),
                 limit: Constants.maxLibOnPage,
                 skip: req.session.loadedBookCount[type],
                 sort: {sort: 1}
