@@ -27,9 +27,9 @@ module.exports = {
         if (req.session.searchType != 'all'){
             searchCondition += "\"type\":\"" + req.session.searchType + "\",";
         } 
-        // else {
-        //     searchCondition += "\"type\":\"['vocabulary','kanji','speech']\",";
-        // }
+        else {
+            searchCondition += "\"type\":\"['vocabulary','kanji','speech']\",";
+        }
         if (req.session.searchLevel != 'all'){
             searchCondition += "\"level\":\"" + req.session.searchLevel + "\",";
         }
