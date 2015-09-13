@@ -764,3 +764,4 @@ function  translateText (text){
     });
     return textTran;
 }
+

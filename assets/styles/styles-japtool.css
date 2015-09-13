@@ -3332,3 +3332,7 @@ ul.timeline li .timeline-panel:after {
         margin-left: 0px;
     }
 }
+.datepicker{
+  z-index: 999999 !important;
+  background: #fff !important;
+}

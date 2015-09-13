@@ -12,7 +12,15 @@
                             <label><%= __("From") %></label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="date" class="form-control" name="startDate" id="startDate"><br>
+                          <div class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="startDate"
+                                                                                                        placeholder="Start Date"
+                                                                                                        id="startDate"
+                              >
+                          </div>
+                            <!--<input type="date" class="form-control" name="startDate" id="startDate"><br>-->
 
                             <div>
                                 <i class="message-date-validate" id="messDateInvalid"><p><%=__("Start date is Invalid")%>!!</p></i>
@@ -21,13 +29,22 @@
                                 <i class="message-date-validate" id="messFinishDateGreater"><p><%=__("Finish date must be greater than today")%>!!!</p></i>
                                 <i class="message-date-validate" id="messFinishDateGreaterStart"><p><%=__("Finish date must be greater than start date")%>!!!</p></i>
                             </div>
+
                         </div>
 
                         <div class="col-sm-2">
                             <label><%= __("To") %></label>
                         </div>
                         <div class="col-sm-4">
-                            <input type="date" class="form-control" name="finishDate" id="finishDate"><br>
+                          <div class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="finishDate"
+                                                                                                        placeholder="Finish Date"
+                                                                                                        id="finishDate"
+                              >
+                          </div>
+                            <!--<input type="date" class="form-control" name="finishDate" id="finishDate"><br>-->
 
                             <div id="mesagefinishDate">
                                 <i class="message-date-validate" id="messFinishDateGreaterToday"><p><%=__("Finish date must be greater than today")%>!</p></i>
@@ -39,6 +56,7 @@
                 <div class="col-sm-2 hidden-md hidden-xs">
                 </div>
             </div>
+          <br/>
             <div class="clearfix">
                 <div class="col-sm-10 learning-group-item">
                     <div class="row">
@@ -114,3 +132,14 @@
         </div>
     </div>
 </div>
+
+<script>
+  $('.input-group.date').datepicker({
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true
+  });
+
+</script>
