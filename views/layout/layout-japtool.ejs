@@ -18,14 +18,13 @@
     <link type="text/css" rel="stylesheet" href="/styles/bootstrap-social.css">
     <link type="text/css" rel="stylesheet" href="/styles/font-awesome.css">
     <link type="text/css" rel="stylesheet" href="/styles/font-roboto.css">
-    <link type="text/css" rel="stylesheet" href="/styles/menu.css">
-    <link type="text/css" rel="stylesheet" href="/styles/menu-learning.css">
-    <link type="text/css" rel="stylesheet" href="/styles/jquery.mCustomScrollbar.css">
-    <link type="text/css" rel="stylesheet" href="/styles/slick.css">
-    <link type="text/css" rel="stylesheet" href="/styles/slick-theme.css">
-    <link type="text/css" rel="stylesheet" href="/styles/responsiveslides.css">
-    <link type="text/css" rel="stylesheet" href="/styles/datepicker.css">
-    <link type="text/css" rel="stylesheet" href="/styles/styles-japtool.css">
+    <link type="text/css" rel="stylesheet" href="/plugins/slick/slick.css">
+    <link type="text/css" rel="stylesheet" href="/plugins/slick/slick-theme.css">
+    <link type="text/css" rel="stylesheet" href="/plugins/responsiveslides/responsiveslides.css">
+    <link type="text/css" rel="stylesheet" href="/plugins/datapicker/datepicker.css">
+    <link type="text/css" rel="stylesheet" href="/styles/japtool/menu.css">
+    <link type="text/css" rel="stylesheet" href="/styles/japtool/menu-learning.css">
+    <link type="text/css" rel="stylesheet" href="/styles/japtool/styles.css">
 </head>
 <body>
 <div class="header">
@@ -58,7 +57,7 @@
     <div class="header-center clearfix">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3">
                     <div class="header-logo">
                         <% if(session.authenticated){ %>
                         <a class="logo" href="/japtool/home"><img src="/images/logo.png"></a>
@@ -67,22 +66,10 @@
                         <% } %>
                     </div>
                 </div>
-
-            </div>
-        </div>
-        <div class="stripe_color"></div>
-    </div>
-    <div class="header-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id='cssmenu' class="">
+                <div class="col-md-9">
+                    <div id='cssmenu' class="pull-right">
                         <ul class="menu-page">
-                            <% if(session.authenticated){ %>
-                            <li><a href='/japtool/home'><%= __('Home') %></a></li>
-                            <% } else { %>
                             <li><a href='/'><%= __('Home') %></a></li>
-                            <% } %>
                             <li><a href="/japtool/page/guide"><%= __('Use Guide') %></a></li>
                             <li><a href='/japtool/Library/index'><%= __('Library') %></a></li>
                             <li><a href="/japtool/learning"><%= __('Learning') %></a></li>
@@ -93,7 +80,9 @@
                 </div>
             </div>
         </div>
+        <div class="stripe_color"></div>
     </div>
+
 </div>
 
 <div class="body-content">
@@ -108,7 +97,7 @@
             <div class="col-xs-12">
                 <ul class="list-inline">
                     <li> <a href="/japtool/page/about"> Kantan</a></li>
-                    <li><a <a href="/japtool/user/new">Sign Up</a></li>
+                    <li><a href="/japtool/user/new">Sign Up</a></li>
                     <li><a href="/japtool/page/guide">Guide</a></li>
                     <li><a href="/japtool/page/contact">Contact</a></li>
                 </ul>
@@ -123,18 +112,16 @@
 </div>
 
 <script src="/js/dependencies/jquery.js"></script>
-<script src="/js/dependencies/jquery.twbsPagination.js"></script>
 <script src="/js/dependencies/bootstrap.min.js"></script>
-<script src="/js/dependencies/jquery.steps.js"></script>
-<script src="/js/dependencies/jquery.validate.min.js"></script>
-<script src="/js/dependencies/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="/js/dependencies/slick.js"></script>
-<script src="/js/menu-learning.js"></script>
 <script src="/js/dependencies/sails.io.js"></script>
-<script src="/js/menu.js"></script>
-<script src="/js/dependencies/responsiveslides.min.js"></script>
-<script src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/customValidate.js"></script>
-<script src="/js/japtool-common.js"></script>
+<script src="/plugins/responsiveslides/responsiveslides.min.js"></script>
+<script src="/plugins/steps/steps.js"></script>
+<script src="/plugins/slick/slick.js"></script>
+<script src="/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="/js/japtool/menu.js"></script>
+<script src="/js/japtool/menu-learning.js"></script>
+<script src="/js/japtool/jquery.validate.min.js"></script>
+<script src="/js/japtool/customValidate.js"></script>
+<script src="/js/japtool/custom.js"></script>
 </body>
 </html>

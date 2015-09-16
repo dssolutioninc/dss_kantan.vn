@@ -12,38 +12,30 @@
     <div class="container">
         <div class="col-sm-12">
             <h1><%= __('WHO ARE WE') %></h1>
+            <div class="line-home"></div>
             <p><%= __('Kantan bring an one and only mission is to teach Japanese language for people around the world. To achieve this mission, we have provided a lesson system according to Japanese standards with a rich vocabulary and a great curriculum.') %></p>
 
             <% if (!req.session.authenticated) { %>
-                <p class=""><%= __("If you haven't account, you can click") %> <a href="japtool/user/new"><%= __('register') %></a> <%= __("or you can login with other accounts follow") %></p>
                 <a class="btn btn-social-icon btn-sm btn-facebook"><i class="fa fa-facebook"></i></a>
                 <a class="btn btn-social-icon btn-sm btn-flickr"><i class="fa fa-flickr"></i></a>
                 <a class="btn btn-social-icon btn-sm btn-github"><i class="fa fa-github"></i></a>
                 <a class="btn btn-social-icon btn-sm btn-google-plus"><i class="fa fa-google-plus"></i></a>
                 <a class="btn btn-social-icon btn-sm btn-linkedin"><i class="fa fa-linkedin"></i></a>
                 <a class="btn btn-social-icon btn-sm btn-twitter"><i class="fa fa-twitter"></i></a>
-                
-
-                <div>
-                    <p>
-                        </br>
-                        <%= __('If you forget your login password, click here') %>
-                        <a href="/japtool/user/passforget"><%=__("Forgotten Password")%></a>
-                    </p>                    
-                </div>
 
                 <div class="no-user">
-                    <p><%= __('If you want not to register') %></p>
                     <p>
-                        <a class="label label-success lb-home" href="/japtool/viewtour"><%= __('Click Here To Take Your View Tour') %></a>
+                        <a class="label label-danger lb-home" href="/japtool/viewtour"><%= __('Click Here To Take Your View Tour') %></a>
                     </p>
                 </div>
             <% } %>
         </div>
     </div>
 </div>
-<div class="member content">
+<div class="intro-doc content">
     <div class="container">
+        <h1 class="text-center">Tài liệu phong phú</h1>
+        <div class="line-home"></div>
         <div class="col-sm-4">
             <div class="ts-service-style-1">
                 <div class="service-title">
@@ -82,6 +74,327 @@
                     <p>Hệ thống từ điển đa dạng, phong phú sẽ giúp bạn có một lượng từ vựng để có thể làm chủ được ngôn ngữ này.</p>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="document-new">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="text-center">Tài liệu mới cập nhật</h1>
+                <div class="line-home"></div>
+            </div>
+
+            <div class="content-tab clearfix">
+
+                <ul class="tabs">
+                    <li class="tab-link current" data-tab="vocabulary">Vocabulary</li>
+                    <li class="tab-link" data-tab="kanji">Kanji</li>
+                    <li class="tab-link" data-tab="grammar">Grammar</li>
+                    <li class="tab-link" data-tab="speech">Speech</li>
+                </ul>
+
+                <div id="vocabulary" class="tab-content current">
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">vocabulary</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">vocabulary</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">vocabulary</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">vocabulary</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">vocabulary</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">vocabulary</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">vocabulary</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">vocabulary</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div id="kanji" class="tab-content">
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">kanji</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">kanji</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">kanji</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">kanji</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">kanji</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">kanji</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">kanji</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">kanji</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="grammar" class="tab-content">
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">grammar</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">grammar</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">grammar</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">grammar</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">grammar</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">grammar</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">grammar</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">grammar</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="speech" class="tab-content">
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">speech</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">speech</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">speech</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">speech</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">speech</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">speech</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">speech</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6">
+                        <div class="document-thumb transition">
+                            <div class="image"><a href=""><img src="/images/books.jpg" alt="Book" title="MacBook" class="img-responsive"></a></div>
+                            <div class="caption">
+                                <h4><a href="">speech</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- container -->
+
         </div>
     </div>
 </div>
@@ -132,7 +445,23 @@
             maxwidth: 1920,
             speed: 800,
             nav: false,             // Boolean: Show navigation, true or false
-            random: true          // Boolean: Randomize the order of the slides, true or false
+            random: true,          // Boolean: Randomize the order of the slides, true or false
+            pager: true
         });
+        $(document).ready(function(){
+
+            $('ul.tabs li').click(function(){
+                var tab_id = $(this).attr('data-tab');
+
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
+            })
+
+        })
+
     }
+
 </script>

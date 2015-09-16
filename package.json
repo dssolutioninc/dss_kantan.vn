@@ -38,7 +38,8 @@
     "sails-mongo": "^0.10.8",
     "skipper-gridfs": "^0.5.3",
     "stream-buffers": "^2.1.0",
-    "xoauth2": "^1.1.0"
+    "xoauth2": "^1.1.0",
+    "moment": "^2.10.3"
   },
   "scripts": {
     "debug": "node debug app.js",

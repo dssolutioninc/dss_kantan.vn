@@ -1,0 +1,40 @@
+<!--Created by itplusvn on 7/19/2015.-->
+<div class="login-box">
+  <div class="login-logo">
+    <a href=""><b>Admin</b>Cpanel</a>
+  </div><!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Login</p>
+    <form action="/admin/auth/login" method="POST">
+      <% if(flash && flash.err) { %>
+      <div class="box-body">
+        <div class="alert alert-warning alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+          <% Object.keys(flash.err).forEach(function(error){ %>
+          <%= JSON.stringify(flash.err[error])%>
+          <% })%>
+
+        </div>
+      </div>
+      <% } %>
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" name="email" placeholder="Email" />
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" name="password" class="form-control" placeholder="Password" />
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <i class="fa fa-hand-o-right"></i> <a href="#">I forgot my password</a><br>
+        </div><!-- /.col -->
+        <div class="col-xs-4">
+          <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+          <button type="submit" class="btn btn-success btn-block btn-flat">Sign In</button>
+        </div><!-- /.col -->
+      </div>
+    </form>
+  </div><!-- /.login-box-body -->
+</div><!-- /.login-box -->
