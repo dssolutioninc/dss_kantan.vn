@@ -132,7 +132,7 @@ input[type=submit]:hover {
 .library-page-line {
     border-bottom: 1px solid rgba(189, 189, 189, 0.44);
     padding-bottom: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .library-page-line:after {
@@ -667,22 +667,11 @@ label.valid, p.valid {
 }
 
 .vocabulary-item .info h3 {
-    border-bottom: 1px solid rgba(189, 189, 189, 0.44);
-    padding-bottom: 1rem;
+    /*border-bottom: 1px solid rgba(189, 189, 189, 0.44);*/
+    /*padding-bottom: 1rem;*/
     margin-top: 2rem;
 }
 
-.vocabulary-item .info h3:after {
-    content: ' ';
-    display: block;
-    height: 1px;
-    width: 27%;
-    z-index: 10;
-    border: 1px solid #2BA9E1;
-    position: relative;
-    top: 11.5px;
-
-}
 
 .group-friends .info h3 a {
     font-size: 18px;
@@ -690,7 +679,7 @@ label.valid, p.valid {
 }
 
 .info span {
-    font-weight: 500;
+    /*font-weight: 500;*/
 }
 
 .view-more {
@@ -834,7 +823,7 @@ label.valid, p.valid {
 /* LibPage */
 
 /*<!-- Arrow Left -->*/
-
+.title-library{ margin: 0px}
 .libMaster {
     padding-top: 5px;
     margin-bottom: 2px;
@@ -903,23 +892,6 @@ a:hover {
 
 .library-page .media .join-learn a {
     color: #fff;
-}
-
-.library-page-line {
-    border-bottom: 1px solid rgba(189, 189, 189, 0.44);
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
-}
-
-.library-page-line:after {
-    content: ' ';
-    display: block;
-    height: 1px;
-    width: 27%;
-    z-index: 1;
-    border: 1px solid #2BA9E1;
-    position: relative;
-    top: 11.5px;
 }
 
 .library-page .row:last-child {
@@ -3392,7 +3364,7 @@ h2.price {
 }
 
 .content .container .div-btn-crt {
-    margin-top: 29px;
+    margin-top: 20px;
 }
 
 .table-learning .progress {
@@ -3434,7 +3406,9 @@ h2.price {
     }
 }
 @media only screen and (max-width: 768px) {
-
+    .info p {
+        padding: 0px;
+    }
     .who-are-we .no-user .lb-home {
         font-size: 83%;
     }
@@ -3445,7 +3419,7 @@ h2.price {
         margin-bottom: 4px;
     }
     .div-btn-crt #btn-create-learning {
-        margin-left: -31px;
+        /*margin-left: -31px;*/
     }
 }
 
