@@ -1,21 +1,23 @@
-<div class="vocabulary-item clearfix">
+<div class="table-learning vocabulary-item clearfix">
     <div class="info clearfix">
         <% _.each(listLearnings, function (learning) { %>
-        <div class="col-sm-12">
+        <div class="col-xs-12 col-sm-10 clearfix pull-left">
             <h3><a title="<%=__('Click to view this library details')%>"
                    data-toggle="modal" data-target="#lib-<%= learning.id %>" class="text-primary"><%= learning.bookMaster.name %></a></h3>
         </div>
         <div class="col-sm-12">
-            <div class="">
-                <div class="col-sm-1"><span class="label label-default lb-date"><%=learning.stringStartDate%></span></div>
-                <div class="col-sm-3">
-                    <div class="progress">
-                        <div id="bar-<%=learning.id%>" class="progress-bar" role="progressbar" aria-valuenow="<%=learning.percentDay%>"
-                             aria-valuemin="0" aria-valuemax="100" style="">
+            <div class="library-page-line clearfix">
+                <div class="row">
+                    <div class="col-sm-1 col-xs-2"><span class="label label-default lb-date"><%=learning.stringStartDate%></span></div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="progress">
+                            <div id="bar-<%=learning.id%>" class="progress-bar" role="progressbar" aria-valuenow="<%=learning.percentDay%>"
+                                 aria-valuemin="0" aria-valuemax="100" style="">
+                            </div>
                         </div>
                     </div>
+                    <div class="col-sm-1 col-xs-2"><span class="label label-default lb-date"><%=learning.stringFinishDate%></span></div>
                 </div>
-                <div class="col-sm-1"><span class="label label-default lb-date"><%=learning.stringFinishDate%></span></div>
             </div>
         </div>
         <div class="col-sm-12">
@@ -114,7 +116,7 @@
     <% _.each(listLearnings, function (learning) {   %>
         $('#bar-<%=learning.id%>').width( <%=learning.percentDay%>+'%' );
         $.ajax({
-            url: '/japtool/learning/learningDetail',
+            url: '/japtool/myLearning/learningDetail',
             type: 'GET',
             data: {
                 learningID: '<%= learning.id %>',
@@ -132,7 +134,7 @@
         })
 
         $.ajax({
-            url: '/japtool/learning/loadSumary',
+            url: '/japtool/myLearning/loadSumary',
             type: 'GET',
             data: {
                 learningID: '<%= learning.id %>',

@@ -56,6 +56,9 @@ module.exports.policies = {
         // '/*&preview=yes*': ["generalize"]
         practice: ["generalize"]
     },
+    'japtool/MyLearning': {
+        '*': ["generalize", "authenticated"]
+    },
     'japtool/Library': {
         '*': ["generalize", "authenticated"]
     },
