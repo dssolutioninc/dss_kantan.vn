@@ -119,7 +119,7 @@ module.exports = {
                         res.redirect('/japtool/page/guide');
 
                     } else {
-                        res.redirect('/japtool/learning');
+                        res.redirect('/japtool/myLearning');
 
                     }
                 });

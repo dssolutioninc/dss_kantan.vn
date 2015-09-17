@@ -145,7 +145,7 @@
     window.onload = function () {
         <% _.each(listLearnings, function (learning) {%>
         $.ajax({
-            url: '/japtool/learning/learningDetail',
+            url: '/japtool/myLearning/learningDetail',
             type: 'GET',
             data: {
                 learningID: '<%= learning.id %>',
@@ -163,7 +163,7 @@
             }
         })
         $.ajax({
-            url: '/japtool/learning/loadSumary',
+            url: '/japtool/myLearning/loadSumary',
             type: 'GET',
             data: {
                 learningID: '<%= learning.id %>',
@@ -202,7 +202,7 @@
             if(!$(this).hasClass('clicked')){
                 $(this).addClass('clicked');
                 $.ajax({
-                    url: '/japtool/learning/loadMore',
+                    url: '/japtool/myLearning/loadMore',
                     type: 'GET',
                     cache: false,
                     async: false,
