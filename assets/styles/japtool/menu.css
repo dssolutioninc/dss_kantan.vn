@@ -43,6 +43,7 @@
 }
 #cssmenu > ul > li a.active{
     background: #C33E2E;
+  color: #fff;
 }
 #cssmenu > ul > li {
     float: left;
@@ -71,12 +72,13 @@
     font-size: 16px;
     letter-spacing: 1px;
     text-decoration: none;
-    color: #dddddd;
-    font-weight: 300;
+    color: #171717;
+    font-weight: 400;
 }
 
 #cssmenu > ul > li:hover > a {
-    color: #ffffff;
+    color: #C33E2E;
+
 }
 
 #cssmenu > ul > li.has-sub > a {
