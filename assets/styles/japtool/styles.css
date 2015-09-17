@@ -5,7 +5,10 @@ body {
     color: #333333;
     background-color: #fff;
 }
-
+::selection {
+    background-color: #EC0000;
+    color: #fff;
+}
 body .body-content {
     min-height: 610px;
 }
@@ -169,7 +172,7 @@ input[type=submit]:hover {
 
 .header-center {
     position: relative;
-    background: #512E44;
+    background: #82446B;
     border-bottom: 1px solid #926882;
 }
 .f-nav {
@@ -3482,3 +3485,5 @@ h2.price {
 .no-user{
     margin-top: 25px;
 }
+
+/*About Us Page*/
