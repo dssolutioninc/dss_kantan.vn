@@ -4,7 +4,6 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-
 var bcrypt = require('bcryptjs');
 var format = require('date-format');
 module.exports = {
@@ -21,9 +20,7 @@ module.exports = {
       postCode: '',
       country: ''
     };
-
     var regisInfor = req.params.all();
-
     // check existing registed email
     User.findOne({email: regisInfor.email}, function (err, foundUser){
       if (err) { res.send(400); }
@@ -37,8 +34,7 @@ module.exports = {
           req.session.flash = {
               err: existingEmail
           }
-
-          return res.redirect('/japtool/user/new'); 
+          return res.redirect('/japtool/user/new');
         } 
         else {
           //Create a user with the params sent from the sign-up form new.ejs
@@ -51,10 +47,6 @@ module.exports = {
               //if error redirect back to sign-up page
               return res.redirect('/japtool/user/new');
             }
-
-            // req.session.user = user;
-            //console.log(JSON.stringify(user));
-            
             //Update user address
             User.update({id: user.id}, {yourAddress: yourAddress}, function (err, updateUser) {
             });
@@ -150,7 +142,6 @@ module.exports = {
           res.send(404);
         } else {
           req.session.user = users[0];
-
           res.ok();
         }
       });
@@ -289,7 +280,6 @@ module.exports = {
           req.session.flash = {
               err: wrongEmail
           }
-
           return res.redirect('/japtool/user/passforget');
         } 
         else {
@@ -321,7 +311,6 @@ module.exports = {
       });
     }
   },
-
   afterLogin: function (req, res) {
     res.view('japtool/user/afterLogin');
   },
