@@ -172,7 +172,7 @@ input[type=submit]:hover {
 
 .header-center {
     position: relative;
-    background: #82446B;
+    background: #512E44;
     border-bottom: 1px solid #926882;
 }
 .f-nav {
@@ -2018,6 +2018,9 @@ ul.timeline li .timeline-panel:after {
 }
 
 /*END VOCABULARY*/
+.document-new{
+  display: none;
+}
 .document-new h1{
     margin-top: 40px;
 }
