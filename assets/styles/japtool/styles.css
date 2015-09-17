@@ -3487,3 +3487,27 @@ h2.price {
 }
 
 /*About Us Page*/
+.do-testimonial-section {
+    text-align: center;
+    padding: 150px 0;
+    background: url('../../images/testimonial.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    position: relative;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.do-dark-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.75);
+}
+.do-section-heading, .do-section-heading-light {
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+}
