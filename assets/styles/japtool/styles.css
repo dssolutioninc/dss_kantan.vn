@@ -173,7 +173,10 @@ input[type=submit]:hover {
 .header-center {
     position: relative;
     background: #FFFFFF;
-    border-bottom: 1px solid #926882;
+    /*border-bottom: 1px solid #926882;*/
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.22);
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.22);
 }
 .f-nav {
     z-index: 9999;
