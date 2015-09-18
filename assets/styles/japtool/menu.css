@@ -1,6 +1,7 @@
-.header-bottom{
+.header-bottom {
     background: #4D366B;
 }
+
 #cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
@@ -35,16 +36,18 @@
 #cssmenu {
     position: relative;
     z-index: 9;
-    top:13px;
+    top: 13px;
 }
 
 .menu-page {
 
 }
-#cssmenu > ul > li a.active{
+
+#cssmenu > ul > li a.active {
     background: #C33E2E;
-  color: #fff;
+    color: #fff;
 }
+
 #cssmenu > ul > li {
     float: left;
 }
@@ -77,7 +80,7 @@
 }
 
 #cssmenu > ul > li:hover > a {
-    color: #C33E2E;
+    color: #ccc;
 
 }
 
@@ -222,6 +225,7 @@
 }
 
 @media all and (max-width: 768px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+
     #cssmenu {
         width: 100%;
     }
@@ -292,7 +296,7 @@
 
     #cssmenu #menu-button {
         display: block;
-        color: #C33E2E;
+        color: #fff;
         cursor: pointer;
         font-size: 12px;
         text-transform: uppercase;
@@ -301,10 +305,6 @@
         top: -65px;
         right: 0;
     }
-
-
-
-
 
     #cssmenu .submenu-button {
         position: absolute;
