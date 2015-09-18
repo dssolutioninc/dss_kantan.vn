@@ -11,7 +11,7 @@
                     <div class="col-sm-1 col-xs-2"><span class="label label-default lb-date"><%=learning.stringStartDate%></span></div>
                     <div class="col-sm-3 col-xs-6">
                         <div class="progress">
-                            <div id="bar-<%=learning.id%>" class="progress-bar" role="progressbar" aria-valuenow="<%=learning.percentDay%>"
+                            <div id="bar-<%=learning.id%>" class="progress-bar" role="progressbar" aria-valuenow=""
                                  aria-valuemin="0" aria-valuemax="100" style="">
                             </div>
                         </div>
@@ -21,8 +21,8 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <i><span class=""><%=__("Recommend")%></span>:<%=__("you should learn")%> <b><span id="rcd-<%=learning.id%>"><%=learning.eachDayLesson%></span></b> <%=__('lesson each day')%> |
-                <span class=""> <%=__("Your learning's status")%></span> : <lable id="stt-<%=learning.id%>"><%=learning.statusLearning%></lable></i>
+            <i><span class=""><%=__("Recommend")%></span>:<%=__("you should learn")%> <b><span id="rcd-<%=learning.id%>"></span></b> <%=__('lesson each day')%> |
+                <span class=""> <%=__("Your learning's status")%></span> : <lable id="stt-<%=learning.id%>"></lable></i>
         </div>
         <div class="col-sm-2">
             <p class="text-primary"><%= __('Category: ') %> <%= learning.bookMaster.type %></p>
@@ -138,7 +138,10 @@
             type: 'GET',
             data: {
                 learningID: '<%= learning.id %>',
-                bookID: '<%= learning.bookMaster.id %>'
+                bookID: '<%= learning.bookMaster.id %>',
+                finishDate :'<%=learning.finishDate%>',
+                startDate :'<%=learning.startDate%>',
+                bookMasterLessonNum:'<%=learning.bookMaster.lessonNum%>'
             },
             cache: false,
             async: false,
@@ -146,6 +149,10 @@
                 // console.log(data);
                 $('#passNum-<%= learning.id %>').text(data.passedNum);
                 $('#falsedNum-<%= learning.id %>').text(data.fasledNum);
+                $('#bar-<%=learning.id%>').width( data.percentDay+'%' );
+                $('#bar-<%=learning.id%>').attr("aria-valuenow" , data.percentDay );
+                $('#stt-<%=learning.id%>').text(data.statusLearning);
+                $('#rcd-<%=learning.id%>').text(data.eachDayLesson);
             },
             error: function (error) {
                 alert('Error')
