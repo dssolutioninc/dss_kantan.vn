@@ -34,7 +34,7 @@
             </ul>
             <div class="tab-content choose-book">
                 <div id="allbook" class="tab-pane fade in active">
-                    <div class="pre-scrollable choose-book-pre" data-mcs-theme="dark">
+                    <div class="">
                         <!--start three book info-->
                         <div class="row form-showBook">
                             <% for(var i = 0;i < books.length;i++){ %>
@@ -87,6 +87,7 @@
     </div>
 </div>
 <script type="text/javascript">
+
     var chooseBookCat = '';
     $(".chosseBookItem").on('click', function () {
         var level = $('#sel1').val();
@@ -129,4 +130,7 @@
             }
         });
     }
+        $('.choose-book').slimScroll({
+            height: '340px'
+        });
 </script>

@@ -110,7 +110,8 @@
             <div id="mesageBook">
                 <i id="choose-book-validator"><p><%=__("You must choose a book")%></p></i>
             </div>
-            <div style="padding-left: 150px">
+
+            <div style="text-align: center">
                 <% if(!book){ %>
                 <input type="button"
                        class="btn btn-danger btn-chooseBook"
@@ -120,7 +121,7 @@
                 <% } %>
                 <input type="button"
                        onclick="check()"
-                       class="btn btn-success"
+                       class="btn btn-primary"
                        value="<%= __('Create learning') %>"
                        id="btnCreateLearning"/>
                 <input type="button"

@@ -3550,3 +3550,12 @@ h2.price {
         font-weight: 300;
     }
 }
+.model-show-boook .nav>li>a {
+    background-color: #2D6CA2;
+    color: #fff;
+    border-radius:0;
+}
+.model-show-boook .nav-tabs>li.active>a, .model-show-boook .nav-tabs>li.active>a:focus, .model-show-boook .nav-tabs>li.active>a:hover{
+    background-color: #9E0303;
+    color:#fff;
+}
