@@ -3492,14 +3492,15 @@ h2.price {
 /*About Us Page*/
 .do-testimonial-section {
     text-align: center;
-    padding: 150px 0;
-    background: url('../../images/testimonial.jpg');
+    padding: 120px 0;
+    background: url('../../images/student-849825_1920.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
     position: relative;
     -webkit-background-size: cover;
     background-size: cover;
+    margin-bottom: 15px;
 }
 .do-dark-overlay {
     width: 100%;
@@ -3513,4 +3514,28 @@ h2.price {
     margin-bottom: 50px;
     text-align: center;
     position: relative;
+}
+.do-section-heading h1{
+    color: #fff;
+    font-size: 40px;
+}
+.about-us img{
+    width: 100%;
+}
+.desc-introduction{
+    text-align: justify;
+}
+.desc-introduction a{
+    color: #C33E2E;
+    font-weight: 600;
+}
+.desc-introduction p:first-child:first-letter {
+    font-size:300%;
+    font-weight:400;
+    float:left;
+    margin-right:10px;
+    padding:0px 5px;
+    border:1px solid #777;
+    background:#ECE9D8;
+    color: #C33E2E;
 }
