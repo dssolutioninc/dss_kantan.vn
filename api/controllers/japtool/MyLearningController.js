@@ -29,7 +29,8 @@ module.exports = {
                 if (err) {
                     if (err) return res.serverError(err);
                 } else {
-                    res.view({listLearnings: learnings, noMore: noMore});
+                    res.view('japtool/myLearning/index',
+                        {listLearnings: learnings, noMore: noMore});
                 }
             })
         })
