@@ -94,7 +94,7 @@ module.exports = {
                 sails.log(err); 
             }
             else {
-                res.redirect('japtool/myLearning/');
+                res.redirect('japtool/learning/');
             }
         })
     },
@@ -505,89 +505,5 @@ module.exports = {
         });
     },
     
-    /*getMissLesson: function (req, res) {
-     var bookId = req.param('bookId');
-     var learningId = req.param('learningId');
-     var startDate = req.param('startDate');
-     var finishDate = req.param('finishDate');
-     finishDate = new Date(finishDate);
-     startDate = new Date(startDate);
-     finishDate.setHours(23, 59, 59);
-     var currentDate = Date.now();
-     //Only recommend when in learning time
-     if (currentDate < startDate || currentDate > finishDate) {
-     return res.send([]);
-     }
-     SelfLearning.findOne({user: req.session.user.id, id: learningId})
-     .populate('bookMaster')
-     .populate('userLearnHistories').exec(function (err, selfLearning) {
-     if (err) {
-     sails.log("Err when read data from server:");
-     return res.serverError(err);
-     }
-     BookDetail.find({bookMaster: bookId}).exec(function (err, bookDetails) {
-     if (err) {
-     sails.log("Err when read book detail data:");
-     return res.serverError(err);
-     }
-     if (selfLearning == null || selfLearning == undefined) {
-     return res.send([]);
-     }
-     //Only recommend when in learning time
-     if (currentDate < startDate || currentDate > finishDate) {
-     return res.send([]);
-     }
-     //Total learning Day
-     var totalDay = Math.ceil((finishDate - startDate) / 86400000);
-     sails.log('Total day: ' + totalDay);
-     var passedDay = totalDay - (Math.ceil((finishDate - currentDate) / 86400000));
-
-     var lessonPerDay = Math.ceil(bookDetails.length / totalDay);
-     var totalMissLesson = Math.ceil(passedDay * lessonPerDay);
-     var lessonLearning = selfLearning.userLearnHistories.length;
-     sails.log('lessonLearning :' + lessonLearning);
-     var bookMissLessons = new Array();
-     for (var j = 0; j < bookDetails.length; j++) {
-     var pus=1;
-     var check = 0;
-     for (var k = 0; k < selfLearning.userLearnHistories.length; k++) {
-     check++;
-     if (bookDetails[j].id == selfLearning.userLearnHistories[k].bookDetail) {
-     pus = 2;
-     }
-     if ((check) == selfLearning.userLearnHistories.length) {
-     sails.log("Da check" + j);
-     if (pus == 1) {
-     bookMissLessons.push(bookDetails[j]);
-     sails.log("Push");
-     if (bookMissLessons.length == totalMissLesson) {
-     sails.log("sended")
-     res.send(bookMissLessons);
-     return;
-     }
-     else {
-
-     }
-     }
-
-
-     }
-     }
-
-     }
-     /!*for (var j = 0; j < selfLearning.userLearnHistories.length; j++) {
-     sails.log(i+''+selfLearning.userLearnHistories[i].bookDetail);
-     if (bookDetails[i].id == selfLearning.userLearnHistories[j].bookDetail) {
-     bookMissLessons.push(bookDetails[i]);
-     break;
-     }
-     if (i == totalMissLesson - 1 && j == selfLearning.userLearnHistories.length - 1) {
-     res.send(bookMissLessons);
-     }
-     }*!/
-
-
-     });
-     });
-     }*/
+   
 };
