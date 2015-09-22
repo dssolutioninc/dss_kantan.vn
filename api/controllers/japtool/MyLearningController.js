@@ -29,7 +29,7 @@ module.exports = {
                 if (err) {
                     if (err) return res.serverError(err);
                 } else {
-                    res.view('japtool/myLearning/index',
+                    res.view('japtool/mylearning/index',
                         {listLearnings: learnings, noMore: noMore});
                 }
             })
@@ -53,7 +53,7 @@ module.exports = {
                    req.session.loadBookNum += learnings.length;
                    var noMore = (req.session.loadBookNum == req.session.learningCount);
     
-                   res.render('japtool/myLearning/loadMore', {
+                   res.render('japtool/mylearning/loadmore', {
                        listLearnings: learnings, noMore: noMore
                    });
                }
@@ -93,7 +93,7 @@ module.exports = {
                             lessonList.push(lesson);
                         });
 
-                        res.render('japtool/myLearning/learningDetail', {
+                        res.render('japtool/mylearning/learningdetail', {
                             lessonList: lessonList,
                             selfLesson: selfLesson,
                             learningID: learningID
