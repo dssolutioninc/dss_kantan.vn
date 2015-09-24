@@ -1,0 +1,63 @@
+<div class="list-search clearfix">
+    <input type="hidden" value="<%= session.user.id %>" id="idUser">
+    <% _.each(userBuddy, function(userBuddyItem){ %>
+    <input type="hidden" value="<%= userBuddyItem.id %>" id="idUserBuddy-<%= userBuddyItem.id %>">
+
+    <div class="col-sm-12">
+        <div class="list-search-member clearfix">
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-xs-3">
+                    <a href="/japtool/user/show/<%= userBuddyItem.id %>">
+                        <% if(!userBuddyItem.avatar){ %>
+                        <img src="/images/admin/avatar.png"/>
+                        <% } else{ %>
+                        <img src="/media/image/<%= userBuddyItem.avatar %>"/>
+                        <% } %>
+                    </a>
+                </div>
+                <div class="col-sm-7 col-xs-6">
+                    <a href="/japtool/user/show/<%= userBuddyItem.id %>">
+                        <h4><%= userBuddyItem.username %></h4>
+
+                        <p><%= userBuddyItem.email %></p>
+                    </a>
+                </div>
+                <div class="col-xs-3">
+                    <% if(session.user.id != userBuddyItem.id) { %>
+                    <a class="btn btn-primary pull-right" id="btn-addBuddy-<%= userBuddyItem.id %>">
+                        <span><i class="fa fa-user-plus"></i></span> Thêm
+                    </a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>
+<script type="text/javascript">
+
+    <% _.each(userBuddy, function (userBuddyItem) {%>
+    $('#btn-addBuddy-<%= userBuddyItem.id %>').on('click', function () {
+        var idUserBuddy = $('#idUserBuddy-<%= userBuddyItem.id %>').val();
+        var idUser = $('#idUser').val();
+        $.ajax({
+            url: '/japtool/buddy/addBuddy',
+            type: 'GET',
+            data: {
+                idUserBuddy: idUserBuddy,
+                idUser: idUser
+            },
+            cache: false,
+            async: false,
+            success: function (data) {
+                console.log('OK');
+            },
+            error: function () {
+                alert('Error')
+            }
+        })
+    });
+    <% }) %>
+
+
+</script>

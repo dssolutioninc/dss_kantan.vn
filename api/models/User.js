@@ -8,7 +8,7 @@
  */
 
 module.exports = {
-    // schema: true,
+     schema: true,
     // adapter: 'mongo',
     attributes: {
         provider: {

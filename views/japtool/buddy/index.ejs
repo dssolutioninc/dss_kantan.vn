@@ -1,0 +1,122 @@
+<div class="content-buddy">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2>Bạn bè</h2>
+
+                        <div class="library-page-line"></div>
+                        <div class="search-buddy clearfix">
+                            <div class="col-sm-offset-2 col-sm-8 col-sm-offset-2">
+                                    <input type="text" class="form-control" id="input-info"
+                                           placeholder="Nhập email hoặc username hoặc số điện thoại">
+                                <!-- /input-group -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="list-search"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="list-search-buddy">
+                        <div class="list-buddy clearfix">
+                            <div class="col-sm-12">
+                                <h2>Danh sách bạn</h2>
+
+                                <div class="library-page-line"></div>
+                            </div>
+
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar.png"></a>
+
+                                <h4>Billy Tran</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar2.png"></a>
+
+                                <h4>Anonymous</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar3.png"></a>
+
+                                <h4>Stupid</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar.png"></a>
+
+                                <h4>Billy Tran</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar2.png"></a>
+
+                                <h4>Anonymous</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar3.png"></a>
+
+                                <h4>Stupid</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar.png"></a>
+
+                                <h4>Billy Tran</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar2.png"></a>
+
+                                <h4>Anonymous</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar3.png"></a>
+
+                                <h4>Stupid</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar.png"></a>
+
+                                <h4>Billy Tran</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar2.png"></a>
+
+                                <h4>Anonymous</h4>
+                            </div>
+                            <div class="col-sm-3 col-md-2 col-xs-4">
+                                <a href=""><img src="/images/admin/avatar3.png"></a>
+
+                                <h4>Stupid</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        $('#input-info').keyup(function () {
+            var input_info = $('#input-info').val();
+            $.ajax({
+                url: '/japtool/buddy/searchUser',
+                type: 'GET',
+                data: {
+                    input_info: input_info
+                },
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#list-search').html('');
+                    $('#list-search').html(data);
+                },
+                error: function () {
+                    alert('Error')
+                }
+            })
+        });
+
+    }
+</script>

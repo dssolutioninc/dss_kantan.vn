@@ -101,6 +101,10 @@ module.exports = {
   //render the edit view edit.ejs
   edit: function (req, res, next) {
     //Find the user from the id passed in via params
+    var id = req.param('id');
+    var sessionIdUser = req.param('sessionIdUser');
+    console.log('sessionIdUser:',sessionIdUser);
+    console.log('id',id);
     User.findOne(req.param('id'), function foundUser(err, user) {
       if (err) {
         return next(err);

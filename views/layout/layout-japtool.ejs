@@ -35,7 +35,9 @@
 
                     <% if(session.authenticated){ %>
                     <span><%= __('Welcome') %> <a id="userIdInSession" userId="<%= session.user.id %>"
-                                                  href="/japtool/user/show/<%= session.user.id %>"><%= session.user.username %></a></span><a
+                                                  href="/japtool/user/show/<%= session.user.id %>"><%= session.user.username %></a></span>
+                    <a href="/japtool/buddy">Bạn bè</a>
+                    <a
                             href="/japtool/auth/destroy"><%= __('Sign Out') %></a>
                     <% } else { %>
                     <a href="/japtool/auth"><%= __('Sign In') %></a>

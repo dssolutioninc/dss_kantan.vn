@@ -162,8 +162,10 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#info"><%= __('Information') %></a></li>
                     <li STYLE="display: none"><a data-toggle="tab" href="#friend"><%= __('Friends') %></a></li>
+                    <% if(session.user.id == user.id){ %>
                     <li><a data-toggle="tab" href="#password"><%= __('Change Password') %></a></li>
                     <li><a data-toggle="tab" href="#change-avatar"><%= __('Change Avatar') %></a></li>
+                    <% } %>
                 </ul>
                 <div class="tab-content">
                     <div id="info" class="tab-pane fade in active">
@@ -432,6 +434,7 @@
                             </div>
                         </div>
                     </div>
+                    <% if(session.user.id == user.id){ %>
                     <div id="password" class="tab-pane fade">
                         <form id="change-pass" name="change-pass">
                             <div class="row changePassword">
@@ -474,15 +477,15 @@
                                         <div class="col-sm-9 pull-left">
                                             <!--Change pass message-->
                                             <label class="change-pass-mess-err" id="change-pass-mess">
-                                                <%=__("All field is required")%></label>
+                                                <%= __("All field is required") %></label>
                                             <label class="change-pass-mess-err" id="change-pass-mess-all-field">
-                                                <%=__("All field is required")%></label>
+                                                <%= __("All field is required") %></label>
                                             <label class="change-pass-mess-err" id="change-pass-mess-old-new">
-                                                <%=__("Current pass and the new one are the same")%></label>
+                                                <%= __("Current pass and the new one are the same") %></label>
                                             <label class="change-pass-mess-err" id="change-pass-mess-common">
-                                                <%=__("Something is wrong, please try again later")%></label>
+                                                <%= __("Something is wrong, please try again later") %></label>
                                             <label class="change-pass-mess-err" id="change-pass-mess-does-not-match">
-                                                <%=__("Password does not match the confirmation")%></label>
+                                                <%= __("Password does not match the confirmation") %></label>
                                             <label class="change-pass-mess-err" id="change-pass-mess-server"></label>
                                             <button type="button" class="btn btn-sm btn-edit pull-right"
                                                     id="btnSaveChangePass">
@@ -529,6 +532,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
             </div>
         </div>

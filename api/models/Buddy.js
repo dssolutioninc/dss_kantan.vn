@@ -11,12 +11,9 @@ module.exports = {
         user_id: {
             type: 'string'
         },
-        // 0: chua ket ban
-        // 1: da yeu cau ket ban
-        // 2: da la ban
         statusBuddy: {
-            type: 'integer'
-
+            type: 'string',
+            enum: ['pending', 'approved', 'denied']
         },
         buddyOf: {
             model: 'User'
