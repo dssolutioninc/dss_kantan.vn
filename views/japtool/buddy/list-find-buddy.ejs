@@ -1,5 +1,4 @@
 <div class="list-search clearfix">
-    <input type="hidden" value="<%= session.user.id %>" id="idUser">
     <% _.each(userBuddy, function(userBuddyItem){ %>
     <input type="hidden" value="<%= userBuddyItem.id %>" id="idUserBuddy-<%= userBuddyItem.id %>">
 
@@ -39,13 +38,12 @@
     <% _.each(userBuddy, function (userBuddyItem) {%>
     $('#btn-addBuddy-<%= userBuddyItem.id %>').on('click', function () {
         var idUserBuddy = $('#idUserBuddy-<%= userBuddyItem.id %>').val();
-        var idUser = $('#idUser').val();
+
         $.ajax({
             url: '/japtool/buddy/addBuddy',
             type: 'GET',
             data: {
-                idUserBuddy: idUserBuddy,
-                idUser: idUser
+                idUserBuddy: idUserBuddy
             },
             cache: false,
             async: false,
@@ -58,6 +56,8 @@
         })
     });
     <% }) %>
-
+    $('.list-search').slimScroll({
+        height: '350px'
+    });
 
 </script>
