@@ -8,7 +8,15 @@
                             <div class="row">
                                 <input type="hidden" name="userID" id="userID" value="<%= user.id %>"/>
 
-                                <div class="col-sm-12"><span class="lbUser"><%= user.username %></span></div>
+                                <div class="col-sm-12">
+                                    <span class="lbUser"><%= user.username %></span>
+                                    <% if(user.online){%>
+                                     <i class="fa fa-circle-o-notch fa-spin online"></i>
+                                    <% } else{ %>
+                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                                    <% } %>
+                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-sm-12"><span class="lbLever"><%= __('Lever Of User') %></span></div>

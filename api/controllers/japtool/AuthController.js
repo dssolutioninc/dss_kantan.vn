@@ -8,9 +8,9 @@ var passport = require('passport');
 var bcrypt = require('bcryptjs');
 module.exports = {
     index: function (req, res) {
-        if(req.session.user){
+        if (req.session.user) {
             res.redirect('/japtool/user/index');
-        }else{
+        } else {
             res.view();
         }
     },
@@ -130,30 +130,23 @@ module.exports = {
     destroy: function (req, res, next) {
         // var lang = req.session.lang;
         // if(!lang) lang = 'en';
-        
-        req.session.destroy();
-
-        //redirect the browser to the sign-in screen
-        // res.redirect('/japtool/auth?lang='+lang);
-        res.redirect('/japtool/auth');
-
+        sails.log('destroy');
+        User.findOne(req.session.user.id, function foundUser(err, user) {
+            var userId = req.session.user.id;
+            //The user is "logging out"
+            console.log(userId);
+            User.update(userId, {
+                online: false
+            }, function (err) {
+                if (err) return next(err);
+                //Wipe out the session (log out)
+                req.session.destroy();
+                //redirect the browser to the sign-in screen
+                // res.redirect('/japtool/auth?lang='+lang);
+                res.redirect('/japtool/auth');
+            })
+        })
     },
-    facebook: function (req, res, next) {
-        passport.authenticate('facebook', {scope: ['email', 'user_about_me']},
-            function (err, user) {
-                console.log(user)
-                req.logIn(user, function (err) {
-                    //sails.log(user);
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        req.session.user = user;
-                        res.redirect('/japtool/user');
-                    }
-                });
-        })(req, res, next);
-    },
-
     _config: {
         locals: {
             layout: 'layout/layout-japtool'
