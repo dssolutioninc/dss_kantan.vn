@@ -155,11 +155,6 @@
             logFinish(100);
         }
     });
-    $("#kanji-List .btn-arrow-left").on("click",function(){
-        $("#kanji-List .btn-arrow-right").show();
-        $("#kanji-List .slider-nav").show();
-        infoconfig=true;
-    });
     $("#kanji-List .slick-prev").on("click",function(){
         $("#kanji-List .btn-arrow-right").show();
         $("#kanji-List .slider-nav").show();
@@ -181,6 +176,8 @@
         $("#kanji-List .btn-arrow-right").show();
         $("#kanji-List .btn-arrow-left").show();
         $("#kanji-List .slider-nav").show();
+        $('.info-off').hide();
+        $('.info-on').show();
         infoconfig=true;
     }
     var current_slide = 0;
