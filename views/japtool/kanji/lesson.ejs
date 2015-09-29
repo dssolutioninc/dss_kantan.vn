@@ -144,9 +144,6 @@
     // when slide is last slide
     $('.slider-for').on('afterChange', function (event, slick, currentSlide, nextSlide) {
         var slideCount = $("#countPage").text();
-        if(slideCount==(currentSlide+3)){
-            infoconfig=false;
-        }
         if(slideCount==(currentSlide)){
             infoconfig=false;
             $("#kanji-List .btn-arrow-right").hide();
