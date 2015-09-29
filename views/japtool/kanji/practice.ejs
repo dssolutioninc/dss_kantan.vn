@@ -9,8 +9,8 @@
         accessibility: false,
         infinite: false,
         asNavFor: '.slider-nav',
-        prevArrow: '<button type="button" data-role="none" class="btn btn-show-list btn-arrow-left-exe" aria-label="Previous" tabindex="0" role="button"><i class="fa fa-chevron-left"></i></button>',
-        nextArrow: '<button type="button" data-role="none" class="btn btn-show-list btn-arrow-right-exe" aria-label="Next" tabindex="0" role="button"><i class="fa fa-chevron-right"></i></button>'
+        prevArrow: '<button type="button" data-role="none" class="btn btn-show-list btn-arrow-left-exe" aria-label="Previous" tabindex="0" role="button"><i class="fa fa-chevron-left" style="color:LightGray"></i></button>',
+        nextArrow: '<button type="button" data-role="none" class="btn btn-show-list btn-arrow-right-exe" aria-label="Next" tabindex="0" role="button"><i class="fa fa-chevron-right" style="color:LightGray"></i></button>'
     });
     $('.slider-nav').slick({
         slidesToShow: 4,
@@ -243,7 +243,6 @@
     }
 </script>
 <input type="hidden" id="sum" value="<%= kanjis.length %>">
-<input type="hidden" id="lessonn" value="<%= lessonn %>">
 <input type="hidden" id="passMark" value="<%= Constants.passMark %>">
 <div class="exe-kanji">
     <!--div audio-->
@@ -301,12 +300,13 @@
                             </div>
                         </div>
                         <div class="col-sm-12 ans-kanji-exe">
-                            <% kanji.randomKanjis.forEach( function(hanviet, indexOption){ %>
+                            <% kanji.randomKanjis.forEach( function(option, indexOption){ %>
                             <div class="col-sm-6">
                                 <div class="panel panel-default text-center panel-choose-exe">
                                     <div id="<%= indexOption %>-<%= index %>" class="panel-body ans-box"
-                                         onclick="checkAnswer('<%= hanviet %>','<%= kanji.hanviet %>','<%= indexOption %>-<%= index %>')">
-                                        <span class="option-exe-hanviet"><%= hanviet %></span>
+                                         onclick="checkAnswer('<%= option.hanviet %>','<%= kanji.hanviet %>','<%= indexOption %>-<%= index %>')">
+                                        <span class="option-exe-hanviet"><%= option.hanviet %></span>
+                                        <span class="small"><%= option.description %></span>
                                     </div>
                                 </div>
                             </div>

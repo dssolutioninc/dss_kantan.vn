@@ -1,0 +1,12 @@
+<iframe id = 'download_iframe' style="display:none;"></iframe>
+<button onclick="downloadTemplate();" class="btn btn-danger"
+                        id="download"><%= __("Download") %></button>
+<script>
+    function downloadTemplate(type){
+        type = "vocabulary";
+        var url = '/japtool/openLibrary/downloadTemplate?type=' + type;
+
+        document.getElementById('download_iframe').src = url;
+    }
+    
+</script>

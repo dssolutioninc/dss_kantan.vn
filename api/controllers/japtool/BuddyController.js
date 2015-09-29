@@ -19,7 +19,7 @@ module.exports = {
     },
     addBuddy:function(req,res,next){
         var idUserBuddy = req.param('idUserBuddy');
-        var idUser = req.param('idUser');
+        var idUser = req.session.user.id;
         sails.log('idUserBuddy',idUserBuddy);
         sails.log('idUser',idUser);
         Buddy.create({user_id:idUserBuddy,buddyOf:idUser}).exec(function(err,user){
