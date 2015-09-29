@@ -12,6 +12,8 @@ module.exports = {
     passMark: 70,   // 70/100 point is pass
     bookNumOnHome: 3,
     bookNumOnHomeMore: 2,
+    templatePath: '/assets/templates/',
+    templateFile: 'Template.xlsx',
     //Email
     smtpServer: '52.76.88.187',
     smtpPort: 587,
