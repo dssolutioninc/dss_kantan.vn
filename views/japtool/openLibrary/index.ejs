@@ -1,6 +1,15 @@
 <iframe id = 'download_iframe' style="display:none;"></iframe>
 <button onclick="downloadTemplate();" class="btn btn-danger"
                         id="download"><%= __("Download") %></button>
+<!-- enctype="multipart/form-data" -->
+<form id="uploadForm"
+      enctype="multipart/form-data"
+      action="/japtool/openLibrary/importTemplate"
+      method="post">
+        <input type="file" name="uploadFile" />
+        <input type="submit" value="submit"/>
+</form>
+
 <script>
     function downloadTemplate(type){
         type = "vocabulary";
