@@ -14,6 +14,7 @@ module.exports = {
     bookNumOnHomeMore: 2,
     templatePath: '/assets/templates/',
     templateFile: 'Template.xlsx',
+    xlsxMimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     //Email
     smtpServer: '52.76.88.187',
     smtpPort: 587,
