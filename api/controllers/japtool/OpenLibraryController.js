@@ -68,7 +68,7 @@ module.exports = {
                             if(desired_cell !== 'undefined' && desired_cell != null){
                                 var desired_value = desired_cell.v;
                                 console.log(desired_value);
-                            }else if()
+                            }
                         }
                     }
                     /*Delete uploaded file from '.tmp/uploads' directory*/
