@@ -19,13 +19,13 @@ module.exports = {
             user: req.session.user.id,
             bookMaster: bookid
         }).populate('bookMaster', {sort: 'startDate'}).exec(function (err, learning) {
-            if (err) { 
-                sails.log(err); 
+            if (err) {
+                sails.log(err);
             }
             else if (learning == undefined) {
                 BookMaster.findOne({id: bookid}).exec(function (err, books) {
-                    if (err) { 
-                        sails.log(err); 
+                    if (err) {
+                        sails.log(err);
                     }
                     else {
                         res.render('japtool/learning/create', {
@@ -59,8 +59,8 @@ module.exports = {
         SelfLearning.findOne({
             id: learnId
         }).populate('bookMaster', {sort: 'startDate'}).exec(function (err, learning) {
-            if (err) { 
-                sails.log(err); 
+            if (err) {
+                sails.log(err);
             }
             else {
                 var now = new Date();
@@ -90,19 +90,19 @@ module.exports = {
             finishDate: finishDate,
             stringFinishDate: stringFinishDate
         }).exec(function (err, ok) {
-            if (err) { 
-                sails.log(err); 
+            if (err) {
+                sails.log(err);
             }
             else {
-                res.redirect('japtool/learning/');
+                res.redirect('japtool/mylearning/');
             }
         })
     },
     loadEditForm: function (req, res) {
         var id = req.param("id");
         SelfLearning.findOne({id: id}).populate('bookMaster', {sort: 'startDate'}).exec(function (err, learning) {
-            if (err) { 
-                sails.log(err); 
+            if (err) {
+                sails.log(err);
             }
             else {
                 var startdate = learning.stringStartDate.split("-");
@@ -166,13 +166,13 @@ module.exports = {
                                 }
                                 else {
                                     BookMaster.find({id: bookMaster})
-                                    .exec(function(err, book){
-                                        var usedNum = book.usedNum? book.usedNum + 1: 1;
-                                        BookMaster.update({id: bookMaster}, {usedNum:usedNum})
-                                        .exec(function(err, book){
-                                            res.send('japtool/learning/');
+                                        .exec(function (err, book) {
+                                            var usedNum = book.usedNum ? book.usedNum + 1 : 1;
+                                            BookMaster.update({id: bookMaster}, {usedNum: usedNum})
+                                                .exec(function (err, book) {
+                                                    res.send('japtool/learning/');
+                                                })
                                         })
-                                    })
                                 }
                             })
                         });
@@ -183,7 +183,7 @@ module.exports = {
                         var now = new Date();
 
                         if (finishDate > now) {
-                            var create = '<h3> ' + req.__('book already') + ' <a href = "/japtool/Learning/practice/?id=<%= book.id %>" > < /a></h3 > ';
+                            var create = '<h3> ' + req.__('book already') + ' <a href = "/japtool/Learning/practice/?id=<%= book.id %>" > </a></h3 > ';
                             res.render('japtool/learning/create', {
                                 create: create,
                                 book: learning.bookMaster,
@@ -215,10 +215,10 @@ module.exports = {
                                     selfLearning: selfLearning
                                 }).exec(function (err, bookusehistory) {
                                     if (err) {
-
+                                        console.log(err);
                                     }
                                     else {
-                                        res.send('japtool/learning/');
+                                        res.send('japtool/mylearning/');
                                     }
                                 })
 
@@ -232,8 +232,8 @@ module.exports = {
                     user: userId,
                     bookMaster: bookMaster
                 }).populate('bookMaster', {sort: 'startDate'}).exec(function (err, learning) {
-                    if (err) { 
-                        sails.log(err); 
+                    if (err) {
+                        sails.log(err);
                     }
                     else {
                         SelfLearning.create({
@@ -258,18 +258,18 @@ module.exports = {
                                 finishDate: finishDatepr,
                                 selfLearning: selfLearning
                             }).exec(function (err, bookusehistory) {
-                                if (err) { 
-                                    sails.log(err); 
+                                if (err) {
+                                    sails.log(err);
                                 }
                                 else {
                                     BookMaster.find({id: bookMaster})
-                                    .exec(function(err, book){
-                                        var usedNum = book.usedNum? book.usedNum + 1: 1;
-                                        BookMaster.update({id: bookMaster}, {usedNum:usedNum})
-                                        .exec(function(err, book){
-                                            res.send('japtool/learning/practice/?id=' + bookMaster);
+                                        .exec(function (err, book) {
+                                            var usedNum = book.usedNum ? book.usedNum + 1 : 1;
+                                            BookMaster.update({id: bookMaster}, {usedNum: usedNum})
+                                                .exec(function (err, book) {
+                                                    res.send('japtool/learning/practice/?id=' + bookMaster);
+                                                })
                                         })
-                                    })
                                 }
                             })
                         });
@@ -293,8 +293,8 @@ module.exports = {
             .sort('sort asc')
             .exec(function (err, books) {
                 var arrTag = [];
-                if (err) { 
-                    sails.log(err); 
+                if (err) {
+                    sails.log(err);
                 }
                 else {
                     books.forEach(function (item, index) {
@@ -317,8 +317,8 @@ module.exports = {
         if (type == "allbook") {
             if (level == 0) {
                 BookMaster.find({}).exec(function (err, books) {
-                    if (err) { 
-                        sails.log(err); 
+                    if (err) {
+                        sails.log(err);
                     }
                     else {
                         res.render('japtool/learning/BookItem', {books: books, level: level});
@@ -327,9 +327,9 @@ module.exports = {
             }
             else {
                 BookMaster.find({level: level}).exec(function (err, books) {
-                    if (err) { 
-                        sails.log(err); 
-                    } 
+                    if (err) {
+                        sails.log(err);
+                    }
                     else {
                         res.render('japtool/learning/BookItem', {books: books, level: level});
                     }
@@ -339,8 +339,8 @@ module.exports = {
         else {
             if (level == 0) {
                 BookMaster.find({type: type}).exec(function (err, books) {
-                    if (err) { 
-                        sails.log(err); 
+                    if (err) {
+                        sails.log(err);
                     }
                     else {
                         res.render('japtool/learning/BookItem', {books: books, level: level});
@@ -349,8 +349,8 @@ module.exports = {
             }
             else {
                 BookMaster.find({type: type, level: level}).exec(function (err, books) {
-                    if (err) { 
-                        sails.log(err); 
+                    if (err) {
+                        sails.log(err);
                     }
                     else {
                         res.render('japtool/learning/BookItem', {books: books, level: level, level: level});
@@ -361,12 +361,12 @@ module.exports = {
 
 
     },
-    
+
     deleteLearning: function (req, res) {
         var id = req.param('id');
         SelfLearning.findOne({id: id}).exec(function (err, selfLearn) {
-            if (err) { 
-                sails.log(err); 
+            if (err) {
+                sails.log(err);
             }
             else {
                 var now = new Date();
@@ -378,11 +378,11 @@ module.exports = {
                 }
                 else {
                     SelfLearning.destroy({id: id}).exec(function (err, ok) {
-                        if (err) { 
-                            sails.log(err); 
+                        if (err) {
+                            sails.log(err);
                         }
                         else {
-                            res.send('japtool/learning/');
+                            res.send('japtool/mylearning/');
                         }
                     })
                 }
@@ -399,68 +399,68 @@ module.exports = {
         // var array = require("array-extended");
 
         BookMaster.findOne({id: bookID}).populate('bookDetails', {sort: 'sort ASC'}).
-            exec(function createCB(err, book) {
-                if (err) {
-                    sails.log(err)
-                }
-                else {
-                    var bookDetails = book.bookDetails;
+        exec(function createCB(err, book) {
+            if (err) {
+                sails.log(err)
+            }
+            else {
+                var bookDetails = book.bookDetails;
 
-                    if (preview == 'yes') {
-                        res.view('japtool/learning/show-book-detail', {
-                            learnID: null,
-                            book: book,
-                            lessonList: bookDetails,
-                            goLessonID: null,
-                            preview: true
-                        });
-                        return;
+                if (preview == 'yes') {
+                    res.view('japtool/learning/show-book-detail', {
+                        learnID: null,
+                        book: book,
+                        lessonList: bookDetails,
+                        goLessonID: null,
+                        preview: true
+                    });
+                    return;
+                }
+
+                var lessonList = [];
+
+                UserLearnHistory.find({selfLearning: learnID, sort: 'updatedAt DESC'}).
+                exec(function (err, learnedLessions) {
+                    if (err) {
+                        sails.log(err)
                     }
+                    else {
+                        bookDetails.forEach(function (lession) {
 
-                    var lessonList = [];
-
-                    UserLearnHistory.find({selfLearning: learnID, sort: 'updatedAt DESC'}).
-                        exec(function (err, learnedLessions) {
-                            if (err) {
-                                sails.log(err)
-                            }
-                            else {
-                                bookDetails.forEach(function (lession) {
-
-                                    learnedLessions.forEach(function (learnedItem) {
-                                        if (lession.id == learnedItem.bookDetail) {
-                                            lession.learnHistory = learnedItem;
-                                            return false;
-                                        }
-                                        else {
-                                            return true;
-                                        }
-                                    });
-
-                                    lessonList.push(lession);
-                                });
-                            }
-                            // console.log('req.param(lessonID): ' + lessonID);
-
-                            if (!lessonID) {
-                                if (learnedLessions[0]) {
-                                    lessonID = learnedLessions[0].bookDetail;
+                            learnedLessions.forEach(function (learnedItem) {
+                                if (lession.id == learnedItem.bookDetail) {
+                                    lession.learnHistory = learnedItem;
+                                    return false;
                                 }
-                                // console.log('learnedLessions[0].bookDetail: ' + lessonID);
-                            }
-                            //console.log('book: ' + JSON.stringify(book));
-                            //console.log('lessonList: ' + JSON.stringify(lessonList));
-
-                            res.view('japtool/learning/show-book-detail', {
-                                learnID: learnID,
-                                book: book,
-                                lessonList: lessonList,
-                                goLessonID: lessonID,
-                                preview: false
+                                else {
+                                    return true;
+                                }
                             });
+
+                            lessonList.push(lession);
                         });
-                }
-            });
+                    }
+                    // console.log('req.param(lessonID): ' + lessonID);
+
+                    if (!lessonID) {
+                        if (learnedLessions[0]) {
+                            lessonID = learnedLessions[0].bookDetail;
+                        }
+                        // console.log('learnedLessions[0].bookDetail: ' + lessonID);
+                    }
+                    //console.log('book: ' + JSON.stringify(book));
+                    //console.log('lessonList: ' + JSON.stringify(lessonList));
+
+                    res.view('japtool/learning/show-book-detail', {
+                        learnID: learnID,
+                        book: book,
+                        lessonList: lessonList,
+                        goLessonID: lessonID,
+                        preview: false
+                    });
+                });
+            }
+        });
     },
 
     saveHistory: function (req, res) {
@@ -504,6 +504,6 @@ module.exports = {
             }
         });
     },
-    
-   
+
+
 };

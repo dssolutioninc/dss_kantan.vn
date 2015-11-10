@@ -30,38 +30,38 @@
         enableActiveSlide(currentSlide);
         var slideCount = $("#countPage").text();
         console.log(currentSlide);
-        if(slideCount==(currentSlide)){
-            audioconfig=false;
+        if (slideCount == (currentSlide)) {
+            audioconfig = false;
             $(".exe-voca .btn-arrow-right").hide();
             $(".exe-voca .btn-arrow-left").hide();
             $(".exe-voca .slider-nav").hide();
         }
     });
-    $(".exe-voca .btn-arrow-left").on("click",function(){
+    $(".exe-voca .btn-arrow-left").on("click", function () {
         $(".exe-voca .btn-arrow-right").show();
         $(".exe-voca .slider-nav").show();
-        audioconfig=true;
+        audioconfig = true;
     });
-    $(".exe-voca .slick-prev").on("click",function(){
+    $(".exe-voca .slick-prev").on("click", function () {
         $(".exe-voca .btn-arrow-right").show();
         $(".exe-voca .slider-nav").show();
-        audioconfig=true;
+        audioconfig = true;
     });
-    function learnAgain(){
+    function learnAgain() {
         window.location.replace(window.location.href);
     }
     //disable all slide-nav
-    function disbleAllSlideNav(){
+    function disbleAllSlideNav() {
         // diable slide-nav
         var sl_nav = $(".slider-nav .slick-slide");
         $(sl_nav).addClass("disable-slide-element");
     }
     // enable slide-nav
-    function enableActiveSlide(index){
+    function enableActiveSlide(index) {
         var sl_nav = $(".slider-nav .slick-slide")[index];
         $(sl_nav).removeClass("disable-slide-element");
     }
-    $(document).ready(function(){
+    $(document).ready(function () {
         disbleAllSlideNav();
         enableActiveSlide(0);
         //    on or off sound
@@ -146,15 +146,16 @@
                 $("#mark-view").text(Math.round(mark));
 
                 //pie chart
-                $(".excercise-kanji .last-right .progress-pie-chart").attr("data-percent",mark);
-                $('.ppc-percents span').html(Math.round(mark)+'%');
+                $(".exe-voca .last-right .progress-pie-chart").attr("data-percent", mark);
+                var percent = Math.round(mark);
+                $('.ppc-percents span').html(percent + '%');
                 var $ppc = $('.progress-pie-chart'),
                         percent = parseInt($ppc.data('percent')),
-                        deg = 360*percent/100;
+                        deg = 360 * percent / 100;
                 if (percent > 50) {
                     $ppc.addClass('gt-50');
                 }
-                $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
+                $('.ppc-progress-fill').css('transform', 'rotate(' + deg + 'deg)');
                 // log mark for run time
                 logMark();
             }
@@ -206,9 +207,9 @@
     $slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
         //currentSlide is undefined on init -- set it to 0 in this case (currentSlide is 0 based)
         var i = (currentSlide ? currentSlide : 0) + 1;
-        $status.text(i + '/' + (slick.slideCount-1));
+        $status.text(i + '/' + (slick.slideCount - 1));
     });
-    function logMark(){
+    function logMark() {
         var mark = $("#mark-view").text();
         logFinish(mark);
     }
@@ -231,7 +232,7 @@
     <div class="slider slider-for">
         <%
             var sumPage = vocabularies.length;
-                vocabularies.forEach( function(vocabulary, index){ %>
+        vocabularies.forEach( function(vocabulary, index){ %>
         <div class="pratice-voca">
             <div class="col-sm-offset-2 col-sm-8">
                 <div class="panel panel-default panel-paper-slide">
@@ -273,11 +274,15 @@
             <div class="col-sm-offset-2 col-sm-8 lastSlide description">
                 <div class="col-sm-6 last-left">
                     <div class="col-sm-12 ">
-                        <i class="fa fa-child fa-2x icon"></i><strong><%=__("You finish exercise")%> !</strong>
+                        <i class="fa fa-child fa-2x icon"></i><strong><%= __("You finish exercise") %> !</strong>
                         <br><br>
-                        <p class="text-left text-danger"><%=__("Your Mark")%> : <label id="mark-view"></label></p>
-                        <p class="text-left"><%=__("Learn Again")%> : <%=__("Learn this sublesson again")%></p>
-                        <p class="text-left"><%=__("Next Lesson")%> : <%=__("Learn missed lesson or new lesson")%></p>
+
+                        <p class="text-left text-danger"><%= __("Your Mark") %> : <label id="mark-view"></label></p>
+
+                        <p class="text-left"><%= __("Learn Again") %> : <%= __("Learn this sublesson again") %></p>
+
+                        <p class="text-left"><%= __("Next Lesson") %>
+                            : <%= __("Learn missed lesson or new lesson") %></p>
                     </div>
                 </div>
                 <div class="col-sm-6 last-right">
@@ -295,8 +300,8 @@
                     <!--End Chart -->
                 </div>
                 <div class="col-sm-12 text-center">
-                    <button onclick="learnAgain();" class="btn btn-primary"><%=__("Learn Again")%></button>
-                    <button onclick="nextLesson();"class="btn btn-primary"><%=__("Next Lesson")%></button>
+                    <button onclick="learnAgain();" class="btn btn-primary"><%= __("Learn Again") %></button>
+                    <button onclick="nextLesson();" class="btn btn-primary"><%= __("Next Lesson") %></button>
                 </div>
             </div>
         </div>
