@@ -5,19 +5,13 @@
   "description": "Source code of www.kantan.vn",
   "keywords": [],
   "dependencies": {
-    "sails": "^1.0.2",
-    "sails-hook-apianalytics": "^2.0.0",
-    "sails-hook-organics": "^0.13.0",
-    "sails-hook-orm": "^2.0.0-16",
-    "sails-hook-sockets": "^1.4.0",
     "@sailshq/connect-redis": "^3.2.1",
-    "@sailshq/socket.io-redis": "^5.2.0",
     "@sailshq/lodash": "^3.10.3",
-    "async": "2.0.1",
+    "@sailshq/socket.io-redis": "^5.2.0",
     "angular": "^1.4.0",
     "array-extended": "0.0.11",
+    "async": "2.0.1",
     "bcryptjs": "^2.1.0",
-    "sails-mongo": "^1.0.1",
     "connect-mongo": "^2.0.1",
     "date-format": "1.2.0",
     "ejs": "~2.6.1",
@@ -30,6 +24,12 @@
     "path": "^0.12.7",
     "rc": "~1.2.8",
     "request": "^2.57.0",
+    "sails": "^1.0.2",
+    "sails-hook-apianalytics": "^2.0.0",
+    "sails-hook-organics": "^0.13.0",
+    "sails-hook-orm": "^2.0.1",
+    "sails-hook-sockets": "^1.5.2",
+    "sails-mongo": "^1.0.1",
     "skipper-gridfs": "^0.5.3",
     "stream-buffers": "^3.0.2",
     "xoauth2": "^1.1.0"
@@ -39,7 +39,7 @@
     "@sailshq/htmlhint": "^0.9.16",
     "@sailshq/lesshint": "^4.6.6",
     "grunt": "1.0.1",
-    "sails-hook-grunt": "^3.0.2"
+    "sails-hook-grunt": "^3.1.0"
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
