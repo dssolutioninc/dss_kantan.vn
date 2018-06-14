@@ -1,61 +1,56 @@
 # Installation Instruction
 (this instruction for Amazon Linux)
 
-		node 	v4.9.1
-		npm 	v2.15.11
-		sails 	v0.11.0
-		mongodb	v3.0.15
+	node 	v4.9.1
+	npm 	v2.15.11
+	sails 	v0.11.0
+	mongodb	v3.0.15
 		
 
 ## 1. In stall mongodb. Version 3.0.15 (2016/01 ver)
 
 ### create file
 ### sudo vi /etc/yum.repos.d/mongodb-org-3.0.repo
-> [mongodb-org-3.0]
-
-> name=MongoDB 3.0 Repository
-
-> baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/
-
-> gpgcheck=0
-
-> enabled=1
-
+	[mongodb-org-3.0]
+	name=MongoDB 3.0 Repository
+	baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/
+	gpgcheck=0
+	enabled=1
 
 
 ### install from repo
-sudo yum install -y mongodb-org-3.0.15 mongodb-org-server-3.0.15 mongodb-org-shell-3.0.15 mongodb-org-mongos-3.0.15 mongodb-org-tools-3.0.15
+	sudo yum install -y mongodb-org-3.0.15 mongodb-org-server-3.0.15 mongodb-org-shell-3.0.15 mongodb-org-mongos-3.0.15 mongodb-org-tools-3.0.15
 
 
 ### start mongodb
-sudo service mongod start
+	sudo service mongod start
 
 ### Verify that MongoDB has started successfully
-tail -50 /var/log/mongodb/mongod.log
+	tail -50 /var/log/mongodb/mongod.log
 
 ### You can optionally ensure that MongoDB will start following a system reboot by issuing the following command:
-sudo chkconfig mongod on
+	sudo chkconfig mongod on
 
 ### Stop MongoDB.
-sudo service mongod stop
+	sudo service mongod stop
 
 ### Restart MongoDB
-sudo service mongod restart
+	sudo service mongod restart
 
 
 ## 2. Install Node v4.x
-curl --silent --location https://rpm.nodesource.com/setup_4.x | sudo bash -
-sudo yum -y install nodejs
+	curl --silent --location https://rpm.nodesource.com/setup_4.x | sudo bash -
+	sudo yum -y install nodejs
 
 
 ## 3. install sails 0.11.0
 
 ### install dependencies
-yum info gcc-c++
-sudo yum install gcc-c++
+	yum info gcc-c++
+	sudo yum install gcc-c++
 
 #### install sails
-sudo npm install -g sails@0.11.0
+	sudo npm install -g sails@0.11.0
 
 
 ## 4. Get source from github
