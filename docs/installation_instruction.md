@@ -56,85 +56,83 @@
 ## 4. Get source from github
 
 ### get source and use tool branch to import data
-git clone https://github.com/duluong/japtool.git
+	git clone https://github.com/duluong/japtool.git
 
-mv japtool japdata
-cd japdata
+	mv japtool japdata
+	cd japdata
 
-git checkout tool
+	git checkout tool
 
-npm install
+	npm install
 
 ### 4.1 Remove all old data before importing data
-node removeAll.js 
+	node removeAll.js 
 ### 4.2 Import data of [test] 
-node importQuestion.js 
-#$$ 4.3 Import data of [vocabulary]
-node importVocabulary.js 
+	node importQuestion.js 
+### 4.3 Import data of [vocabulary]
+	node importVocabulary.js 
 ### 4.4 Import data of [kanji]
-node importKanji.js 
+	node importKanji.js 
 ### 4.5 Import data of [book]
-node importBook.js 
+	node importBook.js 
 ### 4.6 Import data of [survey]
-node importSurvey.js 
+	node importSurvey.js 
 
 
 ## 5. get source and use dev branch to lift server run
-git clone https://github.com/duluong/japtool.git
-cd japtool
+	git clone https://github.com/duluong/japtool.git
+	cd japtool
 
-git checkout master
+	git checkout master
 
-npm install
+	npm install
 
 
 
 ## 6. Run app forever
-
-sudo npm install forever -g
+	sudo npm install forever -g
 
 ### create file
 ### vi .foreverignore
-**/.tmp/**
-**/views/**
-**/assets/**
+	**/.tmp/**
+	**/views/**
+	**/assets/**
 
 
 
 ### update file
-/home/ec2-user/japtool/node_modules/sails-mongo/node_modules/mongodb/node_modules/bson/ext/index.js
+	/home/ec2-user/japtool/node_modules/sails-mongo/node_modules/mongodb/node_modules/bson/ext/index.js
 
-Change path to js version in catch block:
+	Change path to js version in catch block:
 
-bson = require('../build/Release/bson');
-To:
+	bson = require('../build/Release/bson');
+	To:
 
-bson = require('../browser_build/bson');
-Or copy file in:
+	bson = require('../browser_build/bson');
+	Or copy file in:
 
-..\node_modules\bson\build\Release\bson
+	..\node_modules\bson\build\Release\bson
 
-From:
+	From:
 
-..\node_modules\bson\browser_build\bson
+	..\node_modules\bson\browser_build\bson
 
 
 ## 7. RUN
-sudo forever -w start app.js --prod # -w to watch for file changes!
+	sudo forever -w start app.js --prod # -w to watch for file changes!
 
-sudo forever logs
-
+	sudo forever logs
 
 
 
 ## fix RUN error
-https://stackoverflow.com/questions/22475849/node-js-error-enospc
+	https://stackoverflow.com/questions/22475849/node-js-error-enospc
 
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+	echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 #### For Arch Linux add this line to /etc/sysctl.d/99-sysctl.conf:
 
-fs.inotify.max_user_watches=524288
+	fs.inotify.max_user_watches=524288
 
 ### Then execute:
-sudo sysctl --system
+	sudo sysctl --system
