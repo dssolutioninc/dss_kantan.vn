@@ -94,9 +94,9 @@
 
 ### create file
 ### vi .foreverignore
-	\**/.tmp/**
-	\**/views/**
-	\**/assets/**
+\	**/.tmp/**
+\	**/views/**
+\	**/assets/**
 
 
 
