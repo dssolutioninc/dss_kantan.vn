@@ -58,7 +58,8 @@ module.exports = {
             var subject = req.__('Account activate mail subject');
             var mailLayoutFile = 'activeAccount_' + req.session.lang + '.ejs';
 
-            Mailer.send(mailLayoutFile, user, {subject: subject, homeUrl: homeUrl, activateUrl: activateUrl} );
+            // Mailer.send(mailLayoutFile, user, {subject: subject, homeUrl: homeUrl, activateUrl: activateUrl} );
+            Mailer.sendByGmail(mailLayoutFile, user, {subject: subject, homeUrl: homeUrl, activateUrl: activateUrl} );
 
             //　go to waiting active page
             res.view('japtool/user/active-account', {code: 'waitActivate'});
@@ -303,7 +304,8 @@ module.exports = {
                   var subject = req.__('User Account password reset');
                   var mailLayoutFile = 'newPassword_' + req.session.lang + '.ejs';
 
-                  Mailer.send(mailLayoutFile, user, {subject: subject, newPassword: newPass, homeUrl: homeUrl} );
+                  // Mailer.send(mailLayoutFile, user, {subject: subject, newPassword: newPass, homeUrl: homeUrl} );
+                  Mailer.sendByGmail(mailLayoutFile, user, {subject: subject, newPassword: newPass, homeUrl: homeUrl} );
 
                   //　go to waiting active page
                   res.view('japtool/user/active-account', {code: 'resetPassword'});

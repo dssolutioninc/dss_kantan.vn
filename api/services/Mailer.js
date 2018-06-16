@@ -42,6 +42,42 @@ module.exports = {
     });
   },
 
+  sendByGmail: function (mailLayoutFile, user, mailContent) {
+    var nodemailer = require('nodemailer');
+
+    var mailer = nodemailer.createTransport(({
+      service: 'gmail',
+      auth: {
+          user: Constants.gmailUser,
+          pass: Constants.gmailPass
+      }
+    }));
+
+    fs.readFile(path.join(__dirname, '../../views/japtool/email/' + mailLayoutFile), 'utf8', function (err, template) {
+
+      var body = ejs.render(template,{
+          user: user,
+          mailContent: mailContent
+      });
+
+      // compose mail content
+      var mail = {
+        from: Constants.gmailUser,
+        to: user.email,
+        subject: mailContent.subject,
+        html: body
+      };
+      
+      mailer.sendMail(mail, function (error) {
+        if (error) {
+          console.log(error);
+          return;
+        }
+        mailer.close();
+      });
+    });
+  },
+
   sendActiveLinkByGmail: function (user, activeLink) {
     var nodemailer = require('nodemailer');
     var hbs = require('nodemailer-express-handlebars');
